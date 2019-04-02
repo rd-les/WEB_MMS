@@ -1,0 +1,212 @@
+﻿<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QW - MMS</title>
+    <link href="~/Template/SufeeAdmin/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Template/SufeeAdmin/css/normalize.css" rel="stylesheet" />
+    <link href="~/Template/SufeeAdmin/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Template/SufeeAdmin/scss/style.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Template/SufeeAdmin/js/plugins.js"></script>
+    <script src="~/Scripts/default.js"></script>
+
+    <style>
+
+        .tabMenuChild {
+            padding-left: 30px !important;
+        }
+    </style>
+    <style>
+        .navbar .navbar-nav li > a:hover {
+            background-color: white !important;
+            color: black !important;
+        }
+
+            .navbar .navbar-nav li > a:hover .menu-icon {
+                color: black !important;
+            }
+
+        .navbar .navbar-nav li > a .menu-icon {
+            padding-left: 2px !important;
+            width: 30px !important;
+        }
+
+        .menu-title {
+            color: #8ad1ff !important;
+        }
+
+        .navbar .navbar-nav li.menu-item-has-children .sub-menu a .menu-icon {
+            top: 0px !important;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <aside id="left-panel" class="left-panel" style="width:250px !important;">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div class="navbar-header" style="background-color:white;margin-top:15px;">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="~/Home/Index"><img src="~/Images/logo_150.png" alt="Logo"></a>
+                <!-- <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>-->
+            </div>
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav" style="width:300px;">
+
+                    <li class="active" style="padding-top:30px;">
+                        <a href="~/DivisionQW/Index"> <i class="menu-icon fa fa-dashboard " style="color:#FFFFFF !important;font-size:20px;"></i>Dashboard QW</a>
+                    </li>
+                    <h3 class="menu-title">DAILY PRODUCTION SUMMARY</h3><!-- /.menu-title -->
+                    <!--
+        <li class="menu-item-has-children dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>IQA</a>
+        <ul class="sub-menu children dropdown-menu">
+            <li><i class="menu-icon fa fa-th"></i><a href="#">PD 1</a></li>
+            <li><i class="menu-icon fa fa-th"></i><a href="#">PD 2</a></li>
+            <li><i class="menu-icon fa fa-th"></i><a href="#">PD 3</a></li>
+        </ul>
+        </li>
+        -->
+                    <li>
+                        <a href="~/DivisionQW/V_FunctionIQA"><i class="menu-icon fa fa-minus"></i>PROCESS QUALITY CONTROL : IQA</a>
+                    </li>
+                    <li>
+                        <a href="~/DivisionQW/V_FunctionQA"><i class="menu-icon fa fa-minus"></i>PROCESS QUALITY CONTROL : QA</a>
+                    </li>
+
+                    <h3 class="menu-title">PRODUCTION HISTORY REPORT</h3><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color:greenyellow  !important;">PRODUCTION REPORT : IQA</a>
+
+                        <ul class="sub-menu children dropdown-menu">
+                            <li>
+                                <a href="~/DivisionQW/V_ReportIQA" class="dropdown-toggle" style="color:greenyellow  !important;"> <i class="menu-icon fa fa-gear"></i>PRODUCTION RUN TIME</a>
+                            </li>
+
+                            <li class="menu-item-has-children dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-info-circle"></i>PRODUCTION INFORMATION</a>
+                                <ul class="sub-menu children dropdown-menu">
+                                    <li><i class="menu-icon fa fa-th"></i><a href="~/DivisionQW/V_ReportIQA">PERFORMANCE</a></li>
+                                    <li><i class="menu-icon fa fa-th"></i><a href="~/DivisionQW/V_ReportIQA">QUALITY</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="~/DivisionQW/V_ReportIQA" class="dropdown-toggle"> <i class="menu-icon fa fa-bolt"></i>ENERGY</a>
+                            </li>
+                            <li>
+                                <a href="~/DivisionQW/V_ReportIQA" class="dropdown-toggle"> <i class="menu-icon fa fa-area-chart"></i>STATISTICS PROCESS CONTROL</a>
+                            </li>
+                            <li>
+                                <a href="~/DivisionQW/V_ReportIQA" class="dropdown-toggle"> <i class="menu-icon fa fa-bar-chart"></i>OEE</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PRODUCTION REPORT : QA</a>
+
+                        <ul class="sub-menu children dropdown-menu">                           
+                            <li>
+                                <a href="~/DivisionQW/V_ReportQA" class="dropdown-toggle"> <i class="menu-icon fa fa-gear"></i>PRODUCTION RUN TIME</a>
+                            </li>
+
+                            <li class="menu-item-has-children dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-info-circle"></i>PRODUCTION INFORMATION</a>
+                                <ul class="sub-menu children dropdown-menu">
+                                    <li><i class="menu-icon fa fa-th"></i><a href="~/DivisionQW/V_ReportIQA">PERFORMANCE</a></li>
+                                    <li><i class="menu-icon fa fa-th"></i><a href="~/DivisionQW/V_ReportIQA">QUALITY</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="~/DivisionQW/V_ReportQA" class="dropdown-toggle"> <i class="menu-icon fa fa-bolt"></i>ENERGY</a>
+                            </li>
+                            <li>
+                                <a href="~/DivisionQW/V_ReportQA" class="dropdown-toggle"> <i class="menu-icon fa fa-area-chart"></i>STATISTICS PROCESS CONTROL</a>
+                            </li>
+                            <li>
+                                <a href="~/DivisionQW/V_ReportQA" class="dropdown-toggle"> <i class="menu-icon fa fa-bar-chart"></i>OEE</a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside>
+
+
+    <!-- Left Panel -->
+    <div id="right-panel" class="right-panel">
+
+        <header id="header" class="header">
+            <div class="header-menu">
+                <div class="col-sm-7">
+                    <a id="menuToggle" class="menutoggle pull-left" href="~/Home/Index"><i class="far fa fa-home fa-w-18 fa-2x"></i></a>
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li class="active"><span style="color:navy;font-weight:bold;font-size:24px;">Department : QW</span></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="user-area dropdown float-right">
+                        สวัสดีคุณ ทดสอบ - ทดสอบ &nbsp;&nbsp;&nbsp;
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="~/Images/Nomini_Icon.png" alt="User Avatar">
+                        </a>
+                        <div class="user-menu dropdown-menu">
+                            <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+                            <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
+                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+                            <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+
+        <div class="content mt-3">
+
+            @RenderBody()
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; 2018 - L&E SOLID STATE Co,Ltd</p>
+        </footer>
+
+
+    </div>
+
+    <!--
+      <div class="container body-content" >
+          <hr />
+          <footer>
+              <p>&copy; 2018 - L&E SOLID STATE Co,Ltd</p>
+          </footer>
+      </div>
+
+    -->
+
+
+
+
+
+
+</body>
+</html>

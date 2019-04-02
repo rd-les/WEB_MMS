@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "DataRealTime";
+    Layout = "~/Views/Shared/_LayoutPD2.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DataRealTime</h2>
+<div class="container" style="font-size:24px;">
+    <!--
+    <input type="text" id="message" />
+    <input type="button" id="sendmessage" value="SendReceiveDataRealTime" />
+    <input type="text" id="displayname" />
+        -->
+    <input type="text" id="count_data_realtime" value="0" />
+    <ul id="discussion"></ul>
+
+</div>
+
+<script src="~/Scripts/jquery.signalR-2.3.0.js"></script>
+<script src="~/signalr/hubs"></script>
+
+<script>
+
+    $(function () {
+
+        var real_time_hub = $.connection.fT8_Hub;
+        real_time_hub.client.receiveDataRealTimeFT8 = function (watt, result, dateTime) {
+            var str_text = '<li><strong>WATT => ' + htmlEncode(watt) + '</strong> : STATUS => ' + htmlEncode(result) + ' : &nbsp;&nbsp;&nbsp; <strong> ' + htmlEncode(dateTime) + '</strong></li>';
+            $("#discussion").prepend(str_text);
+            //$('#discussion').append(str_text);
+            $("#count_data_realtime").val(parseInt($("#count_data_realtime").val()) + 1);
+        };
+        $.connection.hub.start().done(function () {
+            //real_time_hub.server.receiveRealTime();
+            /*
+            $('#sendmessage').click(function () {
+                chat.server.receiveRealTime();
+            });
+            */
+        });
+
+       
+    });
+    // This optional function html-encodes messages for display in the page.
+    function htmlEncode(value) {
+        //alert(value);
+        var encodedValue = $('<div />').text(value).html();
+        return encodedValue;
+    }
+</script>
+
+

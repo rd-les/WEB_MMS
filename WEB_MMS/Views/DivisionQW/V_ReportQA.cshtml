@@ -1,0 +1,182 @@
+﻿
+@{
+    ViewBag.Title = "V_ReportQA";
+    Layout = "~/Views/Shared/_LayoutQW.cshtml";
+}
+
+<h2>สรุปผลคุณภาพของชิ้นงานตาม WORKSTATION (QA)</h2>
+<style>
+    .btn-xs {
+        padding: 1px 5px !important;
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        border-radius: 3px !important;
+    }
+</style>
+
+<div class="content mt-5">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Data Table</strong>
+                    </div>
+                    <div class="card-body">
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered" style="font-size:12px;">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%;">#</th>
+                                    <th style="width:15%;">PO No.</th>
+                                    <th style="width:10%;">Driver ทั้งหมด</th>
+                                    <th style="width:10%;">Driver ดี</th>
+                                    <th style="width:10%;">Driver เสีย</th>
+                                    <th style="width:40%;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>PO1802778</td>
+                                    <td>1,000</td>
+                                    <td>980</td>
+                                    <td>20</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa ion-edit-o"></i> Detail</button>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa fa-file-excel-o"></i> Excel</button>
+                                        <button type="button" class="btn btn-warning btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Short Report</button>
+                                        <button type="button" class="btn btn-info btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Full Report</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>PO1802764</td>
+                                    <td>2,000</td>
+                                    <td>1,770</td>
+                                    <td>230</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa ion-edit-o"></i> Detail</button>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa fa-file-excel-o"></i> Excel</button>
+                                        <button type="button" class="btn btn-warning btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Short Report</button>
+                                        <button type="button" class="btn btn-info btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Full Report</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>PO1801999</td>
+                                    <td>1,000</td>
+                                    <td>975</td>
+                                    <td>25</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-xs"><i class="fa ion-edit-o"></i> Detail</button>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa fa-file-excel-o"></i> Excel</button>
+                                        <button type="button" class="btn btn-warning btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Short Report</button>
+                                        <button type="button" class="btn btn-info btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Full Report</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>PO1800380</td>
+                                    <td>1,000</td>
+                                    <td>980</td>
+                                    <td>20</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa ion-edit-o"></i> Detail</button>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa fa-file-excel-o"></i> Excel</button>
+                                        <button type="button" class="btn btn-warning btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Short Report</button>
+                                        <button type="button" class="btn btn-info btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Full Report</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>PO1802775</td>
+                                    <td>1,000</td>
+                                    <td>980</td>
+                                    <td>20</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa ion-edit-o"></i> Detail</button>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa fa-file-excel-o"></i> Excel</button>
+                                        <button type="button" class="btn btn-warning btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Short Report</button>
+                                        <button type="button" class="btn btn-info btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Full Report</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>PO1802778</td>
+                                    <td>1,000</td>
+                                    <td>980</td>
+                                    <td>20</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa ion-edit-o"></i> Detail</button>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa fa-file-excel-o"></i> Excel</button>
+                                        <button type="button" class="btn btn-warning btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Short Report</button>
+                                        <button type="button" class="btn btn-info btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Full Report</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>PO1802764</td>
+                                    <td>2,000</td>
+                                    <td>1,770</td>
+                                    <td>230</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa ion-edit-o"></i> Detail</button>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa fa-file-excel-o"></i> Excel</button>
+                                        <button type="button" class="btn btn-warning btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Short Report</button>
+                                        <button type="button" class="btn btn-info btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Full Report</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>PO1801999</td>
+                                    <td>1,000</td>
+                                    <td>975</td>
+                                    <td>25</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa ion-edit-o"></i> Detail</button>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa fa-file-excel-o"></i> Excel</button>
+                                        <button type="button" class="btn btn-warning btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Short Report</button>
+                                        <button type="button" class="btn btn-info btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Full Report</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>PO1800380</td>
+                                    <td>1,000</td>
+                                    <td>980</td>
+                                    <td>20</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa ion-edit-o"></i> Detail</button>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa fa-file-excel-o"></i> Excel</button>
+                                        <button type="button" class="btn btn-warning btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Short Report</button>
+                                        <button type="button" class="btn btn-info btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Full Report</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>PO1802775</td>
+                                    <td>1,000</td>
+                                    <td>980</td>
+                                    <td>20</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa ion-edit-o"></i> Detail</button>
+                                        <button type="button" class="btn btn-success btn-xs sharp"><i class="fa fa-file-excel-o"></i> Excel</button>
+                                        <button type="button" class="btn btn-warning btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Short Report</button>
+                                        <button type="button" class="btn btn-info btn-xs sharp"><i class="fa fa-file-pdf-o"></i> Full Report</button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- .animated -->
+</div>
+
+
+<script src="~/Template/SufeeAdmin/js/lib/data-table/datatables.min.js"></script>
+<script src="~/Template/SufeeAdmin/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+<script src="~/Template/SufeeAdmin/js/lib/data-table/dataTables.buttons.min.js"></script>

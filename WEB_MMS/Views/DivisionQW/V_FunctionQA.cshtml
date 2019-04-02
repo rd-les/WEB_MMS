@@ -1,0 +1,575 @@
+﻿
+@{
+    ViewBag.Title = "V_FunctionIQA";
+    Layout = "~/Views/Shared/_LayoutQW.cshtml";
+}
+
+<div class="row clearfix">
+
+    <div class="content mt-3">
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="menu-icon fa fa-dashboard fa-2x"></i> &nbsp; PD 1</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="menu-icon fa fa-dashboard fa-2x"></i> &nbsp; PD 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false"><i class="menu-icon fa fa-dashboard fa-2x"></i> &nbsp; PD 3</a>
+                    </li>
+                </ul>
+                <div class="tab-content pl-3 p-1" id="myTabContent" style="height:auto;">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+
+
+                        <div class="row clearfix">
+
+
+                            <div class="col-lg-7">
+
+
+                                <div class="col-lg-12">
+                                    &nbsp;
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body" style="text-align:left;">
+                                            <h4 class="mb-3">PO : 18026842</h4>
+                                            <div  class="col-lg-4" id="div_doughutChart1" style="width:30% !important; ">
+                                                <canvas id="doughutChart1"></canvas>
+                                            </div>
+                                            <div  class="col-lg-8" >
+                                                <table class="table table-hover" style="font-size:12px;">
+                                                    <thead>
+                                                        <tr style="background-color:silver;">
+                                                            <th style="width:25%;">CODE</th>
+                                                            <th style="width:10%;">OK</th>
+                                                            <th style="width:10%;">NG</th>
+                                                            <th style="width:15%;">AVG W</th>
+                                                            <th style="width:15%;">AVG I</th>
+                                                            <th style="width:15%;">AVG PF</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>78-00139</td>
+                                                            <td>28</td>
+                                                            <td>2</td>
+                                                            <td>18.7</td>
+                                                            <td>107</td>
+                                                            <td>0.93</td>
+                                                        </tr>
+                                                        </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">I</h4>
+                    <div id="div_doughutChart2" >
+                        <canvas id="doughutChart2"></canvas>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">PF</h4>
+                    <div  id="div_doughutChart3">
+                        <canvas id="doughutChart3"></canvas>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        -->
+
+
+
+                            </div><!-- /# column -->
+
+                            <div class="col-lg-5">
+                                <div class="card">
+                                    <div class="card-body" style="height:auto;">
+                                        <h4 class="mb-3">Real Time DATA</h4>
+
+
+                                        <div class="row clearfix">
+                                            <div class="card bg-flat-color-5 text-light col-lg-6" style="padding:1px;">
+                                                <div class="card-body" style="color:navy;">
+                                                    <div class="h4 m-0"><span id="span_count_ok">1244</span></div>
+                                                    <div>OK</div>
+                                                    <div class="progress-bar bg-light mt-2 mb-2" role="progressbar" style="width: 91%; height: 5px;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="card bg-flat-color-3 text-light col-lg-6">
+                                                <div class="card-body" style="color:navy;">
+                                                    <div class="h4 m-0"><span id="span_count_ng">24</span></div>
+                                                    <div>NG</div>
+                                                    <div class="progress-bar bg-light mt-2 mb-2" role="progressbar" style="width: 9%; height: 5px;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="stat-widget-four">
+                                                        <div class="stat-content" style="margin-left:0px;">
+                                                            <div class="text-left dib">
+                                                                <div class="stat-heading"  style="font-size:16px;">AVG W</div>
+                                                                <div class="stat-text"><span id="span_current_w" style="font-size:16px;font-weight:bold;"></span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="stat-widget-four">
+                                                        <div class="stat-content" style="margin-left:0px;">
+                                                            <div class="text-left dib">
+                                                                <div class="stat-heading" style="font-size:16px;">AVG I</div>
+                                                                <div class="stat-text"><span id="span_current_i" style="font-size:16px;font-weight:bold;">-</span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="stat-widget-four">
+                                                        <div class="stat-content" style="margin-left:0px;">
+                                                            <div class="text-left dib">
+                                                                <div class="stat-heading"  style="font-size:16px;">AVG PF</div>
+                                                                <div class="stat-text"><span id="span_current_pf" style="font-size:16px;font-weight:bold;">-</span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /# column -->
+
+
+                        </div>
+
+
+
+                        <div class="row clearfix">
+                            <div class="content mt-3">
+                                <div class="col-sm-12">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-7">
+                                            <div class="col-lg-6">
+                                                <img src="~/Images/Machine/2652.jpg" style="height:370px;" />
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <img src="~/Images/Machine/2651.jpg" style="height:370px;" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-8 col-sm-12">
+                                            <div class="card">
+                                                <!--
+                                                <div class="header">
+                                                    <h2>DETAILS</h2>
+                                                </div>
+                                                    -->
+                                                <div class="body">
+                                                    <div class="table-responsive" style="font-size:12px;">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr style="background-color:silver;">
+                                                                    <th style="width:25%;">PO</th>
+                                                                    <th style="width:25%;">CODE</th>
+                                                                    <th style="width:10%;">OK</th>
+                                                                    <th style="width:10%;">NG</th>
+                                                                    <th style="width:15%;">AVG W</th>
+                                                                    <th style="width:15%;">AVG I</th>
+                                                                    <th style="width:15%;">AVG PF</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>PO1800611</td>
+                                                                    <td>78-00139</td>
+                                                                    <td>1,730</td>
+                                                                    <td>95</td>
+                                                                    <td>18.7</td>
+                                                                    <td>107</td>
+                                                                    <td>0.93</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>PO1800611</td>
+                                                                    <td>78-00139</td>
+                                                                    <td>1,250</td>
+                                                                    <td>62</td>
+                                                                    <td>18.2</td>
+                                                                    <td>97</td>
+                                                                    <td>0.97</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>PO1800611</td>
+                                                                    <td>72-02473</td>
+                                                                    <td>1,230</td>
+                                                                    <td>80</td>
+                                                                    <td>18.2</td>
+                                                                    <td>97</td>
+                                                                    <td>0.93</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>PO1800611</td>
+                                                                    <td>78-00139</td>
+                                                                    <td>1,230</td>
+                                                                    <td>80</td>
+                                                                    <td>18.2</td>
+                                                                    <td>97</td>
+                                                                    <td>0.93</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>PO1800611</td>
+                                                                    <td>78-00139</td>
+                                                                    <td>1,230</td>
+                                                                    <td>80</td>
+                                                                    <td>18.2</td>
+                                                                    <td>97</td>
+                                                                    <td>0.93</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>PO1800611</td>
+                                                                    <td>78-00139</td>
+                                                                    <td>1,230</td>
+                                                                    <td>80</td>
+                                                                    <td>18.2</td>
+                                                                    <td>97</td>
+                                                                    <td>0.93</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>PO1800611</td>
+                                                                    <td>78-00156</td>
+                                                                    <td>1,230</td>
+                                                                    <td>80</td>
+                                                                    <td>18.2</td>
+                                                                    <td>97</td>
+                                                                    <td>0.93</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>PO1800611</td>
+                                                                    <td>72-02473</td>
+                                                                    <td>1,230</td>
+                                                                    <td>80</td>
+                                                                    <td>18.2</td>
+                                                                    <td>97</td>
+                                                                    <td>0.93</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--########################################################### TAB 2 ###############################################################-->
+
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <h3>PD 2</h3>
+                        <p>Some content here.</p>
+                    </div>
+
+
+                    <!--########################################################### TAB 3 ###############################################################-->
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <h3>PD 3</h3>
+                        <p>Some content here.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+<script src="~/Template/SufeeAdmin/js/lib/flot-chart/jquery.flot.js"></script>
+
+<script src="~/Template/SufeeAdmin/js/lib/chart-js/Chart.bundle.js"></script>
+
+<script>
+
+    (function ($) {
+
+        "use strict"; // Start of use strict
+
+        var SufeeAdmin = {
+
+            cpuLoad: function () {
+
+                var data = [],
+                    totalPoints = 100;
+
+                function getRandomData() {
+
+                    if (data.length > 0)
+                        data = data.slice(1);
+
+                    // Do a random walk
+
+                    while (data.length < totalPoints) {
+
+                        //var prev = data.length > 0 ? data[data.length - 1] : 50,y = prev + Math.random() * 10 - 5;
+                        var prev = data.length > 0 ? data[data.length - 1] : 50, y = (Math.random() * (17.500 - 19.500) + 19.500).toFixed(2);
+                        console.log("--->" + y);
+
+                        if (y < 17.5) {
+                            y = 17.5;
+                        } else if (y > 19.5) {
+                            y = 19.5;
+                        }
+                        $("#span_current_w").text(y);
+                        $("#span_current_i").text((Math.random() * (50 - 150) + 150).toFixed(0));
+                        $("#span_current_pf").text((Math.random() * (0.85 - 0.99) + 0.99).toFixed(2));
+
+
+                        $("#div_light_status").empty();
+                        var randomNum = (Math.random() * (1 - 100) + 100).toFixed(0);
+                        console.log(randomNum);
+                        if (randomNum % 22 == 0) {
+                            $("#span_count_ng").text(parseInt($("#span_count_ng").text()) + 1);
+                        }
+                        else {
+                            $("#span_count_ok").text(parseInt($("#span_count_ok").text()) + 29);
+                        }
+
+
+                        data.push(y);
+                    }
+
+                    // Zip the generated y values with the x values
+
+                    var res = [];
+                    for (var i = 0; i < data.length; ++i) {
+                        res.push([i, data[i]])
+                    }
+
+                    return res;
+                }
+
+                // Set up the control widget
+
+                var updateInterval = 10000;
+                $("#updateInterval").val(updateInterval).change(function () {
+                    var v = $(this).val();
+                    if (v && !isNaN(+v)) {
+                        updateInterval = +v;
+                        if (updateInterval < 1) {
+                            updateInterval = 1; N
+                        } else if (updateInterval > 3000) {
+                            updateInterval = 3000;
+                        }
+                        $(this).val("" + updateInterval);
+                    }
+                });
+
+                var plot = $.plot("#cpu-load", [getRandomData()], {
+                    series: {
+                        shadowSize: 0 // Drawing is faster without shadows
+                    },
+                    yaxis: {
+                        min: 14,
+                        max: 21
+                    },
+                    xaxis: {
+                        show: false
+                    },
+                    colors: ["#007BFF"],
+                    grid: {
+                        color: "transparent",
+                        hoverable: true,
+                        borderWidth: 0,
+                        backgroundColor: 'transparent'
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: "Y: %y",
+                        defaultTheme: false
+                    }
+
+
+                });
+
+                function update() {
+
+                    plot.setData([getRandomData()]);
+
+                    // Since the axes don't change, we don't need to call plot.setupGrid()
+
+                    plot.draw();
+                    setTimeout(update, updateInterval);
+                }
+
+                update();
+
+            },
+
+
+        };
+
+        $(document).ready(function () {
+            SufeeAdmin.cpuLoad();
+            createDonut(); 
+          
+            setInterval(function () {
+                createDonut(); 
+            }, 10000);
+         
+
+
+        });
+
+        function createDonut() {
+            //doughut chart
+            $("#div_doughutChart1").empty();
+            $("#div_doughutChart1").html("<canvas id='doughutChart1' style='width:200px;'></canvas>"); 
+
+           
+            //$("#doughutChart2").empty(); 
+            //$("#doughutChart3").empty(); 
+            var ctx = document.getElementById("doughutChart1");
+            ctx.height = 100;
+            ctx.width = 100;
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [28, 2],
+                        backgroundColor: [
+                            "rgba(0, 204, 102,0.9)",
+                            "rgba(204, 153, 0,0.7)"
+                        ],
+                        hoverBackgroundColor: [
+                            "rgba(0, 123, 255,0.9)",
+                            "rgba(0, 123, 255,0.7)"
+                        ]
+
+                    }],
+                    labels: [
+                        "OK : 28 ",
+                        "NG : 2 "
+                    ]
+                },
+                options: {
+                    width: 200,
+                    height: 100,
+                    responsive: true
+
+                }
+            });
+            //myChart.reSize(200 , 100);
+
+
+            /*
+
+            $("#div_doughutChart2").empty();
+            $("#div_doughutChart2").html("<canvas id='doughutChart2'></canvas>");
+
+            $("#div_doughutChart3").empty();
+            $("#div_doughutChart3").html("<canvas id='doughutChart3'></canvas>"); 
+            //doughut chart
+            var ctx = document.getElementById("doughutChart2");
+            ctx.height = 150;
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [30, 0],
+                        backgroundColor: [
+                            "rgba(0, 204, 102,0.9)",
+                            "rgba(204, 153, 0,0.7)"
+                        ],
+                        hoverBackgroundColor: [
+                            "rgba(0, 123, 255,0.9)",
+                            "rgba(0, 123, 255,0.7)"
+                        ]
+
+                    }],
+                    labels: [
+                        "OK : 30 ",
+                        "NG : 0 "
+                    ]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            //doughut chart
+            var ctx = document.getElementById("doughutChart3");
+            ctx.height = 150;
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [29, 1],
+                        backgroundColor: [
+                            "rgba(0, 204, 102,0.9)",
+                            "rgba(204, 153, 0,0.7)"
+                        ],
+                        hoverBackgroundColor: [
+                            "rgba(0, 123, 255,0.9)",
+                            "rgba(0, 123, 255,0.7)"
+                        ]
+
+                    }],
+                    labels: [
+                        "OK : 29 ",
+                        "NG : 1 "
+                    ]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+            */
+        }
+
+    })(jQuery);
+
+</script>

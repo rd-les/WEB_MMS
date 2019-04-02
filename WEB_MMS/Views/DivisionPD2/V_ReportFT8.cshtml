@@ -1,0 +1,263 @@
+﻿
+@{
+    ViewBag.Title = "V_ReportFT8";
+    Layout = "~/Views/Shared/_LayoutPD2.cshtml";
+}
+
+<h2>สรุปผลคุณภาพของชิ้นงานตาม WORKSTATION (FT8)</h2>
+<link href="~/Scripts/plugins/DataTables/datatables.min.css" rel="stylesheet" />
+<script src="~/Scripts/plugins/DataTables/datatables.min.js"></script>
+<script>
+
+    var jsonString = convertViewBagJsonData("@ViewBag.jsonData");
+    var jsonData = eval('(' + jsonString + ')');
+
+
+    $(document).ready(function () {
+        console.log(jsonData.Data);
+
+        $("#tbody_listData").empty();
+        //console.log(jsonData.Data);
+        $.each(jsonData.Data.mainDataFT8, function (key, value) {
+            //console.log(value);
+            var str = "";
+            str += " <tr>"
+                + "     <td> " + parseInt(key+1)+"</td>"
+                + "     <td>"+value.codeNo+"</td>"
+                + "     <td>" + value.workStationNo+"</td>"
+                + "     <td>" + value.dateCreate + "</td>"
+                + "     <td>" + value.ledTotal + "</td>"
+                + "     <td>" + value.ledGood + "</td>"
+                + "     <td>" + value.ledBad + "</td>"
+                + "     <td>"
+                + "        <button type='button' class='btn btn-success btn-xs' onClick='openDataDetails(" + value.FT8_MainDataId + ", \"" + value.codeNo + "\", \"" + value.workStationNo + "\") ;' style='cursor: pointer'><i class='fa ion-edit-o'></i> Detail</button>"
+                + "        <button type='button' class='btn btn-success btn-xs' data-toggle='modal' data-target='#exampleModalCenter' onClick='openDataExcelDetails(" + value.FT8_MainDataId + ", \"" + value.codeNo + "\", \"" + value.workStationNo + "\") ;' ><i class='fa fa-file-excel-o'></i>Excel</button>"
+                //+ "        <button type='button' class='btn btn-warning btn-xs'><i class='fa fa-file-pdf-o'></i> Short Report</button>"
+                + "        <button type='button' class='btn btn-default btn-xs'><i class='fa fa-file-pdf-o'></i>Report</button>"
+                + "     </td>"
+                + "  </tr>";
+
+            $("#tbody_listData").append(str);
+
+        });
+
+
+        /*
+         *
+        <tr>
+            <th style="width:5%;">#</th>
+            <th style="width:15%;">CODE No.</th>
+            <th style="width:15%;">WORK No.</th>
+            <th style="width:15%;">วันที่</th>
+            <th style="width:10%;">หลอดทั้งหมด</th>
+            <th style="width:10%;">หลอดดี</th>
+            <th style="width:10%;">หลอดเสีย</th>
+            <th style="width:20%;">Action</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>WO1802778</td>
+            <td>WO1802778</td>
+            <td>WO1802778</td>
+            <td>1,000</td>
+            <td>980</td>
+            <td>20</td>
+            <td>
+	        <button type='button' class='btn btn-success btn-xs'><i class='fa ion-edit-o'></i> Detail</button>
+	        <button type='button' class='btn btn-success btn-xs'><i class='fa fa-file-excel-o'></i> Excel</button>
+	        <button type='button' class='btn btn-warning btn-xs'><i class='fa fa-file-pdf-o'></i> Short Report</button>
+	        <button type='button' class='btn btn-info btn-xs'><i class='fa fa-file-pdf-o'></i> Full Report</button>
+            </td>
+        </tr>
+         *
+         */
+
+
+        $('#bootstrap-data-table').DataTable({
+            "lengthChange": false,
+            "ordering": false,
+            "info": false
+        });
+
+
+    });
+
+    function openDataExcelDetails(mainDataId, codeNo, workStationNo) {
+
+        var str = mainDataId + " <div> CODE No.:" + codeNo + "</div><div> WORKSTATION No. :" + workStationNo;
+        $("#div_modal_body").empty();
+        $("#div_modal_body").append(str);
+
+        $("#div_image_loading").show(); 
+       
+        var url = "/DivisionPD2/getReportExcelDetailFT8";
+        $.ajax({
+            data: { main_data_id: mainDataId, codeNo: codeNo, workStationNo: workStationNo },
+            type: "POST", url: url,
+            success: function (results) {
+                console.log(results);
+                $("#div_image_loading").hide();
+                $("#div_modal_body").append("<div>ระบบได้ทำการสร้างไฟล์ เรียบร้อยแล้ว</div>");
+                window.location = results.urlReturn; 
+            },
+            complete: function (xhr, textStatus) {
+                //console.log(xhr.status);
+                if (xhr.status != "200") {
+                    alert("ระบบไม่สามารถงานได้ กรุณาติดต่อผู้ดูแลระบบ");
+                    return false;
+                }
+            }
+        });
+    }
+
+
+    function openDataDetails(mainDataId, codeNo, workStationNo) {
+        window.location = "V_ReportDetailFT8?mainDataId=" + mainDataId + "&codeNo=" + codeNo+"&workStationNo=" + workStationNo;
+        /*
+        var url = "/DivisionPD2/getReportDataDetailFT8";
+        $.ajax({
+            data: { main_data_id: mainDataId},
+            type: "POST", url: url,
+            success: function (results) {
+                //console.log(results);
+                generateDataDetail(results.datas.mMainDataDetailFT8);
+                //setControlList(results.datas);
+            },
+            complete: function (xhr, textStatus) {
+                //console.log(xhr.status);
+                if (xhr.status != "200") {
+                    alert("ระบบไม่สามารถงานได้ กรุณาติดต่อผู้ดูแลระบบ");
+                    return false;
+                }
+
+            }
+        });
+        */
+    }
+
+
+
+</script>
+<div class="content mt-2">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Data Table</strong>
+                    </div>
+                    <div class="card-body">
+                        <!-- <div data-toggle="modal" data-keyboard="false" data-target="#largeModal" style="cursor:pointer"><button>XXXX</button></div>-->
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%;">#</th>
+                                    <th style="width:10%;">CODE No.</th>
+                                    <th style="width:15%;">WORK No.</th>
+                                    <th style="width:15%;">วันที่</th>
+                                    <th style="width:15%;">หลอดทั้งหมด</th>
+                                    <th style="width:10%;">หลอดดี</th>
+                                    <th style="width:10%;">หลอดเสีย</th>
+                                    <th style="width:20%;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_listData">
+                                <!--
+                                    <tr>
+                                        <td>1</td>
+                                        <td>WO1802778</td>
+                                        <td>WO1802778</td>
+                                        <td>WO1802778</td>
+                                        <td>1,000</td>
+                                        <td>980</td>
+                                        <td>20</td>
+                                        <td>
+                                            <button type="button" class="btn btn-success btn-xs"><i class="fa ion-edit-o"></i> Detail</button>
+                                            <button type="button" class="btn btn-success btn-xs"><i class="fa fa-file-excel-o"></i> Excel</button>
+                                            <button type="button" class="btn btn-warning btn-xs"><i class="fa fa-file-pdf-o"></i> Short Report</button>
+                                            <button type="button" class="btn btn-info btn-xs"><i class="fa fa-file-pdf-o"></i> Full Report</button>
+                                        </td>
+                                    </tr>
+                                -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- .animated -->
+</div>
+
+
+<!--########################################################################### MODAL DETAIL.-->
+
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="width:1200px;height:800px;margin: 5% -30% -50%;">
+            <div class="modal-header" style="text-align:center;">
+                CODE NO : 7600510 , WORK NO : WO1802996
+            </div>
+            <div class="modal-body">
+                <table id="data_table_details" class="table table-striped table-bordered" style="font-size:12px !important; ">
+                    <thead>
+                        <tr>
+                            <th style="width:5%;">#</th>
+                            <th style="width:10%;">LED No.</th>
+                            <th style="width:10%;">วันที่</th>
+                            <th style="width:10%;">ลำดับหลอด</th>
+                            <th style="width:30%;">ActionResult</th>
+                            <th style="width:10%;">W</th>
+                            <th style="width:10%;">V</th>
+                            <th style="width:10%;">PF</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_listDataDetail"></tbody>
+                </table>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .btn-xs {
+        padding: 1px 5px !important;
+        font-size: 12px !important;
+        line-height: 1.5 !important;
+        border-radius: 3px !important;
+    }
+</style>
+
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> กำลังสร้างไฟล์ Excel กรุณารอสักครู่ </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="div_modal_body">
+
+                </div>
+                <div id="div_image_loading">
+                    <img src="~/Images/loading-icon-animated-gif-8.gif" id="img_loading_data" />
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

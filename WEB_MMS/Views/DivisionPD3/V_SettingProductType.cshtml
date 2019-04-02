@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "V_SettingProductType";
+    Layout = "~/Views/Shared/_LayoutPD3.cshtml";
+}
+
+<script src="~/Template/SufeeAdmin/js/lib/data-table/datatables.min.js"></script>
+<script src="~/Template/SufeeAdmin/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+<script src="~/Template/SufeeAdmin/js/lib/data-table/dataTables.buttons.min.js"></script>
+
+<script>
+
+    var jsonString = convertViewBagJsonData("@ViewBag.jsonData");
+    var jsonData = eval('(' + jsonString + ')');
+    
+    jQuery(function () {
+        loadDataList(jsonData.Data);
+        console.log(jsonData); 
+        $('#table_dataTable_led_configs_type').DataTable({
+            "lengthChange": false,
+            "ordering": false,
+            "info": false
+        });
+    });
+
+    function addConfigType() {
+        var url = "V_SettingProductTypeDetail";
+        //alert(url + "----->" + workStationId); 
+        window.location.href = url;
+
+    }
+
+    function loadDataList(datas) {
+
+        $("#tbody_list").empty();
+       //console.log(datas);
+        $.each(datas.dataLists, function (key, value) {
+
+
+            /*
+             * 
+             * 
+             *<label class='switch switch-3d switch-success mr-3'>
+	<input type='checkbox' class='switch-input' name='switch_usable' id='switch_usable'>
+	<span class='switch-label'></span>
+	<span class='switch-handle'></span>
+</label>
+             */
+
+
+
+
+            var str = " <tr>"
+                + "      <td>" + (key + 1) + "</td>"
+                + "      <td align='left'>" + value.code + "</td>"
+                + "      <td align='left'>" + value.code_no + "</td>"
+                + "      <td>" + value.led_type_name + "</td>"
+                + "      <td>" + value.led_type_slot_name + "</td>"               
+                + "      <td>" + value.wMin + "</td>"
+                + "      <td>" + value.wMax + "</td>"
+                + "      <td>" + value.pfMin + "</td>"
+                + "      <td>" + value.pfMax + "</td>"
+                + "      <td>"
+                + "         <label class='switch switch-3d switch-success mr-3'>"
+                + "             <input type = 'checkbox' class='switch-input' name = 'switch_usable' id = 'switch_usable' " + (value.usable == "1" ? "checked" : "") + " onClick='return false;' />"
+                + "             <span class='switch-label'></span>"
+                + "             <span class='switch-handle'></span>"
+                + "         </label>"
+                + "      </td > "
+                // + "      <td>" + value.finishName + "</td>"
+                + "      <td>"
+
+                + "<button type='button' class='btn btn-success btn-xs sharp'  onClick='editActionPage(\"" + value.id + "\")'  ><i class='fa ion-edit'></i> EDIT</button>  "
+                //+ "<button type='button' class='btn btn-default btn-xs sharp'  onClick='getReportWorkStationShortDetailFinish(\"" + value.id + "\")' ><i class='fa fa-file-pdf-o'></i> Short Report</button>  "
+                //+ "<button type='button' class='btn btn-default btn-xs sharp' onClick='getReportWorkStationDetailFinish(\"" + value.id + "\")' ><i class='fa fa-file-pdf-o'></i> Full Report</button>  "
+
+                + "     </td>"
+                + "</tr>";
+            $("#tbody_list").append(str);
+            //return false; 
+
+        });
+
+    }
+
+
+    function editActionPage(configId) {
+
+        var url = "V_SettingProductTypeDetail?configId=" + configId;
+        //alert(url + "----->" + workStationId); 
+        window.location.href = url;
+    }
+
+
+
+</script>
+
+<style>
+        .btn-xs {
+            padding: 1px 5px !important;
+            font-size: 12px !important;
+            line-height: 1.5 !important;
+            border-radius: 3px !important;
+        }
+</style>
+        <div class="content mt-5">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header" style="text-align:right;">                                                
+                                <button class="btn-success" onclick="addConfigType();"><strong class="card-title">เพิ่มประเภทหลอด</strong></button>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered table-striped hover" id="table_dataTable_led_configs_type" style="font-size:12px;">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th class="info">Code</th>
+                                            <th class="info">Code No.</th>
+                                            <th class="info">ชื่อหลอด</th>
+                                            <th class="info">ประเภทหลอด</th>
+
+                                            <th class="info">W-Min</th>
+                                            <th class="info">W-Max</th>
+                                            <th class="info">PF-Min</th>
+                                            <th class="info">PF-Max</th>
+                                            <th class="info">การใช้งาน</th>
+                                            <!-- <th class="info">User Finish</th>-->
+                                            <th class="info">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody_list"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- .animated -->
+</div>
+
+

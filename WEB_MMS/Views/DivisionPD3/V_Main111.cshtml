@@ -1,0 +1,407 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>
+        @{
+            ViewBag.Title = "V_Main";
+            Layout = "~/Views/Shared/_LayoutPD3.cshtml";
+        }
+        <h2>V_Main</h2>
+       
+        HELLO PD3
+       
+    </title>
+    <style media="screen">
+      
+    </style>
+   
+
+
+   
+</head>
+<body>
+
+
+
+    <!-- /# column -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Model Type</h4>
+            </div>
+            <div class="card-body">
+                <!--   <p class="text-muted m-b-15">
+
+            </p>-->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="MR16-tab" data-toggle="tab" href="#MR16" role="tab" aria-controls="MR16" aria-selected="true">MR16</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="E27-tab" data-toggle="tab" href="#E27" role="tab" aria-controls="E27" aria-selected="false">E27</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Menu 2</a>
+                    </li>
+                </ul>
+
+                <!--Code Menutap-->
+                <div class="tab-content pl-3 p-1" id="myTabContent">
+                    <div class="tab-pane fade show active" id="MR16" role="tabpanel" aria-labelledby="MR16-tab">
+                        <h3>MR16</h3>
+                        <!--  <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body ">
+                                <div class="stat-widget-one">
+                                    <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
+                                    <div class="stat-content dib">
+                                        <div class="stat-digit">1,012</div>
+                                        <div class="stat-text">หลอด MR16</div>
+                                        <div class="stat-text">Total</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-one">
+                                    <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
+                                    <div class="stat-content dib">
+                                        <div class="stat-digit">961</div>
+                                        <div class="stat-text">หลอด MR16</div>
+                                        <div class="stat-text">OK</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-one">
+                                    <div class="stat-icon dib"><i class="ti-link text-danger border-danger"></i></div>
+                                    <div class="stat-content dib">
+                                        <div class="stat-digit">2,781</div>
+                                        <div class="stat-text">หลอด MR16</div>
+                                        <div class="stat-text">NG</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-one">
+                                    <div class="stat-icon dib"><i class="ti-layout-grid2 text-warning border-warning"></i></div>
+                                    <div class="stat-content dib">
+                                        <div class="stat-digit">770</div>
+                                        <div class="stat-text">Work Station</div>
+                                        <div class="stat-text">Total Work Station</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                        -->
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card text-white bg-flat-color-1">
+                                <div class="card-body pb-0">
+
+                                    <h4 class="mb-0">
+                                        <span id="span_led_t8_total" class="count_all"></span> หลอด
+                                        <!-- <span class="count" id="span_led_t8_total">0</span>-->
+                                    </h4>
+                                    <p class="text-light">MR16 TOTAL</p>
+                                    <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                                        <canvas id="widgetChart1"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card text-white bg-flat-color-5">
+                                <div class="card-body pb-0">
+
+                                    <h4 class="mb-0">
+                                        <span id="span_led_t8_ok" class="count_all">0</span> หลอด
+                                    </h4>
+                                    <p class="text-light">หลอด MR16 OK </p>
+                                    <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                                        <canvas id="widgetChart2"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card text-white bg-flat-color-4">
+                                <div class="card-body pb-0">
+
+                                    <h4 class="mb-0">
+                                        <span id="span_led_t8_ng" class="count_all">0</span> หลอด
+                                    </h4>
+                                    <p class="text-light">หลอด MR16 NG</p>
+                                </div>
+                                <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                                    <canvas id="widgetChart3"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card text-white bg-flat-color-3">
+                                <div class="card-body pb-0">
+
+                                    <h4 class="mb-0">
+                                        <span id="span_workstation_total" class="count_all">0</span> WorkStation
+                                    </h4>
+                                    <p class="text-light">TOTAL WORKSTAION</p>
+                                </div>
+                                <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                                    <canvas id="widgetChart4"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content mt-3">
+                            <div class="animated fadeIn">
+                                <div class="row">
+
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h4 class="mb-3">Bar chart MR16</h4>
+                                                <canvas id="barChartFT8" style="width:100% !important;"></canvas>
+                                            </div>
+                                        </div>
+                                    </div><!-- /# column -->
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <h4 class="mb-3">TOTAL MR16 NG (V , I , W , PF)</h4>
+                                                <canvas id="viwpf-chart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div><!-- /# column -->
+                                </div>
+                            </div><!-- .animated -->
+                        </div><!-- .content -->
+                       <!--  <script src="/Template/SufeeAdmin/js/lib/chart-js/Chart.bundle.js"></script>-->
+                        <!-- <script src="/Template/SufeeAdmin/js/widgets.js"></script>-->
+
+
+                        <!-- <p>
+                    <!-- Some content here.-->
+                        <!--
+                    <h2>V_Main DIVISION PD2</h2>
+
+                     Right Panel -->
+                        <!--  <link href="/Scripts/plugins/datetimepicker/sample in bootstrap v3/bootstrap/css/bootstrap-template-fonts.min.css" rel="stylesheet" />
+                    <link href="/Scripts/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+
+                     <script>
+                        var jsonString = convertViewBagJsonData("{&quot;ContentEncoding&quot;:null,&quot;ContentType&quot;:null,&quot;Data&quot;:{&quot;led_t8_total&quot;:&quot;62222&quot;,&quot;led_t8_ok&quot;:&quot;54970&quot;,&quot;led_t8_ng&quot;:&quot;7252&quot;,&quot;workstation_total&quot;:&quot;55&quot;,&quot;barChart_labels_month&quot;:[&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;,&quot;Jan&quot;],&quot;barChart_datas_ok&quot;:[0,0,0,0,0,0,25878,16102,5886,70,935,6099],&quot;barChart_datas_ng&quot;:[0,0,0,0,0,0,3440,2455,995,5,10,347]},&quot;JsonRequestBehavior&quot;:1,&quot;MaxJsonLength&quot;:null,&quot;RecursionLimit&quot;:null}");
+                        var jsonData = eval('(' + jsonString + ')');
+
+
+                        jQuery(function () {
+                            console.log(jsonData);
+
+                            $("#div_data_dashboard_start").datetimepicker();
+
+                            $("#txt_date_dashboard_start_display").val("01-2-2018");
+                            $("#txt_date_dashboard_end_display").val("14-01-2019");
+
+                            $("#txt_date_dashboard_start").val("2018-2-01");
+                            $("#txt_date_dashboard_end").val("2019--01-14");
+
+
+                        });
+
+
+                    </script>-->
+                        <!-- </p>-->
+
+                    </div>
+                    <div class="tab-pane fade" id="E27" role="tabpanel" aria-labelledby="profile-tab">
+                        <h3>E27</h3>
+                        <!--  <p> Some content here</p>-->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card text-white bg-flat-color-1">
+                                <div class="card-body pb-0">
+
+                                    <h4 class="mb-0">
+                                        <span id="span_led_E27_total" class="count_all"></span> หลอด
+                                        <!-- <span class="count" id="span_led_t8_total">0</span>-->
+                                    </h4>
+                                    <p class="text-light">E27 TOTAL</p>
+                                    <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                                        <canvas id="widgetChart5"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card text-white bg-flat-color-5">
+                                <div class="card-body pb-0">
+
+                                    <h4 class="mb-0">
+                                        <span id="span_led_t8_ok" class="count_all">0</span> หลอด
+                                    </h4>
+                                    <p class="text-light">หลอด E27 OK </p>
+                                    <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                                        <canvas id="widgetChart6"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card text-white bg-flat-color-4">
+                                <div class="card-body pb-0">
+
+                                    <h4 class="mb-0">
+                                        <span id="span_led_t8_ng" class="count_all">0</span> หลอด
+                                    </h4>
+                                    <p class="text-light">หลอด E27 NG</p>
+                                </div>
+                                <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                                    <canvas id="widgetChart7"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card text-white bg-flat-color-3">
+                                <div class="card-body pb-0">
+
+                                    <h4 class="mb-0">
+                                        <span id="span_workstation_total" class="count_all">0</span> WorkStation
+                                    </h4>
+                                    <p class="text-light">TOTAL WORKSTAION</p>
+                                </div>
+                                <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                                    <canvas id="widgetChart8"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content mt-3">
+                            <div class="animated fadeIn">
+                                <div class="row">
+
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h4 class="mb-3">Bar chart E27</h4>
+                                                <canvas id="barChartFT8" style="width:100% !important;"></canvas>
+                                            </div>
+                                        </div>
+                                    </div><!-- /# column -->
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <h4 class="mb-3">TOTAL E27 NG (V , I , W , PF)</h4>
+                                                <canvas id="viwpf-chart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div><!-- /# column -->
+                                </div>
+                            </div><!-- .animated -->
+                        </div><!-- .content -->
+                       <!--  <script src="/Template/SufeeAdmin/js/lib/chart-js/Chart.bundle.js"></script>-->
+                       <!-- <script src="/Template/SufeeAdmin/js/widgets.js"></script>-->
+
+                    </div>
+            <!-- <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Total Profit</div>
+                                <div class="stat-digit">1,012</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">New Customer</div>
+                                <div class="stat-digit">961</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-link text-danger border-danger"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Referrals</div>
+                                <div class="stat-digit">2,781</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-layout-grid2 text-warning border-warning"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Active Projects</div>
+                                <div class="stat-digit">770</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+         -->
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <h3>Menu 2</h3>
+                <p>Some content here.</p>
+            </div>
+        </div>
+
+                      </div>
+                  </div>
+    </div>
+    <!-- </div>-->
+   
+
+
+    <script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
+
+
+</body>
+
+</html> 
+       
+
+   

@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "V_Report_PAR20";
+    Layout = "~/Views/Shared/_LayoutPD3.cshtml";
+}
+
+
+<h2>สรุปผลคุณภาพของชิ้นงานตาม WorkStation(PAR-20)</h2>
+
+<script src="/Scripts/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+<link href="/Scripts/plugins/DataTables/datatables.min.css" rel="stylesheet" />
+<script src="/Scripts/plugins/DataTables/datatables.min.js"></script>
+
+<script>
+
+     var jsonString = convertViewBagJsonData("@ViewBag.jsonData");
+     var jsonData = eval('(' + jsonString + ')');
+     $("#p_menu_icon_pd3_main").hide();
+
+
+     $(document).ready(function () {
+
+         getDataLedTypeCheckbox("5");
+         $("#tbody_listData").empty();
+         createDataTable(jsonData.Data); 
+
+     });
+
+     function openDataDetails(mainDataId, codeNo, workStationNo) {
+         window.location = "V_ReportDetail_PAR20?mainDataId=" + mainDataId + "&codeNo=" + codeNo + "&workStationNo=" + workStationNo;
+         /*
+         var url = "/DivisionPD2/getReportDataDetailFT8";
+         $.ajax({
+             data: { main_data_id: mainDataId},
+             type: "POST", url: url,
+             success: function (results) {
+                 //console.log(results);
+                 generateDataDetail(results.datas.mMainDataDetailFT8);
+                 //setControlList(results.datas);
+             },
+             complete: function (xhr, textStatus) {
+                 //console.log(xhr.status);
+                 if (xhr.status != "200") {
+                     alert("ระบบไม่สามารถงานได้ กรุณาติดต่อผู้ดูแลระบบ");
+                     return false;
+                 }
+
+             }
+         });
+         */
+     }
+
+
+
+</script>
+
+@Html.Partial("V_Report_Runtime_Main")
+
+
+
+
+
+
+

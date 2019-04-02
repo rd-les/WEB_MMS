@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "V_ReportAging";
+    Layout = "~/Views/Shared/_LayoutPD2.cshtml";
+}
+
+<script src="~/Template/SufeeAdmin/js/lib/data-table/datatables.min.js"></script>
+<script src="~/Template/SufeeAdmin/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+<script src="~/Template/SufeeAdmin/js/lib/data-table/dataTables.buttons.min.js"></script>
+
+
+<script>
+    var jsonString = convertViewBagJsonData("@ViewBag.jsonData");
+    var jsonData = eval('(' + jsonString + ')');
+
+    jQuery(function () {
+        loadDataList(jsonData.Data);
+        $('#table_dataTable_workstation_finish').DataTable({
+            "lengthChange": false,
+            "ordering": false,
+            "info": false
+        });
+    });
+
+    function loadDataList(datas) {
+
+        $("#tbody_list").empty();
+        //console.log(datas.dataLists);
+        $.each(datas.dataLists, function (key, value) {
+
+            var str = " <tr>"
+                + "      <td>" + (key + 1) + "</td>"
+                + "      <td align='left'>" + value.workNumber + "</td>"
+                + "      <td>" + value.led_total + "</td>"
+                + "      <td>" + value.led_good + "</td>"
+                + "      <td>" + value.led_bad + "</td>"
+                + "      <td>" + value.dateFinish + "</td>"
+                // + "      <td>" + value.finishName + "</td>"
+                + "      <td>"
+              
+                + "<button type='button' class='btn btn-success btn-xs sharp' onClick='getWorkStationFinishDetail(\"" + value.workStationId + "\")' ><i class='fa ion-edit'></i> Detail</button>  "
+                //+ "<button type='button' class='btn btn-warning btn-xs sharp'  onClick='getReportWorkStationShortDetailFinish(\"" + value.reportWorkStationShortDetail + "\")' ><i class='fa fa-file-pdf-o'></i> Short Report</button>  "
+                //+ "<button type='button' class='btn btn-info btn-xs sharp' onClick='getReportWorkStationDetailFinish(\"" + value.reportWorkStationDetail + "\")' ><i class='fa fa-file-pdf-o'></i> Full Report</button>  "
+
+                + "<button type='button' class='btn btn-default btn-xs sharp'  onClick='getReportWorkStationShortDetailFinish(\"" + value.reportWorkStationShortDetail + "\")' ><i class='fa fa-file-pdf-o'></i> Short Report</button>  "
+                + "<button type='button' class='btn btn-default btn-xs sharp' onClick='getReportWorkStationDetailFinish(\"" + value.reportWorkStationDetail + "\")' ><i class='fa fa-file-pdf-o'></i> Full Report</button>  "
+
+
+                + "</td>"
+                + "  </tr>";
+            $("#tbody_list").append(str);
+
+        });
+
+    }
+
+
+    function getWorkStationFinishDetail(workStationId) {
+        //linkMenuToPage('Home/WorkStationFinishDetail'); 
+        var url = "V_ReportAgingDetail?workStationid=" + workStationId;
+        //alert(url + "----->" + workStationId); 
+        window.location.href = url;
+        /*
+        alert(url + "----->" + workStationId); 
+
+        jQuery.post(url, { workStationId: workStationId }, function (result) {
+            $("#" + DIV_MAIN).html(result);
+            return false;
+        });
+        */
+
+    }
+
+
+</script>
+<style>
+    .btn-xs {
+        padding: 1px 5px !important;
+        font-size: 12px !important;
+        line-height: 1.5 !important;
+        border-radius: 3px !important;
+    }
+</style>
+<div class="content mt-5">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">
+                            สรุปผลคุณภาพของชิ้นงานตาม WORKSTATION (T8 AGING)
+                        </strong>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped hover" id="table_dataTable_workstation_finish">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th class="info" align="left">WO No.</th>
+                                    <th class="info">หลอดทั้งหมด</th>
+                                    <th class="info">หลอดดี</th>
+                                    <th class="info">หลอดเสีย</th>
+                                    <th class="info">Date Finish</th>
+                                    <!-- <th class="info">User Finish</th>-->
+                                    <th class="info">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_list"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- .animated -->
+</div>
+
+
+<script src="~/Template/SufeeAdmin/js/lib/data-table/datatables.min.js"></script>
+<script src="~/Template/SufeeAdmin/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+<script src="~/Template/SufeeAdmin/js/lib/data-table/dataTables.buttons.min.js"></script>

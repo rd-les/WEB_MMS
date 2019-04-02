@@ -1,0 +1,606 @@
+﻿
+@{
+    ViewBag.Title = "PD2";
+    //Layout = null;
+    Layout = "~/Views/Shared/_LayoutPD2.cshtml";
+}
+<!--
+<h2>V_Main DIVISION PD2</h2>
+
+ Right Panel -->
+
+
+<script>
+
+    var jsonString = convertViewBagJsonData("@ViewBag.jsonData");
+    var jsonData = eval('(' + jsonString + ')');
+    var widgetLedFT8Total = new Object();
+    var barChartT8 = new Object();
+    var widgetFT8 = new Object();
+    var lineChartFT8 = new Object();
+
+
+    jQuery(function () {
+
+        //console.log(jsonData.Data);
+        //loadDataList(jsonData.Data);
+        setDataDashboard(jsonData.Data);
+        countWidget();
+        createBarChart();
+        createWidget();
+        createLineChart();
+    });
+
+
+    function setDataDashboard(datas) {
+
+        $("#span_count_t8_total").text(datas.led_t8_total);
+        $("#span_count_t8_ok").text(datas.led_t8_ok);
+        $("#span_count_t8_ng").text(datas.led_t8_ng);
+        $("#span_count_workstation").text(datas.workstation_total);
+
+        barChartT8.barChart_datas_ok = datas.barChart_datas_ok;
+        barChartT8.barChart_datas_ng = datas.barChart_datas_ng;
+        barChartT8.barChart_labels_month = datas.barChart_labels_month;
+
+        widgetFT8.widgetAllFT8 = datas.widgetAllFT8;
+        widgetFT8.widgetOkFT8 = datas.widgetOkFT8;
+        widgetFT8.widgetNgFT8 = datas.widgetNgFT8;
+        widgetFT8.widgetWoFT8 = datas.widgetWoFT8;
+
+        lineChartFT8 = datas.lineChart;
+
+    }
+
+
+
+
+</script>
+
+<div class="col-sm-12">
+
+    <div class="alert  alert-success alert-dismissible fade show" role="alert">
+        <div class="row clearfix">
+            <div class="col-sm-9">
+                <div class="form-group col-sm-3">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input class="form-control" placeholder="01-01-2018">
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-3">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input class="form-control" placeholder="01-07-2018">
+                    </div>
+                </div>
+                <div class="form-group col-sm-3">
+                    <select name="selectLg" id="selectLg" class="form-control form-control">
+                        <!--
+                            <option value="2021">Year 2021</option>
+                            <option value="2020">Year 2020</option>
+                        -->
+                        <option value="0" selected>ALL QUAETER</option>
+                        <option value="1">QUAETER 1</option>
+                        <option value="2">QUAETER 2</option>
+                        <option value="3">QUAETER 3</option>
+                        <option value="4">QUAETER 4</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-3">
+                    <select name="selectLg" id="selectLg" class="form-control form-control">
+                        <!--
+                            <option value="2021">Year 2021</option>
+                            <option value="2020">Year 2020</option>
+                        -->
+                        <option value="2019" selected>Year 2019</option>
+                        <option value="2018">Year 2018</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                    <i class="fa fa-search fa-lg"></i>&nbsp;
+                    <span id="payment-button-amount">SEARCH</span>
+                    <span id="payment-button-sending" style="display:none;">Sending…</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row clearfix">
+        <div class="col-sm-6 col-lg-3">
+            <div class="card text-white bg-flat-color-1">
+                <div class="card-body pb-0">
+
+                    <h4 class="mb-0">
+                        <span class="count" id="span_count_t8_total">0</span>
+                    </h4>
+                    <p class="text-light">LED FT8 TOTAL</p>
+                    <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                        <canvas id="widgetChart_Led_FT8_Total"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3">
+            <div class="card text-white bg-flat-color-5">
+                <div class="card-body pb-0">
+
+                    <h4 class="mb-0">
+                        <span class="count" id="span_count_t8_ok">0</span>
+                    </h4>
+                    <p class="text-light">LED FT8 OK </p>
+                    <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                        <canvas id="widgetChart_Led_FT8_OK"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3">
+            <div class="card text-white bg-flat-color-4">
+                <div class="card-body pb-0">
+
+                    <h4 class="mb-0">
+                        <span class="count" id="span_count_t8_ng">0</span>
+                    </h4>
+                    <p class="text-light">LED FT8 NG</p>
+                </div>
+                <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                    <canvas id="widgetChart_Led_FT8_NG"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <!--
+        <div class="col-sm-6 col-lg-3">
+            <div class="card text-white bg-flat-color-3">
+                <div class="card-body pb-0">
+
+                    <h4 class="mb-0">
+                        <span class="count" id="span_count_workstation">0</span>
+                    </h4>
+                    <p class="text-light">TOTAL WORKSTAION</p>
+                </div>
+                <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                    <canvas id="widgetChart_Led_FT8_WO"></canvas>
+                </div>
+            </div>
+        </div>
+
+            -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card text-white bg-flat-color-3">
+                <div class="card-body pb-0">
+                    <h4 class="mb-0">
+                        <span class="count" id="span_count_workstation">0</span>
+                    </h4>
+                    <p class="text-light">TOTAL WORKSTAION</p>
+                    <div class="chart-wrapper px-3" style="height:70px;" height="70" />
+                    <canvas id="widgetChart_Led_FT8_WO"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-3">จำนวนการเทสหลอดในแต่ละเดือน</h4>
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+                </div><!-- /# column -->
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="mb-3">จำนวนการเทสหลอดในแต่ละชั่วโมง</h4>
+                            <canvas id="viwpf-chart"></canvas>
+                        </div>
+                    </div>
+                </div><!-- /# column -->
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
+
+</div>
+
+
+</div>
+
+
+
+
+
+<script src="~/Template/SufeeAdmin/js/lib/chart-js/Chart.bundle.js"></script>
+<!--<script src="~/Template/SufeeAdmin/js/widgets.js"></script>-->
+<script>
+
+
+    var widgetOptions = {
+
+        maintainAspectRatio: false,
+        legend: {
+            display: false
+        },
+        responsive: true,
+        tooltips: {
+            mode: 'index',
+            titleFontSize: 12,
+            titleFontColor: '#000',
+            bodyFontColor: '#000',
+            backgroundColor: '#fff',
+            titleFontFamily: 'Montserrat',
+            bodyFontFamily: 'Montserrat',
+            cornerRadius: 3,
+            intersect: false,
+        },
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    color: 'transparent',
+                    zeroLineColor: 'transparent'
+                },
+                ticks: {
+                    fontSize: 2,
+                    fontColor: 'transparent'
+                }
+            }],
+            yAxes: [{
+                display: false,
+                ticks: {
+                    display: false,
+                }
+            }]
+        },
+        title: {
+            display: false,
+        },
+        elements: {
+            line: {
+                borderWidth: 1
+            },
+            point: {
+                radius: 5,
+                hitRadius: 20,
+                hoverRadius: 4
+            }
+        }
+    };
+    function countWidget() {
+
+
+        $('.count').each(function () {
+            $(this).prop('Counter', 0).animate({
+                Counter: $(this).text()
+            }, {
+                    duration: 3000,
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(Math.ceil(now));
+                    }
+                });
+        });
+
+    }
+
+
+    function createWidget() {
+
+        var ctx = document.getElementById("widgetChart_Led_FT8_Total");
+        ctx.height = 150;
+        ctx.textBaseline = 'Top';
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: barChartT8.barChart_labels_month,
+                type: 'line',
+                datasets: [{
+                    data: widgetFT8.widgetAllFT8,
+                    label: 'Count',
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgba(255,255,255,.55)',
+                },]
+            },
+            options: widgetOptions
+
+        });
+
+        /*
+         widgetFT8.widgetOkFT8 = datas.widgetOkFT8;
+         widgetFT8.widgetNgFT8 = datas.widgetNgFT8;
+         */
+
+        var ctx = document.getElementById("widgetChart_Led_FT8_OK");
+        ctx.height = 150;
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: barChartT8.barChart_labels_month,
+                type: 'line',
+                datasets: [{
+                    data: widgetFT8.widgetOkFT8,
+                    label: 'Dataset',
+                    backgroundColor: '#63c2de',
+                    borderColor: 'rgba(255,255,255,.55)',
+                },]
+            },
+            options: {
+
+                maintainAspectRatio: false,
+                legend: {
+                    display: false
+                },
+                responsive: true,
+                tooltips: {
+                    mode: 'index',
+                    titleFontSize: 12,
+                    titleFontColor: '#000',
+                    bodyFontColor: '#000',
+                    backgroundColor: '#fff',
+                    titleFontFamily: 'Montserrat',
+                    bodyFontFamily: 'Montserrat',
+                    cornerRadius: 3,
+                    intersect: false,
+                },
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            color: 'transparent',
+                            zeroLineColor: 'transparent'
+                        },
+                        ticks: {
+                            fontSize: 2,
+                            fontColor: 'transparent'
+                        }
+                    }],
+                    yAxes: [{
+                        display: false,
+                        ticks: {
+                            display: false,
+                        }
+                    }]
+                },
+                title: {
+                    display: false,
+                },
+                elements: {
+                    line: {
+                        tension: 0.00001,
+                        borderWidth: 1
+                    },
+                    point: {
+                        radius: 4,
+                        hitRadius: 10,
+                        hoverRadius: 4
+                    }
+                }
+            }
+        });
+
+
+
+        //WidgetChart 3
+        var ctx = document.getElementById("widgetChart_Led_FT8_NG");
+        ctx.height = 70;
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: barChartT8.barChart_labels_month,
+                type: 'line',
+                datasets: [{
+                    data: widgetFT8.widgetNgFT8,
+                    label: 'Dataset',
+                    backgroundColor: 'rgba(255,255,255,.2)',
+                    borderColor: 'rgba(255,255,255,.55)',
+                },]
+            },
+            options: {
+
+                maintainAspectRatio: true,
+                legend: {
+                    display: false
+                },
+                responsive: true,
+                // tooltips: {
+                //     mode: 'index',
+                //     titleFontSize: 12,
+                //     titleFontColor: '#000',
+                //     bodyFontColor: '#000',
+                //     backgroundColor: '#fff',
+                //     titleFontFamily: 'Montserrat',
+                //     bodyFontFamily: 'Montserrat',
+                //     cornerRadius: 3,
+                //     intersect: false,
+                // },
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            color: 'transparent',
+                            zeroLineColor: 'transparent'
+                        },
+                        ticks: {
+                            fontSize: 2,
+                            fontColor: 'transparent'
+                        }
+                    }],
+                    yAxes: [{
+                        display: false,
+                        ticks: {
+                            display: false,
+                        }
+                    }]
+                },
+                title: {
+                    display: false,
+                },
+                elements: {
+                    line: {
+                        borderWidth: 2
+                    },
+                    point: {
+                        radius: 0,
+                        hitRadius: 10,
+                        hoverRadius: 4
+                    }
+                }
+            }
+        });
+
+
+        var ctx = document.getElementById("widgetChart_Led_FT8_WO");
+        ctx.height = 70;
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: barChartT8.barChart_labels_month,
+                datasets: [
+                    {
+                        label: "WORKSTATION",
+                        data: widgetFT8.widgetWoFT8,
+                        //rgba(18, 206, 78, 1)
+                        //borderColor: "rgba(0, 123, 255, 0.9)",
+                        borderColor: "rgba(18, 206, 78, 1)",
+                        //borderWidth: "0",
+                        //backgroundColor: "rgba(255,255,255,.3)"
+                        backgroundColor: "rgba(221, 249, 233, 0.84)"
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: true,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        display: false,
+                        categoryPercentage: 1,
+                        barPercentage: 0.3
+                    }],
+                    yAxes: [{
+                        display: false
+                    }]
+                }
+            }
+        });
+
+
+
+
+
+
+    }
+
+
+    function createLineChart() {
+       // console.log(lineChartFT8);
+        var ctx = document.getElementById("viwpf-chart");
+        ctx.height = 150;
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                //labels: ["January", "February", "March", "April", "May", "June", "July"],
+                //labels: ["08-09:00", "09-10:00", "10-11:00", "11-12:00", "12-13:00", "13-14:00", "14-15:00", "15-16:00", "16-17:00", "17-18:00", "18-19:00", "19-20:00", "20-21:00", "21-22:00"],
+                labels: ["08-09:00", "09-10:00", "10-11:00", "11-12:00", "13-14:00", "14-15:00", "15-16:00", "16-17:00", "17-18:00", "18-19:00", "19-20:00", "20-21:00", "21-22:00"],
+                datasets: lineChartFT8
+
+                /*
+                [
+                {
+                    data: [86, 114, 106, 106, 107, 111, 133],
+                    label: "V",
+                    borderColor: "#3e95cd",
+                    fill: false
+                }, {
+                    data: [100, 350, 411, 502, 635, 720, 457],
+                    label: "I",
+                    borderColor: "#8e5ea2",
+                    fill: false
+                }, {
+                    data: [168, 357, 178, 572, 203, 276, 408],
+                    label: "W",
+                    borderColor: "#3cba9f",
+                    fill: false
+                }, {
+                    data: [40, 20, 10, 16, 24, 38, 74],
+                    label: "PF",
+                    borderColor: "#e8c3b9",
+                    fill: false
+                }
+            ]
+            */
+            },
+            options: {
+                responsive: true,
+                hoverMode: 'index',
+                stacked: false
+            }
+        });
+
+
+
+    }
+
+
+    function createBarChart() {
+
+        //console.log(barChartT8.barChart_labels_month);
+        var ctx = document.getElementById("barChart");
+        ctx.height = 150;
+        //    ctx.height = 200;
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: barChartT8.barChart_labels_month,
+                datasets: [
+                    {
+                        label: "OK",
+                        data: barChartT8.barChart_datas_ok,
+                        borderColor: "rgba(6, 140,1, 0.5)",
+                        borderWidth: "0",
+                        backgroundColor: "rgba(6, 140,1, 0.5)"
+                    },
+                    {
+                        label: "NG",
+                        data: barChartT8.barChart_datas_ng,
+                        borderColor: "rgba(255,0,0,0.09)",
+                        borderWidth: "0",
+                        backgroundColor: "rgba(255,0,0,0.07)"
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+
+    }
+
+
+</script>
+
+
+
+
+
+

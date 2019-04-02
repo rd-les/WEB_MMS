@@ -1,0 +1,394 @@
+﻿
+@{
+    ViewBag.Title = "V_QualityControl";
+    Layout = "~/Views/Shared/_LayoutPD2.cshtml";
+}
+
+<style>
+
+    .card {
+        background: #fff;
+        min-height: 50px;
+        box-shadow: none;
+        position: relative;
+        margin-bottom: 30px;
+        transition: .5s;
+        border: none;
+        border-radius: 0;
+    }
+
+        .card .body {
+            font-size: 12px;
+            color: #444;
+            padding: 15px;
+            font-weight: 400;
+        }
+
+        .card .header {
+            color: #555;
+            padding: 0 0 10px 0;
+            position: relative;
+            box-shadow: none;
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+            .card .header h2 {
+                margin: 0;
+                font-size: 16px;
+                font-weight: normal;
+                color: #111;
+                text-transform: uppercase;
+            }
+
+    .rack-state {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+        .rack-state .progress {
+            height: 7px;
+        }
+
+    .progress {
+        margin-bottom: 5px;
+    }
+
+        .progress .progress-bar.progress-bar-danger {
+            background-color: #68930a;
+        }
+
+    .fc-row .fc-content-skeleton tbody td, .fc-row .fc-helper-skeleton tbody td {
+        border-top: 0;
+        color: white;
+        font-size: 16px;
+    }
+
+    .stats-report {
+        margin-bottom: 20px;
+    }
+
+        .stats-report .stat-item {
+            display: inline-block;
+            padding-right: 15px;
+        }
+
+    .sparkline {
+        text-align: center;
+    }
+
+    .m-b-20{
+        margin-top:10px !important ;
+    }
+</style>
+
+
+<div class="row clearfix">
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-body" style="text-align:left;">
+                <h4 class="mb-3">
+                    จำนวนพนักงาน ประจำวันที่ <span id="span_datenow"></span>
+                </h4>
+                <div>
+                    <div class="col-lg-6" id="div_doughutChart1" style="width:100% !important; ">
+                        <canvas id="doughutChart1"></canvas>
+                    </div>
+                    <div class="col-lg-6" style="text-align:center;">
+                        <i class="fa fa-users fa-5" aria-hidden="true" style="font-size:200px !important;color:green !important;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-body" style="text-align:left;padding: 0.100rem !important;">
+                
+                <div class="col-lg-8" id="div_doughutChart2" style="width:100% !important; ">
+                    
+                    <div class="card" style="">
+                        <div class="card-body">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <h4 class="mb-3">WORKSTATION ที่ผลิต <br />[ 3 WORKSTATION ]</h4>
+                    <div class="card" >
+
+                        <div class="body">
+                            <ul class="rack-state">
+                                <li class="m-b-20">
+                                    <h4 class="m-b-0">WO1802835</h4> <h6>910 จาก 1,000</h6>
+                                    <div class="float-right">91%</div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:91%;"> <span class="sr-only">91% Complete</span></div>
+                                    </div>
+                                </li>
+                                <li class="m-b-20">
+                                    <h4 class="m-b-0">WO1802824</h4> <h6>657 จาก 1,000</h6>
+                                    <div class="float-right">65%</div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:65%;"> <span class="sr-only">65% Complete</span></div>
+                                    </div>
+                                </li>
+                                <li class="m-b-20">
+                                    <h4 class="m-b-0">WO1802824</h4> <h6>452 จาก 1,000</h6>
+                                    <div class="float-right">45%</div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:45%;background-color:red !important;"> <span class="sr-only">45% Complete</span></div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row clearfix" style="height:400px;">
+
+    <div class="col-lg-4">
+        <h4 class="mb-3">FUNCTION TEST QUALITY</h4>
+        <div class="card">
+            <div class="card-body" style="text-align:left;">
+                <div>
+                    <div class="col-lg-12" id="div_doughutChart2" style="width:100% !important; ">
+                        <canvas id="doughutChart2"></canvas>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <h4 class="mb-3">AGING QUALITY</h4>
+        <div class="card">
+            <div class="card-body" style="text-align:left;">
+                <div>
+                    <div class="col-lg-12" id="div_doughutChart3" style="width:100% !important; ">
+                        <canvas id="doughutChart3"></canvas>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="col-lg-4">
+        <h4 class="mb-3">TARGET</h4>
+
+        <div class="card">
+            <div class="card-header">
+                <strong>Perfomance</strong> Today
+            </div>
+
+            <div class="card-body card-block">
+                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <div class="row form-group">
+                        <div class="col col-md-5"><label class=" form-control-label">Target Today</label></div>
+                        <div class="col-12 col-md-7">
+                            <p class="form-control-static" style="color:green;">3,000</p>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-5"><label class=" form-control-label">Current</label></div>
+                        <div class="col-12 col-md-7">
+                            <p class="form-control-static" style="color:green;">1,025</p>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-5"><label class=" form-control-label">Missing</label></div>
+                        <div class="col-12 col-md-7">
+                            <p class="form-control-static" style="color:red;">1,975</p>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-5"><label class=" form-control-label">OEE</label></div>
+                        <div class="col-12 col-md-7">
+                            <p class="form-control-static" style="color:red;">97%</p>
+                        </div>
+                    </div>
+                </form>
+                </div>
+
+
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+</div>
+
+    <script src="~/Template/SufeeAdmin/js/lib/flot-chart/jquery.flot.js"></script>
+    <script src="~/Template/SufeeAdmin/js/lib/chart-js/Chart.bundle.js"></script>
+    <script src="~/Template/SufeeAdmin/js/widgets.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            var dateNow = new Date();
+
+            $("#span_datenow").text(dateNow.getDate() + "-" + dateNow.getMonth() + "-" + dateNow.getFullYear());
+            createDonut();
+        });
+
+        function createDonut() {
+            //doughut chart
+
+            var ctx = document.getElementById("doughutChart1");
+            //ctx.height = 300;
+            ctx.width = 250;
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [18, 2],
+                        backgroundColor: [
+                            "rgba(0, 204, 102,0.9)",
+                            "rgba(204, 153, 0,0.7)"
+                        ],
+                        hoverBackgroundColor: [
+                            "rgba(0, 123, 255,0.9)",
+                            "rgba(0, 123, 255,0.7)"
+                        ]
+
+                    }],
+                    labels: [
+                        "มาทำงาน ",
+                        "ขาดงาน "
+                    ]
+                },
+                options: {
+                    responsive: false
+
+                }
+            });
+
+            var ctx = document.getElementById("doughutChart2");
+            //ctx.height = 300;
+            ctx.width = 250;
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [3487, 55],
+                        backgroundColor: [
+                            "rgba(0, 204, 102,0.9)",
+                            "rgba(204, 153, 0,0.7)"
+                        ],
+                        hoverBackgroundColor: [
+                            "rgba(0, 123, 255,0.9)",
+                            "rgba(0, 123, 255,0.7)"
+                        ]
+
+                    }],
+                    labels: [
+                        "OK :  3487",
+                        "NG :  55"
+                    ]
+                },
+                options: {
+                    responsive: false
+
+                }
+            });
+
+            var ctx = document.getElementById("doughutChart3");
+            //ctx.height = 300;
+            ctx.width = 250;
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [1945, 78],
+                        backgroundColor: [
+                            "rgba(0, 204, 102,0.9)",
+                            "rgba(204, 153, 0,0.7)"
+                        ],
+                        hoverBackgroundColor: [
+                            "rgba(0, 123, 255,0.9)",
+                            "rgba(0, 123, 255,0.7)"
+                        ]
+
+                    }],
+                    labels: [
+                        "OK :  1945",
+                        "NG :  78"
+                    ]
+                },
+                options: {
+                    responsive: false
+
+                }
+            });
+            
+
+
+            var ctx = document.getElementById("barChart");
+
+            //ctx.height = 150;
+            //    ctx.height = 200;
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["WO1802835", "WO1802824", "WO1802824"],
+                    datasets: [
+                        {
+                            label: "CURRENT",
+                            data: [910, 657, 452],
+                            borderColor: "rgba(6, 140,1, 0.5)",
+                            borderWidth: "0",
+                            backgroundColor: "rgba(6, 140,1, 0.5)"
+                        },
+                        {
+                            label: "TARGET",
+                            data: [1000, 1000, 1000],
+                            borderColor: "rgba(0,0,0,0.09)",
+                            borderWidth: "0",
+                            backgroundColor: "rgba(0,0,0,0.07)"
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+    </script>
+
+
+
+

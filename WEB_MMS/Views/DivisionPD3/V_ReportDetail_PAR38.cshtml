@@ -1,0 +1,237 @@
+﻿
+@{
+    ViewBag.Title = "V_ReportDetail_PAR38";
+    Layout = "~/Views/Shared/_LayoutPD3.cshtml";
+}
+
+<h2>V_ReportDetail_PAR38</h2>
+<script src="~/Template/SufeeAdmin/js/lib/data-table/datatables.min.js"></script>
+<script src="~/Template/SufeeAdmin/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+<script src="~/Template/SufeeAdmin/js/lib/data-table/dataTables.buttons.min.js"></script>
+
+
+
+<script>
+
+    var mainDataId = "@ViewBag.mainDataId";
+    $(document).ready(function () {
+
+        if (mainDataId == "") {
+            return false;
+        }
+
+        var url = "/DivisionPD3/getReportDataDetail_MR16";
+        $.ajax({
+            data: { main_data_id: mainDataId },
+            type: "POST", url: url,
+            success: function (results) {
+                //console.log(results);
+                setMainData(results.datas);
+                //generateDataDetail(results.datas.mMainDataDetailFT8);
+                //setControlList(results.datas);
+            },
+            complete: function (xhr, textStatus) {
+                //console.log(xhr.status);
+                if (xhr.status != "200") {
+                    alert("ระบบไม่สามารถงานได้ กรุณาติดต่อผู้ดูแลระบบ");
+                    return false;
+                }
+            }
+        });
+    });
+
+    function setMainData(obj) {
+
+        $("#span_codeNo").text(obj.codeNo);
+        $("#span_workStationNo").text(obj.workStationNo);
+        $("#span_dateCreate").text(obj.dateCreate);
+        $("#span_ledBad").text(obj.ledBad);
+        $("#span_ledGood").text(obj.ledGood);
+        $("#span_ledTotal").text(obj.ledTotal);
+        $("#span_ledHighWatt").text(obj.ledHighWatt);
+        $("#span_ledLowWatt").text(obj.ledLowWatt);
+
+    }
+
+    function generateDataDetail(obj) {
+        //####################################  Clean DataTable.
+
+        $("#tbody_listDataDetail").empty();
+        $.each(obj, function (key, value) {
+            //console.log(value);
+            var str = "";
+            var tr_color = "";
+            if (value.ActionResult == "False") {
+                //alert("xxxxx");
+                tr_color = "#FFE5CC";
+            }
+            //str += " <tr bgcolor='" + tr_color+"'>"
+            str += " <tr style='background-color:" + tr_color + " !important;'>"
+                + "     <td> " + value.led_count + "</td>"
+                + "     <td>" + value.led_no + "</td>"
+                + "     <td>" + value.data_datetime + "</td>"
+                + "     <td>" + value.led_count_no + "</td>"
+                + "     <td>" + value.ActionResult + "</td>"
+                + "     <td>" + value.data_watt + "</td>"
+                + "     <td>" + value.data_volt + "</td>"
+                + "     <td>" + value.data_PF + "</td>"
+                + "  </tr>";
+            $("#tbody_listDataDetail").append(str);
+        });
+
+        var dataTableDetails = $('#data_table_details').DataTable({
+            //"bLengthChange": false, //thought this line could hide the LengthMenu
+            //"bInfo": false,
+            "pageLength": 10
+        });
+
+        //dataTableDetails.fnClearTable();
+        /*
+        dataTableDetails.DataTable({
+            "bLengthChange": false, //thought this line could hide the LengthMenu
+            "bInfo": false,
+            "pageLength": 10
+        });
+        */
+    }
+</script>
+
+<style>
+    .input-group-addon {
+        width: 200px !important;
+        text-align: right !important;
+    }
+
+    .right-addon {
+        width: 150px !important;
+    }
+
+    .div-control {
+        text-align: left !important;
+    }
+
+    table.dataTable thead .sorting {
+        cursor: pointer;
+    }
+</style>
+
+
+
+<div class="row">
+    <div class="col-md-12" style="background-color:white;">
+
+        <div class="row" style="text-align:center;">
+
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Infomations</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <form action="" method="post" class="form-horizontal">
+                            <div class="row form-group">
+                                <div class="col col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">CODE NO : </div>
+                                        <div class="form-control div-control"><span id="span_codeNo"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">WORK NO : </div>
+                                        <div class="form-control div-control"><span id="span_workStationNo"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">วันที่ : </div>
+                                        <div class="form-control div-control"><span id="span_dateCreate"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Infomations</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <form action="" method="post" class="form-horizontal">
+                            <div class="row form-group">
+                                <div class="col col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group-addon right-addon" style="">MIN : </div>
+                                        <div class="form-control div-control"><span id="span_ledLowWatt"></span></div>
+                                    </div>
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group-addon right-addon">MAX : </div>
+                                        <div class="form-control div-control"><span id="span_ledHighWatt"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group-addon right-addon"><span style="color:forestgreen;">OK : </span></div>
+                                        <div class="form-control div-control"><span id="span_ledGood"></span></div>
+                                    </div>
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group-addon right-addon"><span style="color:red;">NG : </span></div>
+                                        <div class="form-control div-control"><span id="span_ledBad"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">หลอดทั้งหมด : </div>
+                                        <div class="form-control div-control"><span id="span_ledTotal"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="background-color:white;">
+                <table id="data_table_details" class="table table-striped table-bordered" style="font-size:12px !important; ">
+                    <thead>
+                        <tr>
+                            <th style="width:5%;">#</th>
+                            <th style="width:15%;">LED No.</th>
+                            <th style="width:15%;">วันที่</th>
+                            <th style="width:10%;">ลำดับหลอด</th>
+                            <th style="width:10%;">ActionResult</th>
+                            <th style="width:10%;">W</th>
+                            <th style="width:10%;">V</th>
+                            <th style="width:10%;">PF</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_listDataDetail"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

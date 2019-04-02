@@ -1,0 +1,241 @@
+﻿
+@{
+    ViewBag.Title = "V_SettingProductTypeDetail";
+    Layout = "~/Views/Shared/_LayoutPD3.cshtml";
+}
+
+<script>
+
+    var jsonString = convertViewBagJsonData("@ViewBag.jsonData");
+    var jsonData = eval('(' + jsonString + ')');
+
+
+    console.log(jsonData);
+    var jsonComboTypeString = convertViewBagJsonData("@ViewBag.jsonComboType");
+    var jsonComboTypeData = eval('(' + jsonComboTypeString + ')');
+
+    jQuery(function () {
+        setComboWorkStation();
+
+        //###########################################################   FOR ADD.
+        if (jsonData.Data.result == "FAILURE") {
+            $("#codex").val(jsonData.Data.codex);
+            $('#switch_usable').prop('checked', true);
+            $("#action").val("ADD");
+            return false;
+        }
+        //console.log(jsonData);
+        //###########################################################   FOR EDIT.
+        else {
+            $("#action").val("EDIT");
+            var data = jsonData.Data.datas;
+            $("#configTypeId").val(data.configTypeId)
+            $("#codex").val(data.codex);
+            
+            $("#ledTypeCodeNo").val(data.ledTypeCodeNo);
+            $("#ledTypeName").val(data.ledTypeName);
+
+            $("#ledTypeSlotName").val(data.ledTypeSlotName);
+            $("#wMin").val(data.wMin);
+            $("#wMax").val(data.wMax);
+            $("#pfMin").val(data.pfMin);
+            $("#pfMax").val(data.pfMax);
+
+            if (data.usable == "1") {
+                $('#switch_usable').prop('checked', true);
+            }
+            else {
+                $('#switch_usable').prop('checked', false);
+            }
+
+            $("#ledTypeSlotId").val(data.ledTypeSlotId);
+        }
+
+
+    });
+
+
+    function setComboWorkStation() {
+        $.each(jsonComboTypeData.Data.comboData, function (key, val) {
+            $("#ledTypeSlotId").append($('<option />').attr('Value', key).text(val));
+        });
+    }
+
+
+    function saveData() {
+
+        var url = "V_SettingProductTypeDetail";
+
+        $.ajax({
+            type: "POST", url: url, async: false, data: $("#form_input_data").serialize() + "&saveData=true",
+            success: function (response) {
+                console.log(response);
+
+                if (response.result == RESULT_SUCCESS) {
+                    alert(MESSAGE_SYSTEM_SUCCESS);
+                    window.location = "V_SettingProductType"; 
+                    //linkMenuToPage('V_SettingProductType');
+
+                } else {
+                    alert(MESSAGE_SYSTEM_FAILURE);
+                }
+
+            }
+        });
+        return false;
+
+
+    }
+</script>
+
+<style>
+    .div-control {
+        text-align: left !important;
+    }
+
+    .input-group-addon {
+        width: 120px;
+    }
+</style>
+
+
+
+
+<form class="form-horizontal" role="form" name="form_input_data" id="form_input_data">
+    <div class="row" style="text-align:center;">
+        <div class="col-lg-12">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Infomations</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <div class="row form-group">
+                            <div class="col col-md-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon">CODE NO : </div>
+                                    <div class="form-control div-control">
+                                        <input type="text" id="codex" name="codex" class="col-md-8" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon">CODE No. : </div>
+                                    <div class="form-control div-control">
+                                        <input type="text" id="ledTypeCodeNo" name="ledTypeCodeNo" class="col-md-8" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon">NAME : </div>
+                                    <div class="form-control div-control">
+                                        <input type="text" id="ledTypeName" name="ledTypeName" class="col-md-8" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon">TYPE NAME : </div>
+                                    <div class="form-control div-control">
+                                        <!--<span id="span_ledTypeSlotName"></span>-->
+                                        <input type="hidden" id="ledTypeSlotName" name="ledTypeSlotName" class="col-md-8" />
+                                        <select name="ledTypeSlotId" id="ledTypeSlotId">
+                                            <option value="0">----- กรุณาเลือก -----</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Infomations</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <div class="row form-group">
+                            <div class="col col-md-6">
+                                <div class="input-group">
+                                    <div class="input-group-addon right-addon" style="">W MIN : </div>
+                                    <div class="form-control div-control">
+                                        <input type="text" id="wMin" name="wMin" class="col-md-8" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-md-6">
+                                <div class="input-group">
+                                    <div class="input-group-addon right-addon">W MAX : </div>
+                                    <div class="form-control div-control">
+                                        <input type="text" id="wMax" name="wMax" class="col-md-8" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-6">
+                                <div class="input-group">
+                                    <div class="input-group-addon right-addon" style="">PF MIN : </div>
+                                    <div class="form-control div-control">
+                                        <input type="text" id="pfMin" name="pfMin" class="col-md-8" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-md-6">
+                                <div class="input-group">
+                                    <div class="input-group-addon right-addon">PF MAX : </div>
+                                    <div class="form-control div-control">
+                                        <input type="text" id="pfMax" name="pfMax" class="col-md-8" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row form-group">
+                            <div class="col col-md-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon">USABLE : </div>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label class="switch switch-3d switch-success mr-3">
+                                        <input type="checkbox" class="switch-input" name="usable" id="switch_usable">
+                                        <span class="switch-label"></span>
+                                        <span class="switch-handle"></span>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <input type="hidden" value="" readonly name="configTypeId" id="configTypeId" />
+            <input type="hidden" value="ADD" readonly name="action" id="action" />
+            <button type="button" onclick="saveData();">SAVE</button>
+            <button>CANCEL</button>
+        </div>
+
+
+    </div>
+
+</form>

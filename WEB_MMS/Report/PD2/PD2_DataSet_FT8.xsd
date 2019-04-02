@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PD2_DataSet_FT8" targetNamespace="http://tempuri.org/PD2_DataSet_FT8.xsd" xmlns:mstns="http://tempuri.org/PD2_DataSet_FT8.xsd" xmlns="http://tempuri.org/PD2_DataSet_FT8.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PD2_DataSet_FT8" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PD2_DataSet_FT8" msprop:Generator_UserDSName="PD2_DataSet_FT8">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable_FT8" msprop:Generator_TableClassName="DataTable_FT8DataTable" msprop:Generator_TableVarName="tableDataTable_FT8" msprop:Generator_TablePropName="DataTable_FT8" msprop:Generator_RowDeletingName="DataTable_FT8RowDeleting" msprop:Generator_RowChangingName="DataTable_FT8RowChanging" msprop:Generator_RowEvHandlerName="DataTable_FT8RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable_FT8RowDeleted" msprop:Generator_UserTableName="DataTable_FT8" msprop:Generator_RowChangedName="DataTable_FT8RowChanged" msprop:Generator_RowEvArgName="DataTable_FT8RowChangeEvent" msprop:Generator_RowClassName="DataTable_FT8Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="code_no" msprop:Generator_ColumnVarNameInTable="columncode_no" msprop:Generator_ColumnPropNameInRow="code_no" msprop:Generator_ColumnPropNameInTable="code_noColumn" msprop:Generator_UserColumnName="code_no" type="xs:string" minOccurs="0" />
+              <xs:element name="work_station_no" msprop:Generator_ColumnVarNameInTable="columnwork_station_no" msprop:Generator_ColumnPropNameInRow="work_station_no" msprop:Generator_ColumnPropNameInTable="work_station_noColumn" msprop:Generator_UserColumnName="work_station_no" type="xs:string" minOccurs="0" />
+              <xs:element name="date_create" msprop:Generator_ColumnVarNameInTable="columndate_create" msprop:Generator_ColumnPropNameInRow="date_create" msprop:Generator_ColumnPropNameInTable="date_createColumn" msprop:Generator_UserColumnName="date_create" type="xs:string" minOccurs="0" />
+              <xs:element name="led_total" msprop:Generator_ColumnVarNameInTable="columnled_total" msprop:Generator_ColumnPropNameInRow="led_total" msprop:Generator_ColumnPropNameInTable="led_totalColumn" msprop:Generator_UserColumnName="led_total" type="xs:string" minOccurs="0" />
+              <xs:element name="led_good" msprop:Generator_ColumnVarNameInTable="columnled_good" msprop:Generator_ColumnPropNameInRow="led_good" msprop:Generator_ColumnPropNameInTable="led_goodColumn" msprop:Generator_UserColumnName="led_good" type="xs:string" minOccurs="0" />
+              <xs:element name="led_bad" msprop:Generator_ColumnVarNameInTable="columnled_bad" msprop:Generator_ColumnPropNameInRow="led_bad" msprop:Generator_ColumnPropNameInTable="led_badColumn" msprop:Generator_UserColumnName="led_bad" type="xs:string" minOccurs="0" />
+              <xs:element name="low_watt" msprop:Generator_ColumnVarNameInTable="columnlow_watt" msprop:Generator_ColumnPropNameInRow="low_watt" msprop:Generator_ColumnPropNameInTable="low_wattColumn" msprop:Generator_UserColumnName="low_watt" type="xs:string" minOccurs="0" />
+              <xs:element name="high_watt" msprop:Generator_ColumnVarNameInTable="columnhigh_watt" msprop:Generator_ColumnPropNameInRow="high_watt" msprop:Generator_ColumnPropNameInTable="high_wattColumn" msprop:Generator_UserColumnName="high_watt" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DataTable_FT8_Detail" msprop:Generator_TableClassName="DataTable_FT8_DetailDataTable" msprop:Generator_TableVarName="tableDataTable_FT8_Detail" msprop:Generator_TablePropName="DataTable_FT8_Detail" msprop:Generator_RowDeletingName="DataTable_FT8_DetailRowDeleting" msprop:Generator_RowChangingName="DataTable_FT8_DetailRowChanging" msprop:Generator_RowEvHandlerName="DataTable_FT8_DetailRowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable_FT8_DetailRowDeleted" msprop:Generator_UserTableName="DataTable_FT8_Detail" msprop:Generator_RowChangedName="DataTable_FT8_DetailRowChanged" msprop:Generator_RowEvArgName="DataTable_FT8_DetailRowChangeEvent" msprop:Generator_RowClassName="DataTable_FT8_DetailRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:string" minOccurs="0" />
+              <xs:element name="FT8_main_data_id" msprop:Generator_ColumnVarNameInTable="columnFT8_main_data_id" msprop:Generator_ColumnPropNameInRow="FT8_main_data_id" msprop:Generator_ColumnPropNameInTable="FT8_main_data_idColumn" msprop:Generator_UserColumnName="FT8_main_data_id" type="xs:string" minOccurs="0" />
+              <xs:element name="led_no" msprop:Generator_ColumnVarNameInTable="columnled_no" msprop:Generator_ColumnPropNameInRow="led_no" msprop:Generator_ColumnPropNameInTable="led_noColumn" msprop:Generator_UserColumnName="led_no" type="xs:string" minOccurs="0" />
+              <xs:element name="data_watt" msprop:Generator_ColumnVarNameInTable="columndata_watt" msprop:Generator_ColumnPropNameInRow="data_watt" msprop:Generator_ColumnPropNameInTable="data_wattColumn" msprop:Generator_UserColumnName="data_watt" type="xs:string" minOccurs="0" />
+              <xs:element name="data_PF" msprop:Generator_ColumnVarNameInTable="columndata_PF" msprop:Generator_ColumnPropNameInRow="data_PF" msprop:Generator_ColumnPropNameInTable="data_PFColumn" msprop:Generator_UserColumnName="data_PF" type="xs:string" minOccurs="0" />
+              <xs:element name="data_THDi" msprop:Generator_ColumnVarNameInTable="columndata_THDi" msprop:Generator_ColumnPropNameInRow="data_THDi" msprop:Generator_ColumnPropNameInTable="data_THDiColumn" msprop:Generator_UserColumnName="data_THDi" type="xs:string" minOccurs="0" />
+              <xs:element name="data_volt" msprop:Generator_ColumnVarNameInTable="columndata_volt" msprop:Generator_ColumnPropNameInRow="data_volt" msprop:Generator_ColumnPropNameInTable="data_voltColumn" msprop:Generator_UserColumnName="data_volt" type="xs:string" minOccurs="0" />
+              <xs:element name="data_mA" msprop:Generator_ColumnVarNameInTable="columndata_mA" msprop:Generator_ColumnPropNameInRow="data_mA" msprop:Generator_ColumnPropNameInTable="data_mAColumn" msprop:Generator_UserColumnName="data_mA" type="xs:string" minOccurs="0" />
+              <xs:element name="data_THDv" msprop:Generator_ColumnVarNameInTable="columndata_THDv" msprop:Generator_ColumnPropNameInRow="data_THDv" msprop:Generator_ColumnPropNameInTable="data_THDvColumn" msprop:Generator_UserColumnName="data_THDv" type="xs:string" minOccurs="0" />
+              <xs:element name="power_out_watt" msprop:Generator_ColumnVarNameInTable="columnpower_out_watt" msprop:Generator_ColumnPropNameInRow="power_out_watt" msprop:Generator_ColumnPropNameInTable="power_out_wattColumn" msprop:Generator_UserColumnName="power_out_watt" type="xs:string" minOccurs="0" />
+              <xs:element name="VLED" msprop:Generator_ColumnVarNameInTable="columnVLED" msprop:Generator_ColumnPropNameInRow="VLED" msprop:Generator_ColumnPropNameInTable="VLEDColumn" msprop:Generator_UserColumnName="VLED" type="xs:string" minOccurs="0" />
+              <xs:element name="ILED" msprop:Generator_ColumnVarNameInTable="columnILED" msprop:Generator_ColumnPropNameInRow="ILED" msprop:Generator_ColumnPropNameInTable="ILEDColumn" msprop:Generator_UserColumnName="ILED" type="xs:string" minOccurs="0" />
+              <xs:element name="ActionResult" msprop:Generator_ColumnVarNameInTable="columnActionResult" msprop:Generator_ColumnPropNameInRow="ActionResult" msprop:Generator_ColumnPropNameInTable="ActionResultColumn" msprop:Generator_UserColumnName="ActionResult" type="xs:string" minOccurs="0" />
+              <xs:element name="LowWatt" msprop:Generator_ColumnVarNameInTable="columnLowWatt" msprop:Generator_ColumnPropNameInRow="LowWatt" msprop:Generator_ColumnPropNameInTable="LowWattColumn" msprop:Generator_UserColumnName="LowWatt" type="xs:string" minOccurs="0" />
+              <xs:element name="HighWatt" msprop:Generator_ColumnVarNameInTable="columnHighWatt" msprop:Generator_ColumnPropNameInRow="HighWatt" msprop:Generator_ColumnPropNameInTable="HighWattColumn" msprop:Generator_UserColumnName="HighWatt" type="xs:string" minOccurs="0" />
+              <xs:element name="MaxTHDi" msprop:Generator_ColumnVarNameInTable="columnMaxTHDi" msprop:Generator_ColumnPropNameInRow="MaxTHDi" msprop:Generator_ColumnPropNameInTable="MaxTHDiColumn" msprop:Generator_UserColumnName="MaxTHDi" type="xs:string" minOccurs="0" />
+              <xs:element name="data_datetime" msprop:Generator_ColumnVarNameInTable="columndata_datetime" msprop:Generator_ColumnPropNameInRow="data_datetime" msprop:Generator_ColumnPropNameInTable="data_datetimeColumn" msprop:Generator_UserColumnName="data_datetime" type="xs:string" minOccurs="0" />
+              <xs:element name="date_create" msprop:Generator_ColumnVarNameInTable="columndate_create" msprop:Generator_ColumnPropNameInRow="date_create" msprop:Generator_ColumnPropNameInTable="date_createColumn" msprop:Generator_UserColumnName="date_create" type="xs:string" minOccurs="0" />
+              <xs:element name="led_count" msprop:Generator_ColumnVarNameInTable="columnled_count" msprop:Generator_ColumnPropNameInRow="led_count" msprop:Generator_ColumnPropNameInTable="led_countColumn" msprop:Generator_UserColumnName="led_count" type="xs:string" minOccurs="0" />
+              <xs:element name="led_count_no" msprop:Generator_ColumnVarNameInTable="columnled_count_no" msprop:Generator_ColumnPropNameInRow="led_count_no" msprop:Generator_ColumnPropNameInTable="led_count_noColumn" msprop:Generator_UserColumnName="led_count_no" type="xs:string" minOccurs="0" />
+              <xs:element name="RowNumber" msprop:Generator_ColumnVarNameInTable="columnRowNumber" msprop:Generator_ColumnPropNameInRow="RowNumber" msprop:Generator_ColumnPropNameInTable="RowNumberColumn" msprop:Generator_UserColumnName="RowNumber" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

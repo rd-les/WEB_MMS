@@ -1,0 +1,1095 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{09437D5F-FB0C-4592-BD39-FB27D29700E9}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WEB_MMS</RootNamespace>
+    <AssemblyName>WEB_MMS</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.3.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.3.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.5.1\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.5.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.5.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.5.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.5.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.5.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Class\ClassDataBase.cs" />
+    <Compile Include="App_Class\ConfigClass.cs" />
+    <Compile Include="App_Class\SystemClass.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DivisionPD2Controller.cs" />
+    <Compile Include="Controllers\DivisionPD3Controller.cs" />
+    <Compile Include="Controllers\DivisionQWController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PersonalController.cs" />
+    <Compile Include="DataAccessLayer\Shared\Dao_Shared.cs" />
+    <Compile Include="DataAccessLayer\V_PD2\DAO_Dashboard.cs" />
+    <Compile Include="DataAccessLayer\V_PD2\DAO_ReportAging.cs" />
+    <Compile Include="DataAccessLayer\V_PD2\Dao_ReportFT8.cs" />
+    <Compile Include="DataAccessLayer\V_PD3\Dao_LedConfigs.cs" />
+    <Compile Include="DataAccessLayer\V_PD3\Dao_LedSlotType.cs" />
+    <Compile Include="DataAccessLayer\V_PD3\DAO_RunTime_Report.cs" />
+    <Compile Include="DataAccessLayer\V_PD3\DAO_Shared.cs" />
+    <Compile Include="DataAccessLayer\V_QW\Dao_ReportDriver.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Hubs\FT8_Hub.cs" />
+    <Compile Include="Models\Personal\M_Personal.cs" />
+    <Compile Include="Models\Personal\M_PersonalLogin.cs" />
+    <Compile Include="Models\Shared\M_comboBox.cs" />
+    <Compile Include="Models\V_PD2\M_Dashboard.cs" />
+    <Compile Include="Models\V_PD2\M_MainDataDetailFT8.cs" />
+    <Compile Include="Models\V_PD2\M_MainDataFT8.cs" />
+    <Compile Include="Models\V_PD2\M_ReportFT8.cs" />
+    <Compile Include="Models\V_PD3\M_ConfigType.cs" />
+    <Compile Include="Models\V_PD3\M_RunTime_Report.cs" />
+    <Compile Include="Models\V_QW\M_MainDataDetailDriver.cs" />
+    <Compile Include="Models\V_QW\M_MainDataDriver.cs" />
+    <Compile Include="Models\V_QW\M_ReportIQA.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\PD2\PD2_DataSet_FT8.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PD2_DataSet_FT8.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\QW\QW_DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QW_DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Mobirise\style.css" />
+    <Content Include="Content\style_login.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\13vwstt9paw-brian-garcia-800x600.jpg" />
+    <Content Include="Images\admin.jpg" />
+    <Content Include="Images\d5salkdogb4-stefan-widua-1-800x600.jpg" />
+    <Content Include="Images\d5salkdogb4-stefan-widua.jpg" />
+    <Content Include="Images\DSCF0181.JPG" />
+    <Content Include="Images\DSC_2711.jpg" />
+    <Content Include="Images\DSC_27111.jpg" />
+    <Content Include="Images\DSC_2742.JPG" />
+    <Content Include="Images\DSC_2747.JPG" />
+    <Content Include="Images\DSC_2752.JPG" />
+    <Content Include="Images\FAC_ICON.jpg" />
+    <Content Include="Images\favicon.ico" />
+    <Content Include="Images\hzscr9frfd0-ferdinand-stohr.jpg" />
+    <Content Include="Images\i4dpa7eveam-vincent-versluis-800x600.jpg" />
+    <Content Include="Images\Icons\sort_both.png" />
+    <Content Include="Images\IQA_ICON.JPG" />
+    <Content Include="Images\les_logo.jpg" />
+    <Content Include="Images\loading-icon-animated-gif-8.gif" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\logo_150.png" />
+    <Content Include="Images\Machine\2650.jpg" />
+    <Content Include="Images\Machine\2651.jpg" />
+    <Content Include="Images\Machine\2652.jpg" />
+    <Content Include="Images\Machine\2868.jpg" />
+    <Content Include="Images\Machine\2872.jpg" />
+    <Content Include="Images\Nomini_Icon.png" />
+    <Content Include="Images\PD1_ICON.jpg" />
+    <Content Include="Images\PD2_ICON.jpg" />
+    <Content Include="Images\PD3_ICON.JPG" />
+    <Content Include="Images\SMT_ICON.jpg" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Report\QW\QW_DataSet1.xsc">
+      <DependentUpon>QW_DataSet1.xsd</DependentUpon>
+    </Content>
+    <Content Include="Report\PD2\PD2_DataSet_FT8.xsc">
+      <DependentUpon>PD2_DataSet_FT8.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\PD2\PD2_DataSet_FT8.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PD2_DataSet_FT8.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\PD2\PD2_DataSet_FT8.xss">
+      <DependentUpon>PD2_DataSet_FT8.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\QW\QW_DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>QW_DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\QW\QW_DataSet1.xss">
+      <DependentUpon>QW_DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\bundle.js" />
+    <Content Include="Scripts\default.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.3.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.3.0.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\css\dataTables.bootstrap.css" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\css\dataTables.bootstrap.min.css" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\css\dataTables.bootstrap4.css" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\css\dataTables.foundation.css" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\css\dataTables.foundation.min.css" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\css\dataTables.jqueryui.css" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\css\dataTables.jqueryui.min.css" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\css\dataTables.semanticui.css" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\css\dataTables.semanticui.min.css" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\css\jquery.dataTables.css" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\css\jquery.dataTables.min.css" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\images\sort_asc.png" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\images\sort_asc_disabled.png" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\images\sort_both.png" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\images\sort_desc.png" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\images\sort_desc_disabled.png" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\js\dataTables.bootstrap.js" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\js\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\js\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\js\dataTables.foundation.js" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\js\dataTables.foundation.min.js" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\js\dataTables.jqueryui.js" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\js\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\js\dataTables.semanticui.js" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\js\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\js\jquery.dataTables.js" />
+    <Content Include="Scripts\plugins\DataTables\DataTables-1.10.16\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\plugins\DataTables\datatables.css" />
+    <Content Include="Scripts\plugins\DataTables\datatables.js" />
+    <Content Include="Scripts\plugins\DataTables\datatables.min.css" />
+    <Content Include="Scripts\plugins\DataTables\datatables.min.js" />
+    <Content Include="Scripts\plugins\datetimepicker\.gitattributes" />
+    <Content Include="Scripts\plugins\datetimepicker\.gitignore" />
+    <Content Include="Scripts\plugins\datetimepicker\build\css\bootstrap-datetimepicker-standalone.css" />
+    <Content Include="Scripts\plugins\datetimepicker\build\css\bootstrap-datetimepicker.css" />
+    <Content Include="Scripts\plugins\datetimepicker\build\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Scripts\plugins\datetimepicker\build\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\plugins\datetimepicker\css\bootstrap-datetimepicker.css" />
+    <Content Include="Scripts\plugins\datetimepicker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Scripts\plugins\datetimepicker\Gruntfile.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.ar.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.az.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.bg.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.bn.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.ca.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.cs.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.da.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.de.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.ee.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.el.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.es.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.fi.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.fr.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.he.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.hr.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.hu.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.hy.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.id.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.is.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.it.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.ja.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.ka.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.ko.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.lt.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.lv.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.ms.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.nb.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.nl.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.no.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.pl.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.pt-BR.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.pt.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.ro.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.rs-latin.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.rs.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.ru.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.sk.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.sl.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.sv.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.sw.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.th.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.tr.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.ua.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.uk.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.zh-CN.js" />
+    <Content Include="Scripts\plugins\datetimepicker\js\locales\bootstrap-datetimepicker.zh-TW.js" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v2\bootstrap\css\bootstrap.css" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v2\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v2\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v2\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v2\bootstrap\js\bootstrap.js" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v2\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v2\index.html" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v2\jquery\jquery-1.8.3.min.js" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v3\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v3\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v3\bootstrap\css\bootstrap.css" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v3\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v3\bootstrap\css\bootstrap-template-fonts.min.css" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v3\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v3\bootstrap\js\bootstrap.js" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v3\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v3\index.html" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v3\jquery\jquery-1.8.3.min.js" />
+    <Content Include="Scripts\plugins\datetimepicker\screenshot\standard_day.png" />
+    <Content Include="Scripts\plugins\datetimepicker\screenshot\standard_day_meridian.png" />
+    <Content Include="Scripts\plugins\datetimepicker\screenshot\standard_decade.png" />
+    <Content Include="Scripts\plugins\datetimepicker\screenshot\standard_full.png" />
+    <Content Include="Scripts\plugins\datetimepicker\screenshot\standard_hour.png" />
+    <Content Include="Scripts\plugins\datetimepicker\screenshot\standard_hour_meridian.png" />
+    <Content Include="Scripts\plugins\datetimepicker\screenshot\standard_month.png" />
+    <Content Include="Scripts\plugins\datetimepicker\screenshot\standard_year.png" />
+    <Content Include="Scripts\plugins\datetimepicker\src\js\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\plugins\datetimepicker\src\nuget\NuGet.exe" />
+    <Content Include="Scripts\plugins\datetimepicker\tasks\bump_version.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\assets\coverage.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\assets\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\assets\mock.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\assets\qunit-logging.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\assets\qunit.css" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\assets\qunit.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\assets\utils.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\run-qunit.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\suites\component.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\suites\events.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\suites\formats.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\suites\inline.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\suites\keyboard_navigation\2011.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\suites\keyboard_navigation\2012.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\suites\keyboard_navigation\all.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\suites\mouse_navigation\2011.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\suites\mouse_navigation\2012.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\suites\mouse_navigation\all.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\suites\options.js" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\tests.html" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\tests.min.html" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\_coverage.html" />
+    <Content Include="Scripts\plugins\datetimepicker\test\publicApiSpec.js" />
+    <Content Include="Scripts\plugins\datetimepicker\test\screen-capture\base.html" />
+    <Content Include="Scripts\plugins\datetimepicker\test\screen-capture\compile.js" />
+    <Content Include="Scripts\plugins\datetimepicker\test\screen-capture\index.js" />
+    <Content Include="Scripts\plugins\datetimepicker\test\screen-capture\out\.gitignore" />
+    <Content Include="Scripts\plugins\datetimepicker\test\screen-capture\pic\.gitignore" />
+    <Content Include="Scripts\plugins\datetimepicker\test\screen-capture\t1.html" />
+    <Content Include="Scripts\plugins\datetimepicker\test\screen-capture\t2.html" />
+    <Content Include="Scripts\plugins\datetimepicker\test\screen-capture\t3.html" />
+    <Content Include="Scripts\plugins\datetimepicker\test\screen-capture\t4.html" />
+    <Content Include="Scripts\plugins\datetimepicker\test\screen-capture\t5.html" />
+    <Content Include="Scripts\vendor.js" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Template\SufeeAdmin\css\animate.css" />
+    <Content Include="Template\SufeeAdmin\css\bootstrap-select.css" />
+    <Content Include="Template\SufeeAdmin\css\bootstrap.css" />
+    <Content Include="Template\SufeeAdmin\css\bootstrap.min.css" />
+    <Content Include="Template\SufeeAdmin\css\cs-skin-elastic.css" />
+    <Content Include="Template\SufeeAdmin\css\flag-icon.min.css" />
+    <Content Include="Template\SufeeAdmin\css\font-awesome.min.css" />
+    <Content Include="Template\SufeeAdmin\css\fullcalendar.min.css" />
+    <Content Include="Template\SufeeAdmin\css\lib\chosen\chosen-sprite%402x.png" />
+    <Content Include="Template\SufeeAdmin\css\lib\chosen\chosen-sprite.png" />
+    <Content Include="Template\SufeeAdmin\css\lib\chosen\chosen.css" />
+    <Content Include="Template\SufeeAdmin\css\lib\chosen\chosen.min.css" />
+    <Content Include="Template\SufeeAdmin\css\lib\datatable\buttons.bootstrap.min.css" />
+    <Content Include="Template\SufeeAdmin\css\lib\datatable\buttons.dataTables.min.css" />
+    <Content Include="Template\SufeeAdmin\css\lib\datatable\dataTables.bootstrap.min.css" />
+    <Content Include="Template\SufeeAdmin\css\lib\vector-map\jqvmap.min.css" />
+    <Content Include="Template\SufeeAdmin\css\normalize.css" />
+    <Content Include="Template\SufeeAdmin\css\style.css" />
+    <Content Include="Template\SufeeAdmin\css\themify-icons.css" />
+    <Content Include="Template\SufeeAdmin\css\variables.css" />
+    <Content Include="Template\SufeeAdmin\fonts\codropsicons\codropsicons.svg" />
+    <Content Include="Template\SufeeAdmin\fonts\codropsicons\index.html" />
+    <Content Include="Template\SufeeAdmin\fonts\codropsicons\license.txt" />
+    <Content Include="Template\SufeeAdmin\fonts\fontawesome-webfont.svg" />
+    <Content Include="Template\SufeeAdmin\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Template\SufeeAdmin\fonts\icomoon\icomoon.svg" />
+    <Content Include="Template\SufeeAdmin\fonts\icomoon\index.html" />
+    <Content Include="Template\SufeeAdmin\fonts\index.html" />
+    <Content Include="Template\SufeeAdmin\fonts\themify.svg" />
+    <Content Include="Template\SufeeAdmin\js\calendar.js" />
+    <Content Include="Template\SufeeAdmin\js\chartjs.min.js" />
+    <Content Include="Template\SufeeAdmin\js\dashboard.js" />
+    <Content Include="Template\SufeeAdmin\js\fullcalendarscripts.bundle.js" />
+    <Content Include="Template\SufeeAdmin\js\index.html" />
+    <Content Include="Template\SufeeAdmin\js\jquery.sparkline.min.js" />
+    <Content Include="Template\SufeeAdmin\js\less.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\chart-js\Chart.bundle.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\chart-js\chartjs-init.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\chosen\chosen.jquery.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\chosen\chosen.jquery.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\chosen\chosen.proto.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\chosen\chosen.proto.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\buttons.bootstrap.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\buttons.colVis.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\buttons.flash.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\buttons.html5.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\buttons.print.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\datatables-init.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\dataTables.bootstrap.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\dataTables.buttons.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\datatables.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\jquery-1.12.4.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\jquery.dataTables.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\jszip.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\pdfmake.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\data-table\vfs_fonts.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\flot-chart\curvedLines.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\flot-chart\excanvas.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\flot-chart\flot-chart-init.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\flot-chart\flot-tooltip\jquery.flot.tooltip.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\flot-chart\jquery.flot.categories.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\flot-chart\jquery.flot.crosshair.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\flot-chart\jquery.flot.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\flot-chart\jquery.flot.pie.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\flot-chart\jquery.flot.resize.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\flot-chart\jquery.flot.stack.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\flot-chart\jquery.flot.threshold.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\flot-chart\jquery.flot.time.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\gauge\gauge.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\gmap\gmap.init.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\gmap\gmapApi.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\gmap\gmaps.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\gmap\gmaps.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\peitychart\jquery.peity.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\peitychart\peitychart.init.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.algeria.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.argentina.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.brazil.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.europe.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.france.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.germany.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.greece.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.iran.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.iraq.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.russia.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.tunisia.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.turkey.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.usa.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\country\jquery.vmap.world.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\jquery.vmap.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\jquery.vmap.min.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\jquery.vmap.sampledata.js" />
+    <Content Include="Template\SufeeAdmin\js\lib\vector-map\vector.init.js" />
+    <Content Include="Template\SufeeAdmin\js\main.js" />
+    <Content Include="Template\SufeeAdmin\js\plugins.js" />
+    <Content Include="Template\SufeeAdmin\js\popper.min.js" />
+    <Content Include="Template\SufeeAdmin\js\selectFx.js" />
+    <Content Include="Template\SufeeAdmin\js\vendor\index.html" />
+    <Content Include="Template\SufeeAdmin\js\vendor\jquery-1.11.3.min.js" />
+    <Content Include="Template\SufeeAdmin\js\vendor\jquery-2.1.4.min.js" />
+    <Content Include="Template\SufeeAdmin\js\vendor\modernizr-2.8.3.min.js" />
+    <Content Include="Template\SufeeAdmin\js\widgets.js" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\bootstrap-grid.css" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\bootstrap-reboot.css" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\bootstrap.css" />
+    <Content Include="Template\SufeeAdmin\scss\socials.css" />
+    <Content Include="Template\SufeeAdmin\scss\style.css" />
+    <Content Include="Template\SufeeAdmin\scss\variables.css" />
+    <Content Include="Template\SufeeAdmin\scss\widgets.css" />
+    <Content Include="Views\DivisionPD3\V_Main.cshtml" />
+    <Content Include="Views\DivisionPD3\V_SettingProductType.cshtml" />
+    <Content Include="Views\DivisionPD3\V_SettingProductTypeDetail.cshtml" />
+    <Content Include="Views\DivisionPD3\V_SettingSlotType.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Personal\V_Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutPD1.cshtml" />
+    <Content Include="Views\Shared\_LayoutPD2.cshtml" />
+    <Content Include="Views\Shared\_LayoutSMT.cshtml" />
+    <Content Include="Template\SufeeAdmin\css\bootstrap.css.map" />
+    <Content Include="Template\SufeeAdmin\css\bootstrap.min.css.map" />
+    <Content Include="Template\SufeeAdmin\css\style.css.map" />
+    <Content Include="Template\SufeeAdmin\fonts\codropsicons\codropsicons.eot" />
+    <Content Include="Template\SufeeAdmin\fonts\codropsicons\codropsicons.ttf" />
+    <Content Include="Template\SufeeAdmin\fonts\codropsicons\codropsicons.woff" />
+    <Content Include="Template\SufeeAdmin\fonts\fontawesome-webfont.eot" />
+    <Content Include="Template\SufeeAdmin\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Template\SufeeAdmin\fonts\fontawesome-webfont.woff" />
+    <Content Include="Template\SufeeAdmin\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Template\SufeeAdmin\fonts\FontAwesome.otf" />
+    <Content Include="Template\SufeeAdmin\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Template\SufeeAdmin\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Template\SufeeAdmin\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Template\SufeeAdmin\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Template\SufeeAdmin\fonts\icomoon\icomoon.eot" />
+    <Content Include="Template\SufeeAdmin\fonts\icomoon\icomoon.ttf" />
+    <Content Include="Template\SufeeAdmin\fonts\icomoon\icomoon.woff" />
+    <Content Include="Template\SufeeAdmin\fonts\themify.eot" />
+    <Content Include="Template\SufeeAdmin\fonts\themify.ttf" />
+    <Content Include="Template\SufeeAdmin\fonts\themify.woff" />
+    <Content Include="Views\DivisionPD2\V_Main.cshtml" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\0c2f4e7e3ce607a0f7f238a71122520ed74aaa15\style.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\0c2f4e7e3ce607a0f7f238a71122520ed74aaa15\variables.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\0c2f4e7e3ce607a0f7f238a71122520ed74aaa15\_gauge.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\0c2f4e7e3ce607a0f7f238a71122520ed74aaa15\_switches.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\0c2f4e7e3ce607a0f7f238a71122520ed74aaa15\_widgets.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_alert.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_background-variant.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_badge.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_border-radius.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_box-shadow.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_breakpoints.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_buttons.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_caret.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_clearfix.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_float.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_forms.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_gradients.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_grid-framework.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_grid.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_hover.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_image.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_list-group.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_lists.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_nav-divider.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_pagination.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_reset-text.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_resize.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_screen-reader.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_size.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_table-row.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_text-emphasis.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_text-hide.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_text-truncate.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_transition.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_visibility.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\bootstrap.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_alert.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_badge.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_breadcrumb.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_button-group.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_buttons.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_card.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_carousel.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_close.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_code.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_custom-forms.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_dropdown.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_forms.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_functions.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_grid.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_images.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_input-group.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_jumbotron.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_list-group.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_media.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_mixins.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_modal.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_nav.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_navbar.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_pagination.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_popover.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_print.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_progress.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_reboot.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_root.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_tables.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_tooltip.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_transitions.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_type.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_utilities.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_variables.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\bootstrap.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_alert.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_badge.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_breadcrumb.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_button-group.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_buttons.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_card.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_carousel.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_close.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_code.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_custom-forms.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_dropdown.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_forms.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_functions.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_grid.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_images.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_input-group.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_jumbotron.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_list-group.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_media.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_mixins.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_modal.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_nav.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_navbar.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_pagination.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_popover.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_print.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_progress.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_reboot.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_root.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_tables.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_tooltip.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_transitions.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_type.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_utilities.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_variables.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6da42945727bdadaec570db1596987e0a46bfa4d\socials.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6da42945727bdadaec570db1596987e0a46bfa4d\style.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6da42945727bdadaec570db1596987e0a46bfa4d\variables.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6da42945727bdadaec570db1596987e0a46bfa4d\_gauge.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6da42945727bdadaec570db1596987e0a46bfa4d\_switches.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6da42945727bdadaec570db1596987e0a46bfa4d\_widgets.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_align.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_background.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_borders.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_clearfix.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_display.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_embed.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_flex.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_float.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_position.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_screenreaders.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_sizing.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_spacing.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_text.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_visibility.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_alert.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_background-variant.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_badge.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_border-radius.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_box-shadow.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_breakpoints.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_buttons.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_caret.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_clearfix.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_float.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_forms.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_gradients.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_grid-framework.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_grid.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_hover.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_image.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_list-group.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_lists.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_nav-divider.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_pagination.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_reset-text.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_resize.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_screen-reader.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_size.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_table-row.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_text-emphasis.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_text-hide.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_text-truncate.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_transition.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_visibility.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_align.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_background.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_borders.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_clearfix.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_display.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_embed.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_flex.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_float.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_position.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_screenreaders.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_sizing.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_spacing.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_text.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_visibility.scssc" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\bootstrap-grid.css.map" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\bootstrap-grid.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\bootstrap-reboot.css.map" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\bootstrap-reboot.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\bootstrap.css.map" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\bootstrap.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_alert.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_background-variant.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_badge.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_box-shadow.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_breakpoints.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_buttons.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_caret.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_float.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_forms.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_gradients.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_grid.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_hover.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_image.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_list-group.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_lists.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_navbar-align.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_pagination.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_resize.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_screen-reader.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_size.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_table-row.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_text-hide.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_text-truncate.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_transition.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\mixins\_visibility.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_align.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_background.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_borders.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_clearfix.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_display.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_embed.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_flex.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_float.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_position.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_screenreaders.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_sizing.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_spacing.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_text.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\utilities\_visibility.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_alert.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_badge.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_breadcrumb.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_button-group.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_buttons.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_card.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_carousel.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_close.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_code.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_custom-forms.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_dropdown.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_forms.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_functions.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_grid.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_images.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_input-group.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_jumbotron.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_list-group.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_media.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_mixins.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_modal.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_nav.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_navbar.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_pagination.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_popover.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_print.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_progress.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_reboot.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_root.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_tables.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_tooltip.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_transitions.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_type.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_utilities.scss" />
+    <Content Include="Template\SufeeAdmin\scss\bootstrap\_variables.scss" />
+    <Content Include="Template\SufeeAdmin\scss\socials.css.map" />
+    <Content Include="Template\SufeeAdmin\scss\socials.scss" />
+    <Content Include="Template\SufeeAdmin\scss\style.css.map" />
+    <Content Include="Template\SufeeAdmin\scss\style.scss" />
+    <Content Include="Template\SufeeAdmin\scss\variables.scss" />
+    <Content Include="Template\SufeeAdmin\scss\_gauge.scss" />
+    <Content Include="Template\SufeeAdmin\scss\_switches.scss" />
+    <Content Include="Template\SufeeAdmin\scss\_widgets.scss" />
+    <Content Include="Views\DivisionPD2\V_ReportAging.cshtml" />
+    <Content Include="Views\DivisionPD2\V_ReportFT8.cshtml" />
+    <Content Include="Views\DivisionPD2\V_Aging.cshtml" />
+    <Content Include="Views\DivisionPD2\V_FT8_FINAL.cshtml" />
+    <Content Include="Views\Shared\_LayoutQW.cshtml" />
+    <Content Include="Views\DivisionQW\Index.cshtml" />
+    <Content Include="Views\DivisionQW\V_FunctionIQA.cshtml" />
+    <Content Include="Views\DivisionQW\V_FunctionQA.cshtml" />
+    <Content Include="Views\DivisionQW\V_ReportIQA.cshtml" />
+    <Content Include="Views\DivisionQW\V_ReportQA.cshtml" />
+    <Content Include="Views\DivisionPD2\V_QualityControl.cshtml" />
+    <Content Include="Views\DivisionPD2\V_ReportDetailFT8.cshtml" />
+    <Content Include="Views\DivisionPD2\DataRealTime.cshtml" />
+    <Content Include="Views\DivisionQW\V_ReportDetailIQA.cshtml" />
+    <Content Include="Views\DivisionPD2\V_AgingRealTime.cshtml" />
+    <Content Include="Views\DivisionPD2\V_ReportAgingDetail.cshtml" />
+    <Content Include="Scripts\plugins\datetimepicker\.jscs.json" />
+    <Content Include="Scripts\plugins\datetimepicker\.npmignore" />
+    <Content Include="Scripts\plugins\datetimepicker\.travis.yml" />
+    <Content Include="Scripts\plugins\datetimepicker\bower.json" />
+    <Content Include="Scripts\plugins\datetimepicker\build\build.less" />
+    <Content Include="Scripts\plugins\datetimepicker\build\build_standalone.less" />
+    <Content Include="Scripts\plugins\datetimepicker\component.json" />
+    <Content Include="Scripts\plugins\datetimepicker\composer.json" />
+    <Content Include="Scripts\plugins\datetimepicker\CONTRIBUTING.md" />
+    <Content Include="Scripts\plugins\datetimepicker\docs\ChangeLog.md" />
+    <Content Include="Scripts\plugins\datetimepicker\docs\ContributorsGuide.md" />
+    <Content Include="Scripts\plugins\datetimepicker\docs\Events.md" />
+    <Content Include="Scripts\plugins\datetimepicker\docs\Extras.md" />
+    <Content Include="Scripts\plugins\datetimepicker\docs\FAQ.md" />
+    <Content Include="Scripts\plugins\datetimepicker\docs\Functions.md" />
+    <Content Include="Scripts\plugins\datetimepicker\docs\index.md" />
+    <Content Include="Scripts\plugins\datetimepicker\docs\Installing.md" />
+    <Content Include="Scripts\plugins\datetimepicker\docs\Options.md" />
+    <Content Include="Scripts\plugins\datetimepicker\docs\Version 4 Changelog.md" />
+    <Content Include="Scripts\plugins\datetimepicker\docs\Version 4 Contributors guide.md" />
+    <Content Include="Scripts\plugins\datetimepicker\less\datetimepicker.less" />
+    <Content Include="Scripts\plugins\datetimepicker\LICENSE" />
+    <Content Include="Scripts\plugins\datetimepicker\minify.sh" />
+    <Content Include="Scripts\plugins\datetimepicker\mkdocs.yml" />
+    <Content Include="Scripts\plugins\datetimepicker\package.json" />
+    <Content Include="Scripts\plugins\datetimepicker\README.md" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v3\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v3\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Scripts\plugins\datetimepicker\sample in bootstrap v3\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\plugins\datetimepicker\src\less\bootstrap-datetimepicker-build.less" />
+    <Content Include="Scripts\plugins\datetimepicker\src\less\_bootstrap-datetimepicker.less" />
+    <Content Include="Scripts\plugins\datetimepicker\src\nuget\Bootstrap.v3.Datetimepicker.CSS.nuspec" />
+    <Content Include="Scripts\plugins\datetimepicker\src\nuget\Bootstrap.v3.Datetimepicker.nuspec" />
+    <Content Include="Scripts\plugins\datetimepicker\src\nuget\install.ps1" />
+    <Content Include="Scripts\plugins\datetimepicker\src\sass\bootstrap-datetimepicker-build.scss" />
+    <Content Include="Scripts\plugins\datetimepicker\src\sass\_bootstrap-datetimepicker.scss" />
+    <Content Include="Scripts\plugins\datetimepicker\tests\README.md" />
+    <Content Include="Views\Shared\_LayoutPD3.cshtml" />
+    <Content Include="Views\DivisionPD3\V_DRIVER.cshtml" />
+    <Content Include="Views\DivisionPD3\V_E14.cshtml" />
+    <Content Include="Views\DivisionPD3\V_E27.cshtml" />
+    <Content Include="Views\DivisionPD3\V_GU10.cshtml" />
+    <Content Include="Views\DivisionPD3\V_LED_T8.cshtml" />
+    <Content Include="Views\DivisionPD3\V_Main111.cshtml" />
+    <Content Include="Views\DivisionPD3\V_PAR20.cshtml" />
+    <Content Include="Views\DivisionPD3\V_PAR30.cshtml" />
+    <Content Include="Views\DivisionPD3\V_PAR38.cshtml" />
+    <Content Include="Views\DivisionPD3\V_ReportDetail_Driver.cshtml" />
+    <Content Include="Views\DivisionPD3\V_ReportDetail_E14.cshtml" />
+    <Content Include="Views\DivisionPD3\V_ReportDetail_E27.cshtml" />
+    <Content Include="Views\DivisionPD3\V_ReportDetail_GU10.cshtml" />
+    <Content Include="Views\DivisionPD3\V_ReportDetail_LEDT8.cshtml" />
+    <Content Include="Views\DivisionPD3\V_ReportDetail_MR16.cshtml" />
+    <Content Include="Views\DivisionPD3\V_ReportDetail_PAR20.cshtml" />
+    <Content Include="Views\DivisionPD3\V_ReportDetail_PAR30.cshtml" />
+    <Content Include="Views\DivisionPD3\V_ReportDetail_PAR38.cshtml" />
+    <Content Include="Views\DivisionPD3\V_Report_MR16.cshtml" />
+    <Content Include="Views\DivisionPD3\V_Report_Driver.cshtml" />
+    <Content Include="Views\DivisionPD3\V_Report_E14.cshtml" />
+    <Content Include="Views\DivisionPD3\V_Report_E27.cshtml" />
+    <Content Include="Views\DivisionPD3\V_Report_GU10.cshtml" />
+    <Content Include="Views\DivisionPD3\V_Report_LEDT8.cshtml" />
+    <Content Include="Views\DivisionPD3\V_Report_PAR20.cshtml" />
+    <Content Include="Views\DivisionPD3\V_Report_PAR30.cshtml" />
+    <Content Include="Views\DivisionPD3\V_Report_PAR38.cshtml" />
+    <Content Include="Views\DivisionPD3\V_Report_Runtime_Main.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="DataAccessLayer\Personal\" />
+    <Folder Include="DataAccessLayer\V_FACILITY\" />
+    <Folder Include="DataAccessLayer\V_PD1\" />
+    <Folder Include="DataAccessLayer\V_SMT\" />
+    <Folder Include="Models\V_FACILITY\" />
+    <Folder Include="Models\V_PD1\" />
+    <Folder Include="Models\V_SMT\" />
+    <Folder Include="Uploads\DivisionQW\REPORT_IQA\" />
+    <Folder Include="Views\V_FACILITY\" />
+    <Folder Include="Views\V_PD1\" />
+    <Folder Include="Views\V_PD2\" />
+    <Folder Include="Views\V_PD3\" />
+    <Folder Include="Views\V_SMT\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Report\PD2\Report_FT8.rdlc" />
+    <EmbeddedResource Include="Report\QW\Report1.rdlc" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61828</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:62828/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

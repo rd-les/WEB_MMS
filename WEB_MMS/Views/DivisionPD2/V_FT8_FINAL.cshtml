@@ -1,0 +1,501 @@
+﻿
+@{
+    ViewBag.Title = "V_FT8_FINAL";
+    Layout = "~/Views/Shared/_LayoutPD2.cshtml";
+}
+
+<style>
+    .stat-widget-four .stat-content {
+        margin-left: 40px;
+        text-align: center;
+    }
+
+    .stat-widget-four .stat-icon {
+        display: inline-block;
+        position: absolute;
+        top: 5px;
+    }
+</style>
+
+<div class="row clearfix">
+    <div class="col-md-6 col-lg-4">
+        <div class="input-group">
+            <div class="col-md-6 col-lg-6">
+                <div class="input-group-addon">CODE-NO : </div>
+            </div>
+            <div class="col-lg-6 form-control div-control"><span id="span_code_no"></span></div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="input-group">
+            <div class="col-md-6 col-lg-6">
+                <div class="input-group-addon">WORK-STATION : </div>
+            </div>
+            <div class="col-lg-6 form-control div-control"><span id="span_workstation"></span></div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="input-group">
+            <div class="col-md-6 col-lg-6">
+                <div class="input-group-addon">MIN-MAX : </div>
+            </div>
+            <div class="col-lg-6 form-control div-control"><span id="span_workstation_min"></span> - <span id="span_workstation_max"></span></div>
+        </div>
+    </div>
+
+</div>
+<div class="row clearfix">&nbsp;</div>
+<div class="row clearfix">
+
+    <div class="col-md-6 col-lg-4">
+        <div class="card bg-flat-color-1 text-light">
+            <div class="card-body">
+                <div class="h4 m-0">TOTAL [OK] : <span id="span_realtime_1"></span></div>
+                <div><span id="span_wo_flat_1"></span> </div>
+                <div class="progress-bar bg-light mt-2 mb-2" role="progressbar" id="progressbar_realtime_1" style="width: 100%; height: 5px;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                <small class="text-light">Progress is realtime.</small>
+            </div>
+        </div>
+    </div><!--/.col-->
+    <div class="col-md-6 col-lg-4">
+        <div class="card bg-flat-color-3 text-light">
+            <div class="card-body" style="color:navy;">
+                <div class="h4 m-0"><span id="span_total_current_workstation"></span> From <span id="span_total_all_workstation"></span></div>
+                <div><span id="span_wo_flat_2"></span> CURRENT</div>
+                <div class="progress-bar bg-light mt-2 mb-2" role="progressbar" id="progressbar_realtime_2" style="width: 100%; height: 5px;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                <small class="text-light">Progress is realtime.</small>
+            </div>
+        </div>
+    </div><!--/.col-->
+    <div class="col-md-6 col-lg-4">
+        <div class="card bg-flat-color-4 text-light">
+            <div class="card-body" style="color:navy;">
+                <div class="h4 m-0">TOTAL : <span id="span_total_workstation_time"></span></div>
+                <div>Total Time</div>
+                <div class="progress-bar bg-light mt-2 mb-2" role="progressbar" id="progressbar_realtime_3" style="width: 100%; height: 5px;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                <small class="text-light">Progress is realtime.</small>
+            </div>
+        </div>
+    </div><!--/.col-->
+
+
+
+</div>
+
+<input type="hidden" id="count_data_realtime" value="0" />
+
+<div class="row clearfix">
+
+
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="mb-3">Real Chart FT8 (W) LAST 100 Datas</h4>
+                <div class="flot-container">
+                    <div id="cpu-load" class="cpu-load"></div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /# column -->
+
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body" style="height:auto;">
+                <h4 class="mb-3">Real Time DATA</h4>
+
+
+                <div class="row clearfix">
+                    <div class="card bg-flat-color-5 text-light col-lg-6" style="padding:1px;">
+                        <div class="card-body" style="color:navy;">
+                            <div class="h4 m-0"><span id="span_count_ok">0</span></div>
+                            <div>OK</div>
+                            <div class="progress-bar bg-light mt-2 mb-2" role="progressbar" style="width: 91%; height: 5px;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="card bg-flat-color-3 text-light col-lg-6">
+                        <div class="card-body" style="color:navy;">
+                            <div class="h4 m-0"><span id="span_count_ng">0</span></div>
+                            <div>NG</div>
+                            <div class="progress-bar bg-light mt-2 mb-2" role="progressbar" style="width: 9%; height: 5px;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-four">
+                                <div class="stat-content" style="margin-left:0px;">
+                                    <div class="text-left dib">
+                                        <div class="stat-heading">W</div>
+                                        <div class="stat-text"><span id="span_current_w" style="font-size:18px;font-weight:bold;"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-four">
+                                <div class="stat-content" style="margin-left:0px;">
+                                    <div class="text-left dib">
+                                        <div class="stat-heading">PF</div>
+                                        <div class="stat-text"><span id="span_current_pf" style="font-size:18px;font-weight:bold;"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12" id="div_light_status" style="text-align:center;">
+                    <button type="button" class="btn btn-success" style="width:200px;"><i class="fa fa-lightbulb-o"></i>&nbsp; PASS</button>
+                </div>
+
+            </div>
+        </div>
+    </div><!-- /# column -->
+
+
+</div>
+
+<div class="row clearfix">
+
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body" style="text-align:center;">
+                <img src="~/Images/Machine/2650.jpg" style="height:370px;" />
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-lg-8 col-md-8 col-sm-12">
+
+        <div class="card">
+            <!--
+            <div class="header">
+                <h2>DETAILS</h2>
+            </div>
+                -->
+            <div class="body" style="height: 450px ;     overflow: scroll;">
+                <div class="table-responsive" style="font-size:12px;">
+                    <table class="table table-hover" >
+                        <thead>
+                            <tr style="background-color:silver;">
+                                <th style="width:10%;">#</th>
+                                <th style="width:20%;">LED No</th>
+                                <th style="width:30%;">DateTime</th>
+                                <th style="width:10%;">Status</th>
+                                <th style="width:10%;">W</th>
+                                <th style="width:10%;">PF</th>
+                                <th style="width:10%;">THDi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_data_lasttime"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Template/SufeeAdmin/js/lib/flot-chart/excanvas.min.js"></script>
+<script src="~/Template/SufeeAdmin/js/lib/flot-chart/jquery.flot.js"></script>
+
+
+
+
+<script src="~/Scripts/jquery.signalR-2.3.0.js"></script>
+<script src="~/signalr/hubs"></script>
+
+
+<script>
+
+    var global_min = 0;
+    var global_max = 0;
+
+    (function ($) {
+        startUpDataWorkStation();
+        "use strict"; // Start of use strict
+        var SufeeAdmin = {
+
+            cpuLoad: function () {
+
+                var data = [], totalPoints = 100;
+                // Set up the control widget
+                function returnDataRealTime() {
+                    var url = "getLastDataRealtimeGraph";
+                    var obj = $.ajax({
+                        //type: "POST", url: url, async: false, data: { FT8_main_data_id: 25 },
+                        type: "POST", url: url, async: false,
+
+                        success: function (results) {
+                            //console.log(results.datas);
+                            return results.datas;
+                        }
+                    });
+                    return obj.responseJSON.datas;
+                    //console.log(obj.responseJSON.datas);
+                }
+
+                function getStartupData(watt, actionResult, dataPf) {
+                    //console.log(data.length);
+                    if (data.length > 0) {
+                        data = data.slice(1);
+                    }
+                    else {
+                        data = returnDataRealTime();
+                        //console.log(data);
+                        //console.log(data.length);
+                        var res = [];
+
+                        for (var i = 0; i < data.length; ++i) {
+
+
+                            if (parseFloat(data[i].data_watt) <= global_min) {
+                                data[i].data_watt = global_min;
+                            }
+                            else if (parseFloat(data[i].data_watt) >= global_max) {
+                                data[i].data_watt = global_max;
+                            }
+                            res.push([i, data[i].data_watt]);
+                            if (data[i].id != "") {
+                                var tr_color = "";
+                                var data_icon = "";
+                                if (data[i].ActionResult == "True") {
+                                    data_icon = "<i class='fa fa-check' aria-hidden='true' style='color:green;'></i>";
+                                }
+                                else {
+                                    tr_color = "#ffcab7";
+                                    data_icon = "<i class='fa fa-times' aria-hidden='true' style='color:red;'></i>";
+                                }
+
+                                var str_text = "<tr bgcolor='" + tr_color + "'>"
+                                    + " <td>" + data[i].led_count + "</td>"
+                                    + " <td>" + data[i].led_no + "</td>"
+                                    + " <td>" + data[i].datetime_create + "</td>"
+                                    + " <td>" + data_icon + "</td>"
+                                    + " <td>" + data[i].data_watt + "</td>"
+                                    + " <td>" + data[i].data_PF + "</td>"
+                                    + " <td>" + data[i].data_THDi + "</td>"
+                                    + "</tr>";
+                                $("#tbody_data_lasttime").append(str_text);
+                            }
+
+
+                        }
+                        //console.log(data);
+                        //var dataset = [{ label: "a label", data: res, color: "red" }];
+                        //console.log(res);
+                        return res;
+                    }
+
+
+
+
+                    var prev = data.length > 0 ? data[data.length - 1] : 50
+                        , y = watt;
+                    $("#span_current_w").text(y);
+                    $("#span_current_pf").text(dataPf);
+                    //$("#span_current_i").text(actionResult);
+
+                    if (actionResult == "TRUE") {
+                        $("#div_light_status").html("<button type='button' class='btn btn-success' style='width:200px;' > <i class='fa fa-lightbulb-o'></i> &nbsp; PASS</button>");
+                    }
+                    else {
+                        $("#div_light_status").html("<button type='button' class='btn btn-danger' style='width:200px;' > <i class='fa fa-lightbulb-o'></i> &nbsp; FAIL</button>");
+                    }
+                    //
+
+
+                    data.push({ data_watt: y });
+                    var res = [];
+                    for (var i = 0; i < data.length; ++i) {
+                        res.push([i, data[i].data_watt])
+                    }
+                    //console.log(res);
+                    return res;
+                }
+
+
+                var resultMin = [];
+                for (var index = 0; index <= 99; ++index) {
+                    resultMin.push([index, global_min + 3]);
+                }
+                var resultMax = [];
+                for (var index = 0; index <= 99; ++index) {
+                    resultMax.push([index, global_max - 3]);
+                }
+                //console.log(getStartupData());
+                var updateInterval = 1000;
+
+                var plot = $.plot("#cpu-load", [
+                    { data: getStartupData() }
+                    //, { label: "MIN", data: resultMin, color: "#ffcab7" }
+                    //, { label: "MAX", data: resultMax, color: "#ffcab7" }
+                    , { data: resultMin, color: "red" }
+                    , { data: resultMax, color: "red" }
+                ], {
+                        series: {
+                            lines: {
+                                show: true
+                            }
+                        },
+                        yaxis: {
+                            min: global_min,
+                            max: global_max
+                        },
+                        xaxis: {
+                            show: true
+                        },
+                        colors: ["#007BFF"],
+                        grid: {
+                            color: "transparent",
+                            hoverable: true,
+                            borderWidth: 0,
+                            backgroundColor: 'transparent'
+                        },
+                        tooltip: true,
+                        tooltipOpts: {
+                            content: "Y: %y",
+                            defaultTheme: false
+                        }
+                    });
+
+                var real_time_hub = $.connection.fT8_Hub;
+                real_time_hub.client.receiveDataRealTimeFT8 = function (ledCount, dateTime, result, watt, dataPF, dataTHDi, ledNo, lastSec) {
+                    
+                    $("#count_data_realtime").val(parseInt($("#count_data_realtime").val()) + 1);
+                    if (parseFloat(watt) <= global_min) {
+                        watt = global_min;
+                    }
+                    else if (parseFloat(watt) >= global_max) {
+                        watt = global_max;
+                    }
+                    //plot.setData([getStartupData(watt, result, dataPF)]);
+
+                    plot.setData([{ data: getStartupData(watt, result, dataPF) }
+                        //, { label: "MIN", data: resultMin, color: "#ffcab7" }
+                        //, { label: "MAX", data: resultMax, color: "#ffcab7" }
+                        , { data: resultMin, color: "red" }
+                        , { data: resultMax, color: "red" }
+                    ]);
+
+                    plot.draw();
+                    var tr_color = "";
+                    var data_icon = "";
+
+                    if (result == "TRUE") {
+                        $("#span_count_ok").text(parseInt($("#span_count_ok").text()) + 1);
+                        data_icon = "<i class='fa fa-check' aria-hidden='true' style='color:green;'></i>";
+                    }
+                    else {
+                        $("#span_count_ng").text(parseInt($("#span_count_ng").text()) + 1);
+                        tr_color = "#ffcab7";
+                        data_icon = "<i class='fa fa-times' aria-hidden='true' style='color:red;'></i>";
+                    }
+
+                    //############################################################# PROGRESS 1.
+                    var count_ok = parseInt($("#span_count_ok").text());
+                    var count_ng = parseInt($("#span_count_ng").text());
+                    var total_realtime_1 = (count_ok / (count_ok + count_ng)) * 100;
+                    total_realtime_1 = total_realtime_1.toFixed(2);
+                    total_realtime_1 += "%";
+
+                    //############################################################# PROGRESS 2.
+                    var workStationAllTotal = parseInt(parseInt($("#span_total_all_workstation").text()));
+                    var workStaionCurrent = ledCount;
+                    var workStationCurrentPercent = (workStaionCurrent / workStationAllTotal) * 100;
+                    $("#span_total_current_workstation").text(workStaionCurrent);
+                    $("#span_total_all_workstation").text(workStationAllTotal + " [" + workStationCurrentPercent.toFixed(2) + "%] ");
+
+                    $("#progressbar_realtime_2").width(workStationCurrentPercent + "%");
+
+                    $("#span_total_workstation_time").text(lastSec);
+
+                    var str_text = "<tr bgcolor='" + tr_color + "'>"
+                        + " <td>" + ledCount + "</td>"
+                        + " <td>" + ledNo + "</td>"
+                        + " <td>" + dateTime + "</td>"
+                        + " <td>" + data_icon + "</td>"
+                        + " <td>" + watt + "</td>"
+                        + " <td>" + dataPF + "</td>"
+                        + " <td>" + dataTHDi + "</td>"
+                        + "</tr>";
+                    $("#tbody_data_lasttime").prepend(str_text);
+
+                    $("#progressbar_realtime_1").width(total_realtime_1);
+                    $("#span_realtime_1").text(total_realtime_1);
+                };
+
+                $.connection.hub.start().done(function () {
+                });
+
+            },
+        };
+
+        $(document).ready(function () {
+
+            SufeeAdmin.cpuLoad();
+        });
+
+        function startUpDataWorkStation() {
+            var url = "getStartUpDataWorkStation";
+            $.ajax({
+                type: "POST"
+                , url: url
+                , async: false
+                , success: function (results) {
+
+                    var count_ok = parseInt(results.datas[0].TOTAL_REAL_LED_GOOD);
+                    var count_ng = parseInt(results.datas[0].TOTAL_REAL_LED_BAD);
+
+                    var total_realtime_1 = (count_ok / (count_ok + count_ng)) * 100;
+                    total_realtime_1 = total_realtime_1.toFixed(2);
+                    total_realtime_1 += "%";
+
+
+                    $("#span_code_no").text(results.datas[0].CODE_NO);
+                    $("#span_workstation").text(results.datas[0].WORK_STATION_NO);
+                    $("#span_wo_flat_1").text(results.datas[0].WORK_STATION_NO);
+                    $("#span_wo_flat_2").text(results.datas[0].WORK_STATION_NO);
+                    $("#span_count_ok").text(count_ok);
+                    $("#span_count_ng").text(count_ng);
+
+                    //############################################################# PROGRESS 1.
+                    $("#progressbar_realtime_1").width(total_realtime_1);
+                    $("#span_realtime_1").text(total_realtime_1);
+
+                    //############################################################# PROGRESS 2.
+                    var workStationAllTotal = parseInt(results.datas[0].WORKSTATION_ALL_TOTAL);
+                    var workStaionCurrent = parseInt(results.datas[0].COUNT_ALL_CURRENT_LED);
+                    var workStationCurrentPercent = (workStaionCurrent / workStationAllTotal) * 100;
+
+                    $("#span_total_current_workstation").text(workStaionCurrent);
+                    $("#span_total_all_workstation").text(workStationAllTotal + " [" + workStationCurrentPercent.toFixed(2) + "%] ");
+                    $("#progressbar_realtime_2").width(workStationCurrentPercent + "%");
+
+                    //############################################################# PROGRESS 3.
+                    $("#progressbar_realtime_3").width("100%");
+                    $("#span_total_workstation_time").text(results.datas[0].WORKSTATION_TOTAL_TIME);
+                 
+                    global_min = parseFloat(results.datas[0].LOW_WATT) - 3;
+                    global_max = parseFloat(results.datas[0].HIGH_WATT) + 3;
+
+
+                    //###
+                    $("#span_workstation_max").text(parseFloat(results.datas[0].HIGH_WATT).toFixed(2));
+                    $("#span_workstation_min").text(parseFloat(results.datas[0].LOW_WATT).toFixed(2));
+                }
+            });
+        }
+
+    })(jQuery);
+
+</script>

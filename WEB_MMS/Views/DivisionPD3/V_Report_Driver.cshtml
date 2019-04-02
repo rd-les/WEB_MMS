@@ -1,0 +1,273 @@
+﻿
+@{
+    ViewBag.Title = "V_Report_Driver";
+    Layout = "~/Views/Shared/_LayoutPD3.cshtml";
+}
+
+<h2>สรุปผลคุณภาพของชิ้นงานตาม WorkStation(Driver)</h2>
+<div class="col-lg-12">
+
+    <div class="card-header">
+        <input type="checkbox" class="switch-input" checked=""><strong class="card-title"> 20 watt</strong>&nbsp;
+        <input type="checkbox" class="switch-input" checked=""><strong class="card-title"> 21 watt</strong>&nbsp;
+        <input type="checkbox" class="switch-input" checked=""><strong class="card-title"> 30 watt</strong>&nbsp;
+        <input type="checkbox" class="switch-input" checked=""><strong class="card-title"> 40 watt</strong>&nbsp;
+        <input type="checkbox" class="switch-input" checked=""><strong class="card-title"> 42 watt</strong>&nbsp;
+        <input type="checkbox" class="switch-input" checked=""><strong class="card-title"> SLT50-360IB-E</strong>&nbsp;
+        <input type="checkbox" class="switch-input" checked=""><strong class="card-title"> SRPC-200724-200CVF</strong>&nbsp;
+        <input type="checkbox" class="switch-input" checked=""><strong class="card-title"> SRPL-2007-30CC</strong>&nbsp;
+        <input type="checkbox" class="switch-input" checked=""><strong class="card-title"> SRPL-2007-50CC</strong>&nbsp;
+
+        <!-- <p>สร้าง Datepickerและปุ่มค้นหา-->
+        <div class="row clearfix">
+
+            <div class="col-sm-9">
+                <div class="form-group col-sm-4"></div>
+
+                <div class="form-group col-sm-4"></div>
+
+                <div class="form-group col-sm-2"></div>
+
+                <div class="form-group col-sm-2"></div>
+
+            </div>
+            <div class="col-sm-2">
+                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block" onclick="searchDashboard(); ">
+                    <i class="fa fa-search fa-lg"></i>&nbsp;
+                    <span id="payment-button-amount">SEARCH</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<script src="/Scripts/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+     function searchDashboard() {
+         //alert("searchDashboard =====> " + $("#txt_date_dashboard_start").val() + " - " + $("#txt_date_dashboard_end").val());
+
+         var url = "/DivisionPD3/getDashboardDataByCriteria";
+         $.ajax({
+             data: { txt_date_dashboard_start: $("#txt_date_dashboard_start").val(), txt_date_dashboard_end: $("#txt_date_dashboard_end").val() },
+             type: "POST", url: url,
+             success: function (results) {
+                 console.log(results);
+
+             },
+             complete: function (xhr, textStatus) {
+                 //console.log(xhr.status);
+                 if (xhr.status != "200") {
+                     alert("ระบบไม่สามารถงานได้ กรุณาติดต่อผู้ดูแลระบบ");
+                     return false;
+                 }
+             }
+         });
+     }
+
+     $('.form_date').datetimepicker({
+         weekStart: 1,
+         todayBtn: 1,
+         autoclose: 1,
+         todayHighlight: 1,
+         startView: 2,
+         minView: 2,
+         forceParse: 0
+     });
+
+</script>
+<link href="/Scripts/plugins/DataTables/datatables.min.css" rel="stylesheet" />
+<script src="/Scripts/plugins/DataTables/datatables.min.js"></script>
+
+<script>
+
+     var jsonString = convertViewBagJsonData("{&quot;ContentEncoding&quot;:null,&quot;ContentType&quot;:null,&quot;Data&quot;:{&quot;mainDataFT8&quot;:[{&quot;FT8_MainDataId&quot;:&quot;104&quot;,&quot;workStationNo&quot;:&quot;WO1805312&quot;,&quot;codeNo&quot;:&quot;7600477&quot;,&quot;dateCreate&quot;:&quot;11-01-2019&quot;,&quot;ledTotal&quot;:&quot;729&quot;,&quot;ledGood&quot;:&quot;725&quot;,&quot;ledBad&quot;:&quot;4&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;103&quot;,&quot;workStationNo&quot;:&quot;WO1805383&quot;,&quot;codeNo&quot;:&quot;7600537&quot;,&quot;dateCreate&quot;:&quot;09-01-2019&quot;,&quot;ledTotal&quot;:&quot;1089&quot;,&quot;ledGood&quot;:&quot;1062&quot;,&quot;ledBad&quot;:&quot;27&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;102&quot;,&quot;workStationNo&quot;:&quot;WO1800605&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;09-01-2019&quot;,&quot;ledTotal&quot;:&quot;343&quot;,&quot;ledGood&quot;:&quot;316&quot;,&quot;ledBad&quot;:&quot;27&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;101&quot;,&quot;workStationNo&quot;:&quot;WO1800605&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;08-01-2019&quot;,&quot;ledTotal&quot;:&quot;1638&quot;,&quot;ledGood&quot;:&quot;1531&quot;,&quot;ledBad&quot;:&quot;107&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;100&quot;,&quot;workStationNo&quot;:&quot;WO1800603&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;08-01-2019&quot;,&quot;ledTotal&quot;:&quot;463&quot;,&quot;ledGood&quot;:&quot;443&quot;,&quot;ledBad&quot;:&quot;20&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;99&quot;,&quot;workStationNo&quot;:&quot;WO1800603&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;07-01-2019&quot;,&quot;ledTotal&quot;:&quot;1466&quot;,&quot;ledGood&quot;:&quot;1397&quot;,&quot;ledBad&quot;:&quot;69&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;98&quot;,&quot;workStationNo&quot;:&quot;WO1800603&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;04-01-2019&quot;,&quot;ledTotal&quot;:&quot;50&quot;,&quot;ledGood&quot;:&quot;50&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;97&quot;,&quot;workStationNo&quot;:&quot;WO1805005&quot;,&quot;codeNo&quot;:&quot;7600536&quot;,&quot;dateCreate&quot;:&quot;03-01-2019&quot;,&quot;ledTotal&quot;:&quot;199&quot;,&quot;ledGood&quot;:&quot;195&quot;,&quot;ledBad&quot;:&quot;4&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;96&quot;,&quot;workStationNo&quot;:&quot;WO1804926&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;25-12-2018&quot;,&quot;ledTotal&quot;:&quot;2&quot;,&quot;ledGood&quot;:&quot;2&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;95&quot;,&quot;workStationNo&quot;:&quot;WO1805387&quot;,&quot;codeNo&quot;:&quot;7600543&quot;,&quot;dateCreate&quot;:&quot;20-12-2018&quot;,&quot;ledTotal&quot;:&quot;632&quot;,&quot;ledGood&quot;:&quot;628&quot;,&quot;ledBad&quot;:&quot;4&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;94&quot;,&quot;workStationNo&quot;:&quot;WO1805387&quot;,&quot;codeNo&quot;:&quot;7600543&quot;,&quot;dateCreate&quot;:&quot;19-12-2018&quot;,&quot;ledTotal&quot;:&quot;243&quot;,&quot;ledGood&quot;:&quot;240&quot;,&quot;ledBad&quot;:&quot;3&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;93&quot;,&quot;workStationNo&quot;:&quot;WO1804964&quot;,&quot;codeNo&quot;:&quot;7600501&quot;,&quot;dateCreate&quot;:&quot;19-12-2018&quot;,&quot;ledTotal&quot;:&quot;7&quot;,&quot;ledGood&quot;:&quot;7&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;92&quot;,&quot;workStationNo&quot;:&quot;WO1804925&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;19-12-2018&quot;,&quot;ledTotal&quot;:&quot;1&quot;,&quot;ledGood&quot;:&quot;1&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;91&quot;,&quot;workStationNo&quot;:&quot;WO1804964&quot;,&quot;codeNo&quot;:&quot;7600501&quot;,&quot;dateCreate&quot;:&quot;19-12-2018&quot;,&quot;ledTotal&quot;:&quot;&quot;,&quot;ledGood&quot;:&quot;&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;90&quot;,&quot;workStationNo&quot;:&quot;WO1804152&quot;,&quot;codeNo&quot;:&quot;7600524&quot;,&quot;dateCreate&quot;:&quot;14-11-2018&quot;,&quot;ledTotal&quot;:&quot;5&quot;,&quot;ledGood&quot;:&quot;3&quot;,&quot;ledBad&quot;:&quot;2&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;89&quot;,&quot;workStationNo&quot;:&quot;WO1803413&quot;,&quot;codeNo&quot;:&quot;P200001&quot;,&quot;dateCreate&quot;:&quot;09-11-2018&quot;,&quot;ledTotal&quot;:&quot;48&quot;,&quot;ledGood&quot;:&quot;47&quot;,&quot;ledBad&quot;:&quot;1&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;88&quot;,&quot;workStationNo&quot;:&quot;WO1804126&quot;,&quot;codeNo&quot;:&quot;7600524&quot;,&quot;dateCreate&quot;:&quot;19-10-2018&quot;,&quot;ledTotal&quot;:&quot;488&quot;,&quot;ledGood&quot;:&quot;395&quot;,&quot;ledBad&quot;:&quot;93&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;87&quot;,&quot;workStationNo&quot;:&quot;WO1804121&quot;,&quot;codeNo&quot;:&quot;7600524&quot;,&quot;dateCreate&quot;:&quot;10-10-2018&quot;,&quot;ledTotal&quot;:&quot;&quot;,&quot;ledGood&quot;:&quot;&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;86&quot;,&quot;workStationNo&quot;:&quot;WO1804121&quot;,&quot;codeNo&quot;:&quot;7600524&quot;,&quot;dateCreate&quot;:&quot;08-10-2018&quot;,&quot;ledTotal&quot;:&quot;&quot;,&quot;ledGood&quot;:&quot;&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;85&quot;,&quot;workStationNo&quot;:&quot;WO1804121&quot;,&quot;codeNo&quot;:&quot;7600524&quot;,&quot;dateCreate&quot;:&quot;06-10-2018&quot;,&quot;ledTotal&quot;:&quot;&quot;,&quot;ledGood&quot;:&quot;&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;84&quot;,&quot;workStationNo&quot;:&quot;WO1803708&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;04-10-2018&quot;,&quot;ledTotal&quot;:&quot;1173&quot;,&quot;ledGood&quot;:&quot;970&quot;,&quot;ledBad&quot;:&quot;203&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;83&quot;,&quot;workStationNo&quot;:&quot;WO1803708&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;03-10-2018&quot;,&quot;ledTotal&quot;:&quot;1188&quot;,&quot;ledGood&quot;:&quot;945&quot;,&quot;ledBad&quot;:&quot;243&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;82&quot;,&quot;workStationNo&quot;:&quot;WO1803708&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;02-10-2018&quot;,&quot;ledTotal&quot;:&quot;121&quot;,&quot;ledGood&quot;:&quot;104&quot;,&quot;ledBad&quot;:&quot;17&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;81&quot;,&quot;workStationNo&quot;:&quot;WO1803937&quot;,&quot;codeNo&quot;:&quot;7600476&quot;,&quot;dateCreate&quot;:&quot;02-10-2018&quot;,&quot;ledTotal&quot;:&quot;1478&quot;,&quot;ledGood&quot;:&quot;1372&quot;,&quot;ledBad&quot;:&quot;106&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;80&quot;,&quot;workStationNo&quot;:&quot;WO1804059&quot;,&quot;codeNo&quot;:&quot;7600529&quot;,&quot;dateCreate&quot;:&quot;02-10-2018&quot;,&quot;ledTotal&quot;:&quot;197&quot;,&quot;ledGood&quot;:&quot;187&quot;,&quot;ledBad&quot;:&quot;10&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;79&quot;,&quot;workStationNo&quot;:&quot;WO1804059&quot;,&quot;codeNo&quot;:&quot;7600529&quot;,&quot;dateCreate&quot;:&quot;01-10-2018&quot;,&quot;ledTotal&quot;:&quot;682&quot;,&quot;ledGood&quot;:&quot;641&quot;,&quot;ledBad&quot;:&quot;41&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;78&quot;,&quot;workStationNo&quot;:&quot;WO1803706&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;29-09-2018&quot;,&quot;ledTotal&quot;:&quot;846&quot;,&quot;ledGood&quot;:&quot;655&quot;,&quot;ledBad&quot;:&quot;191&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;77&quot;,&quot;workStationNo&quot;:&quot;WO1803705&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;29-09-2018&quot;,&quot;ledTotal&quot;:&quot;567&quot;,&quot;ledGood&quot;:&quot;474&quot;,&quot;ledBad&quot;:&quot;93&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;76&quot;,&quot;workStationNo&quot;:&quot;WO1803705&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;28-09-2018&quot;,&quot;ledTotal&quot;:&quot;1416&quot;,&quot;ledGood&quot;:&quot;1133&quot;,&quot;ledBad&quot;:&quot;283&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;75&quot;,&quot;workStationNo&quot;:&quot;WO1800602&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;28-09-2018&quot;,&quot;ledTotal&quot;:&quot;479&quot;,&quot;ledGood&quot;:&quot;399&quot;,&quot;ledBad&quot;:&quot;80&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;74&quot;,&quot;workStationNo&quot;:&quot;WO1800602&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;27-09-2018&quot;,&quot;ledTotal&quot;:&quot;1085&quot;,&quot;ledGood&quot;:&quot;925&quot;,&quot;ledBad&quot;:&quot;160&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;73&quot;,&quot;workStationNo&quot;:&quot;WO1800635&quot;,&quot;codeNo&quot;:&quot;7600470&quot;,&quot;dateCreate&quot;:&quot;25-09-2018&quot;,&quot;ledTotal&quot;:&quot;32&quot;,&quot;ledGood&quot;:&quot;31&quot;,&quot;ledBad&quot;:&quot;1&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;72&quot;,&quot;workStationNo&quot;:&quot;WO1803626&quot;,&quot;codeNo&quot;:&quot;7600478&quot;,&quot;dateCreate&quot;:&quot;24-09-2018&quot;,&quot;ledTotal&quot;:&quot;495&quot;,&quot;ledGood&quot;:&quot;259&quot;,&quot;ledBad&quot;:&quot;236&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;71&quot;,&quot;workStationNo&quot;:&quot;WO1803823&quot;,&quot;codeNo&quot;:&quot;7600476&quot;,&quot;dateCreate&quot;:&quot;24-09-2018&quot;,&quot;ledTotal&quot;:&quot;222&quot;,&quot;ledGood&quot;:&quot;217&quot;,&quot;ledBad&quot;:&quot;5&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;70&quot;,&quot;workStationNo&quot;:&quot;WO1803635&quot;,&quot;codeNo&quot;:&quot;7600503&quot;,&quot;dateCreate&quot;:&quot;22-09-2018&quot;,&quot;ledTotal&quot;:&quot;&quot;,&quot;ledGood&quot;:&quot;&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;69&quot;,&quot;workStationNo&quot;:&quot;WO1803635&quot;,&quot;codeNo&quot;:&quot;7600503&quot;,&quot;dateCreate&quot;:&quot;21-09-2018&quot;,&quot;ledTotal&quot;:&quot;1394&quot;,&quot;ledGood&quot;:&quot;1285&quot;,&quot;ledBad&quot;:&quot;109&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;68&quot;,&quot;workStationNo&quot;:&quot;WO1803635&quot;,&quot;codeNo&quot;:&quot;7600503&quot;,&quot;dateCreate&quot;:&quot;20-09-2018&quot;,&quot;ledTotal&quot;:&quot;307&quot;,&quot;ledGood&quot;:&quot;286&quot;,&quot;ledBad&quot;:&quot;21&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;67&quot;,&quot;workStationNo&quot;:&quot;WO1800600&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;20-09-2018&quot;,&quot;ledTotal&quot;:&quot;537&quot;,&quot;ledGood&quot;:&quot;512&quot;,&quot;ledBad&quot;:&quot;25&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;66&quot;,&quot;workStationNo&quot;:&quot;WO1803517&quot;,&quot;codeNo&quot;:&quot;7600414&quot;,&quot;dateCreate&quot;:&quot;19-09-2018&quot;,&quot;ledTotal&quot;:&quot;6&quot;,&quot;ledGood&quot;:&quot;5&quot;,&quot;ledBad&quot;:&quot;1&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;65&quot;,&quot;workStationNo&quot;:&quot;WO1803892&quot;,&quot;codeNo&quot;:&quot;7600526&quot;,&quot;dateCreate&quot;:&quot;19-09-2018&quot;,&quot;ledTotal&quot;:&quot;6&quot;,&quot;ledGood&quot;:&quot;6&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;64&quot;,&quot;workStationNo&quot;:&quot;WO1803517&quot;,&quot;codeNo&quot;:&quot;7600414&quot;,&quot;dateCreate&quot;:&quot;18-09-2018&quot;,&quot;ledTotal&quot;:&quot;325&quot;,&quot;ledGood&quot;:&quot;290&quot;,&quot;ledBad&quot;:&quot;35&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;63&quot;,&quot;workStationNo&quot;:&quot;WO1803892&quot;,&quot;codeNo&quot;:&quot;7600526&quot;,&quot;dateCreate&quot;:&quot;18-09-2018&quot;,&quot;ledTotal&quot;:&quot;726&quot;,&quot;ledGood&quot;:&quot;677&quot;,&quot;ledBad&quot;:&quot;49&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;62&quot;,&quot;workStationNo&quot;:&quot;WO1803892&quot;,&quot;codeNo&quot;:&quot;7600526&quot;,&quot;dateCreate&quot;:&quot;17-09-2018&quot;,&quot;ledTotal&quot;:&quot;1089&quot;,&quot;ledGood&quot;:&quot;896&quot;,&quot;ledBad&quot;:&quot;193&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;61&quot;,&quot;workStationNo&quot;:&quot;WO1803634&quot;,&quot;codeNo&quot;:&quot;7600503&quot;,&quot;dateCreate&quot;:&quot;17-09-2018&quot;,&quot;ledTotal&quot;:&quot;879&quot;,&quot;ledGood&quot;:&quot;808&quot;,&quot;ledBad&quot;:&quot;71&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;60&quot;,&quot;workStationNo&quot;:&quot;WO1803634&quot;,&quot;codeNo&quot;:&quot;7600503&quot;,&quot;dateCreate&quot;:&quot;14-09-2018&quot;,&quot;ledTotal&quot;:&quot;1102&quot;,&quot;ledGood&quot;:&quot;1022&quot;,&quot;ledBad&quot;:&quot;80&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;59&quot;,&quot;workStationNo&quot;:&quot;WO1803436&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;13-09-2018&quot;,&quot;ledTotal&quot;:&quot;1623&quot;,&quot;ledGood&quot;:&quot;1375&quot;,&quot;ledBad&quot;:&quot;248&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;58&quot;,&quot;workStationNo&quot;:&quot;WO1803436&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;12-09-2018&quot;,&quot;ledTotal&quot;:&quot;834&quot;,&quot;ledGood&quot;:&quot;698&quot;,&quot;ledBad&quot;:&quot;136&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;57&quot;,&quot;workStationNo&quot;:&quot;WO1803519&quot;,&quot;codeNo&quot;:&quot;7600388&quot;,&quot;dateCreate&quot;:&quot;11-09-2018&quot;,&quot;ledTotal&quot;:&quot;157&quot;,&quot;ledGood&quot;:&quot;135&quot;,&quot;ledBad&quot;:&quot;22&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;56&quot;,&quot;workStationNo&quot;:&quot;WO1803519&quot;,&quot;codeNo&quot;:&quot;7600388&quot;,&quot;dateCreate&quot;:&quot;10-09-2018&quot;,&quot;ledTotal&quot;:&quot;32&quot;,&quot;ledGood&quot;:&quot;25&quot;,&quot;ledBad&quot;:&quot;7&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;55&quot;,&quot;workStationNo&quot;:&quot;WO1803428&quot;,&quot;codeNo&quot;:&quot;7600395&quot;,&quot;dateCreate&quot;:&quot;10-09-2018&quot;,&quot;ledTotal&quot;:&quot;292&quot;,&quot;ledGood&quot;:&quot;282&quot;,&quot;ledBad&quot;:&quot;10&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;54&quot;,&quot;workStationNo&quot;:&quot;WO1800600&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;10-09-2018&quot;,&quot;ledTotal&quot;:&quot;1&quot;,&quot;ledGood&quot;:&quot;1&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;53&quot;,&quot;workStationNo&quot;:&quot;WO1800600&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;04-09-2018&quot;,&quot;ledTotal&quot;:&quot;131&quot;,&quot;ledGood&quot;:&quot;130&quot;,&quot;ledBad&quot;:&quot;1&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;52&quot;,&quot;workStationNo&quot;:&quot;WO1800600&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;03-09-2018&quot;,&quot;ledTotal&quot;:&quot;1314&quot;,&quot;ledGood&quot;:&quot;1274&quot;,&quot;ledBad&quot;:&quot;40&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;51&quot;,&quot;workStationNo&quot;:&quot;WO1800597&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;31-08-2018&quot;,&quot;ledTotal&quot;:&quot;1363&quot;,&quot;ledGood&quot;:&quot;1268&quot;,&quot;ledBad&quot;:&quot;95&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;50&quot;,&quot;workStationNo&quot;:&quot;WO1800597&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;30-08-2018&quot;,&quot;ledTotal&quot;:&quot;627&quot;,&quot;ledGood&quot;:&quot;594&quot;,&quot;ledBad&quot;:&quot;33&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;49&quot;,&quot;workStationNo&quot;:&quot;WO1800595&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;30-08-2018&quot;,&quot;ledTotal&quot;:&quot;771&quot;,&quot;ledGood&quot;:&quot;711&quot;,&quot;ledBad&quot;:&quot;60&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;47&quot;,&quot;workStationNo&quot;:&quot;WO1800595&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;30-08-2018&quot;,&quot;ledTotal&quot;:&quot;73&quot;,&quot;ledGood&quot;:&quot;72&quot;,&quot;ledBad&quot;:&quot;1&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;46&quot;,&quot;workStationNo&quot;:&quot;WO1800595&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;29-08-2018&quot;,&quot;ledTotal&quot;:&quot;1142&quot;,&quot;ledGood&quot;:&quot;1068&quot;,&quot;ledBad&quot;:&quot;74&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;45&quot;,&quot;workStationNo&quot;:&quot;WO1800694&quot;,&quot;codeNo&quot;:&quot;7600462&quot;,&quot;dateCreate&quot;:&quot;28-08-2018&quot;,&quot;ledTotal&quot;:&quot;5&quot;,&quot;ledGood&quot;:&quot;5&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;44&quot;,&quot;workStationNo&quot;:&quot;WO1803258&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;27-08-2018&quot;,&quot;ledTotal&quot;:&quot;1&quot;,&quot;ledGood&quot;:&quot;&quot;,&quot;ledBad&quot;:&quot;1&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;43&quot;,&quot;workStationNo&quot;:&quot;WO1800594&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;27-08-2018&quot;,&quot;ledTotal&quot;:&quot;462&quot;,&quot;ledGood&quot;:&quot;394&quot;,&quot;ledBad&quot;:&quot;68&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;42&quot;,&quot;workStationNo&quot;:&quot;WO1803258&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;27-08-2018&quot;,&quot;ledTotal&quot;:&quot;222&quot;,&quot;ledGood&quot;:&quot;191&quot;,&quot;ledBad&quot;:&quot;31&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;41&quot;,&quot;workStationNo&quot;:&quot;WO1803258&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;25-08-2018&quot;,&quot;ledTotal&quot;:&quot;1780&quot;,&quot;ledGood&quot;:&quot;1595&quot;,&quot;ledBad&quot;:&quot;185&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;40&quot;,&quot;workStationNo&quot;:&quot;WO1803258&quot;,&quot;codeNo&quot;:&quot;7600502&quot;,&quot;dateCreate&quot;:&quot;24-08-2018&quot;,&quot;ledTotal&quot;:&quot;466&quot;,&quot;ledGood&quot;:&quot;427&quot;,&quot;ledBad&quot;:&quot;39&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;39&quot;,&quot;workStationNo&quot;:&quot;WO1803512&quot;,&quot;codeNo&quot;:&quot;7600522&quot;,&quot;dateCreate&quot;:&quot;24-08-2018&quot;,&quot;ledTotal&quot;:&quot;1&quot;,&quot;ledGood&quot;:&quot;1&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;38&quot;,&quot;workStationNo&quot;:&quot;WO1803425&quot;,&quot;codeNo&quot;:&quot;7600476&quot;,&quot;dateCreate&quot;:&quot;24-08-2018&quot;,&quot;ledTotal&quot;:&quot;498&quot;,&quot;ledGood&quot;:&quot;478&quot;,&quot;ledBad&quot;:&quot;20&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;37&quot;,&quot;workStationNo&quot;:&quot;WO1803512&quot;,&quot;codeNo&quot;:&quot;7600522&quot;,&quot;dateCreate&quot;:&quot;24-08-2018&quot;,&quot;ledTotal&quot;:&quot;1169&quot;,&quot;ledGood&quot;:&quot;1051&quot;,&quot;ledBad&quot;:&quot;118&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;36&quot;,&quot;workStationNo&quot;:&quot;WO1803512&quot;,&quot;codeNo&quot;:&quot;7600522&quot;,&quot;dateCreate&quot;:&quot;23-08-2018&quot;,&quot;ledTotal&quot;:&quot;543&quot;,&quot;ledGood&quot;:&quot;461&quot;,&quot;ledBad&quot;:&quot;82&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;35&quot;,&quot;workStationNo&quot;:&quot;WO1803512&quot;,&quot;codeNo&quot;:&quot;7600522&quot;,&quot;dateCreate&quot;:&quot;23-08-2018&quot;,&quot;ledTotal&quot;:&quot;108&quot;,&quot;ledGood&quot;:&quot;94&quot;,&quot;ledBad&quot;:&quot;14&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;34&quot;,&quot;workStationNo&quot;:&quot;WO1803456&quot;,&quot;codeNo&quot;:&quot;7600506&quot;,&quot;dateCreate&quot;:&quot;23-08-2018&quot;,&quot;ledTotal&quot;:&quot;76&quot;,&quot;ledGood&quot;:&quot;61&quot;,&quot;ledBad&quot;:&quot;15&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;33&quot;,&quot;workStationNo&quot;:&quot;WO1803456&quot;,&quot;codeNo&quot;:&quot;7600506&quot;,&quot;dateCreate&quot;:&quot;23-08-2018&quot;,&quot;ledTotal&quot;:&quot;768&quot;,&quot;ledGood&quot;:&quot;616&quot;,&quot;ledBad&quot;:&quot;152&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;32&quot;,&quot;workStationNo&quot;:&quot;WO1803456&quot;,&quot;codeNo&quot;:&quot;7600506&quot;,&quot;dateCreate&quot;:&quot;22-08-2018&quot;,&quot;ledTotal&quot;:&quot;444&quot;,&quot;ledGood&quot;:&quot;360&quot;,&quot;ledBad&quot;:&quot;84&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;31&quot;,&quot;workStationNo&quot;:&quot;WO1802863&quot;,&quot;codeNo&quot;:&quot;7600506&quot;,&quot;dateCreate&quot;:&quot;23-08-2018&quot;,&quot;ledTotal&quot;:&quot;68&quot;,&quot;ledGood&quot;:&quot;55&quot;,&quot;ledBad&quot;:&quot;13&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;30&quot;,&quot;workStationNo&quot;:&quot;WO1802863&quot;,&quot;codeNo&quot;:&quot;7600506&quot;,&quot;dateCreate&quot;:&quot;22-08-2018&quot;,&quot;ledTotal&quot;:&quot;786&quot;,&quot;ledGood&quot;:&quot;687&quot;,&quot;ledBad&quot;:&quot;99&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;29&quot;,&quot;workStationNo&quot;:&quot;WO1800594&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;22-08-2018&quot;,&quot;ledTotal&quot;:&quot;229&quot;,&quot;ledGood&quot;:&quot;225&quot;,&quot;ledBad&quot;:&quot;4&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;28&quot;,&quot;workStationNo&quot;:&quot;WO1800594&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;21-08-2018&quot;,&quot;ledTotal&quot;:&quot;521&quot;,&quot;ledGood&quot;:&quot;512&quot;,&quot;ledBad&quot;:&quot;9&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;27&quot;,&quot;workStationNo&quot;:&quot;WO1802992&quot;,&quot;codeNo&quot;:&quot;7600508&quot;,&quot;dateCreate&quot;:&quot;21-08-2018&quot;,&quot;ledTotal&quot;:&quot;577&quot;,&quot;ledGood&quot;:&quot;464&quot;,&quot;ledBad&quot;:&quot;113&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;26&quot;,&quot;workStationNo&quot;:&quot;WO1800588&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;21-08-2018&quot;,&quot;ledTotal&quot;:&quot;323&quot;,&quot;ledGood&quot;:&quot;303&quot;,&quot;ledBad&quot;:&quot;20&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;25&quot;,&quot;workStationNo&quot;:&quot;WO1800588&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;20-08-2018&quot;,&quot;ledTotal&quot;:&quot;1655&quot;,&quot;ledGood&quot;:&quot;1566&quot;,&quot;ledBad&quot;:&quot;89&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;24&quot;,&quot;workStationNo&quot;:&quot;WO1803143&quot;,&quot;codeNo&quot;:&quot;7600516&quot;,&quot;dateCreate&quot;:&quot;18-08-2018&quot;,&quot;ledTotal&quot;:&quot;207&quot;,&quot;ledGood&quot;:&quot;198&quot;,&quot;ledBad&quot;:&quot;9&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;23&quot;,&quot;workStationNo&quot;:&quot;WO1803143&quot;,&quot;codeNo&quot;:&quot;7600516&quot;,&quot;dateCreate&quot;:&quot;17-08-2018&quot;,&quot;ledTotal&quot;:&quot;1&quot;,&quot;ledGood&quot;:&quot;&quot;,&quot;ledBad&quot;:&quot;1&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;22&quot;,&quot;workStationNo&quot;:&quot;WO1803141&quot;,&quot;codeNo&quot;:&quot;7600514&quot;,&quot;dateCreate&quot;:&quot;17-08-2018&quot;,&quot;ledTotal&quot;:&quot;58&quot;,&quot;ledGood&quot;:&quot;57&quot;,&quot;ledBad&quot;:&quot;1&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;21&quot;,&quot;workStationNo&quot;:&quot;WO1803139&quot;,&quot;codeNo&quot;:&quot;7600512&quot;,&quot;dateCreate&quot;:&quot;17-08-2018&quot;,&quot;ledTotal&quot;:&quot;59&quot;,&quot;ledGood&quot;:&quot;57&quot;,&quot;ledBad&quot;:&quot;2&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;20&quot;,&quot;workStationNo&quot;:&quot;WO1802652&quot;,&quot;codeNo&quot;:&quot;7600503&quot;,&quot;dateCreate&quot;:&quot;17-08-2018&quot;,&quot;ledTotal&quot;:&quot;213&quot;,&quot;ledGood&quot;:&quot;203&quot;,&quot;ledBad&quot;:&quot;10&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;19&quot;,&quot;workStationNo&quot;:&quot;WO1803192&quot;,&quot;codeNo&quot;:&quot;7600513&quot;,&quot;dateCreate&quot;:&quot;17-08-2018&quot;,&quot;ledTotal&quot;:&quot;348&quot;,&quot;ledGood&quot;:&quot;298&quot;,&quot;ledBad&quot;:&quot;50&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;18&quot;,&quot;workStationNo&quot;:&quot;WO1802994&quot;,&quot;codeNo&quot;:&quot;7600509&quot;,&quot;dateCreate&quot;:&quot;17-08-2018&quot;,&quot;ledTotal&quot;:&quot;884&quot;,&quot;ledGood&quot;:&quot;771&quot;,&quot;ledBad&quot;:&quot;113&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;17&quot;,&quot;workStationNo&quot;:&quot;WO1802994&quot;,&quot;codeNo&quot;:&quot;7600509&quot;,&quot;dateCreate&quot;:&quot;16-08-2018&quot;,&quot;ledTotal&quot;:&quot;51&quot;,&quot;ledGood&quot;:&quot;50&quot;,&quot;ledBad&quot;:&quot;1&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;15&quot;,&quot;workStationNo&quot;:&quot;WO1800587&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;16-08-2018&quot;,&quot;ledTotal&quot;:&quot;&quot;,&quot;ledGood&quot;:&quot;&quot;,&quot;ledBad&quot;:&quot;&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;14&quot;,&quot;workStationNo&quot;:&quot;WO1803298&quot;,&quot;codeNo&quot;:&quot;7600456&quot;,&quot;dateCreate&quot;:&quot;16-08-2018&quot;,&quot;ledTotal&quot;:&quot;1987&quot;,&quot;ledGood&quot;:&quot;1728&quot;,&quot;ledBad&quot;:&quot;259&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;13&quot;,&quot;workStationNo&quot;:&quot;WO1803135&quot;,&quot;codeNo&quot;:&quot;7600478&quot;,&quot;dateCreate&quot;:&quot;15-08-2018&quot;,&quot;ledTotal&quot;:&quot;591&quot;,&quot;ledGood&quot;:&quot;405&quot;,&quot;ledBad&quot;:&quot;186&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;12&quot;,&quot;workStationNo&quot;:&quot;WO1803063&quot;,&quot;codeNo&quot;:&quot;7600479&quot;,&quot;dateCreate&quot;:&quot;15-08-2018&quot;,&quot;ledTotal&quot;:&quot;299&quot;,&quot;ledGood&quot;:&quot;200&quot;,&quot;ledBad&quot;:&quot;99&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;11&quot;,&quot;workStationNo&quot;:&quot;WO1803147&quot;,&quot;codeNo&quot;:&quot;7600517&quot;,&quot;dateCreate&quot;:&quot;15-08-2018&quot;,&quot;ledTotal&quot;:&quot;958&quot;,&quot;ledGood&quot;:&quot;812&quot;,&quot;ledBad&quot;:&quot;146&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;10&quot;,&quot;workStationNo&quot;:&quot;WO1803147&quot;,&quot;codeNo&quot;:&quot;7600517&quot;,&quot;dateCreate&quot;:&quot;14-08-2018&quot;,&quot;ledTotal&quot;:&quot;1462&quot;,&quot;ledGood&quot;:&quot;1410&quot;,&quot;ledBad&quot;:&quot;52&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;9&quot;,&quot;workStationNo&quot;:&quot;WO1803145&quot;,&quot;codeNo&quot;:&quot;7600517&quot;,&quot;dateCreate&quot;:&quot;14-08-2018&quot;,&quot;ledTotal&quot;:&quot;257&quot;,&quot;ledGood&quot;:&quot;210&quot;,&quot;ledBad&quot;:&quot;47&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;8&quot;,&quot;workStationNo&quot;:&quot;WO1803145&quot;,&quot;codeNo&quot;:&quot;7600517&quot;,&quot;dateCreate&quot;:&quot;10-08-2018&quot;,&quot;ledTotal&quot;:&quot;1801&quot;,&quot;ledGood&quot;:&quot;1615&quot;,&quot;ledBad&quot;:&quot;186&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;7&quot;,&quot;workStationNo&quot;:&quot;WO1803145&quot;,&quot;codeNo&quot;:&quot;7600517&quot;,&quot;dateCreate&quot;:&quot;09-08-2018&quot;,&quot;ledTotal&quot;:&quot;500&quot;,&quot;ledGood&quot;:&quot;455&quot;,&quot;ledBad&quot;:&quot;45&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;6&quot;,&quot;workStationNo&quot;:&quot;WO1800585&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;09-08-2018&quot;,&quot;ledTotal&quot;:&quot;808&quot;,&quot;ledGood&quot;:&quot;762&quot;,&quot;ledBad&quot;:&quot;46&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;5&quot;,&quot;workStationNo&quot;:&quot;WO1800585&quot;,&quot;codeNo&quot;:&quot;7600469&quot;,&quot;dateCreate&quot;:&quot;08-08-2018&quot;,&quot;ledTotal&quot;:&quot;237&quot;,&quot;ledGood&quot;:&quot;231&quot;,&quot;ledBad&quot;:&quot;6&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;4&quot;,&quot;workStationNo&quot;:&quot;WO1802996&quot;,&quot;codeNo&quot;:&quot;7600510&quot;,&quot;dateCreate&quot;:&quot;08-08-2018&quot;,&quot;ledTotal&quot;:&quot;237&quot;,&quot;ledGood&quot;:&quot;223&quot;,&quot;ledBad&quot;:&quot;14&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null},{&quot;FT8_MainDataId&quot;:&quot;3&quot;,&quot;workStationNo&quot;:&quot;WO1802996&quot;,&quot;codeNo&quot;:&quot;7600510&quot;,&quot;dateCreate&quot;:&quot;07-08-2018&quot;,&quot;ledTotal&quot;:&quot;244&quot;,&quot;ledGood&quot;:&quot;86&quot;,&quot;ledBad&quot;:&quot;158&quot;,&quot;ledLowWatt&quot;:null,&quot;ledHighWatt&quot;:null,&quot;mMainDataDetailFT8&quot;:null}]},&quot;JsonRequestBehavior&quot;:1,&quot;MaxJsonLength&quot;:null,&quot;RecursionLimit&quot;:null}");
+     var jsonData = eval('(' + jsonString + ')');
+
+
+     $(document).ready(function () {
+         console.log(jsonData.Data);
+
+         $("#tbody_listData").empty();
+         //console.log(jsonData.Data);
+         $.each(jsonData.Data.mainDataFT8, function (key, value) {
+             //console.log(value);
+             var str = "";
+             str += " <tr>"
+                 + "     <td> " + parseInt(key + 1) + "</td>"
+                 + "     <td>" + value.codeNo + "</td>"
+                 + "     <td>" + value.workStationNo + "</td>"
+                 + "     <td>" + value.dateCreate + "</td>"
+                 + "     <td>" + value.ledTotal + "</td>"
+                 + "     <td>" + value.ledGood + "</td>"
+                 + "     <td>" + value.ledBad + "</td>"
+                 + "     <td>"
+                 + "        <button type='button' class='btn btn-success btn-xs' onClick='openDataDetails(" + value.FT8_MainDataId + ", \"" + value.codeNo + "\", \"" + value.workStationNo + "\") ;' style='cursor: pointer'><i class='fa ion-edit-o'></i> Detail</button>"
+                 + "        <button type='button' class='btn btn-default btn-xs'><i class='fa fa-file-excel-o'></i>Excel</button>"
+                 //+ "        <button type='button' class='btn btn-warning btn-xs'><i class='fa fa-file-pdf-o'></i> Short Report</button>"
+                 + "        <button type='button' class='btn btn-default btn-xs'><i class='fa fa-file-pdf-o'></i>Report</button>"
+                 + "     </td>"
+                 + "  </tr>";
+
+             $("#tbody_listData").append(str);
+
+         });
+
+
+         /*
+          *
+         <tr>
+             <th style="width:5%;">#</th>
+             <th style="width:15%;">CODE No.</th>
+             <th style="width:15%;">WORK No.</th>
+             <th style="width:15%;">วันที่</th>
+             <th style="width:10%;">หลอดทั้งหมด</th>
+             <th style="width:10%;">หลอดดี</th>
+             <th style="width:10%;">หลอดเสีย</th>
+             <th style="width:20%;">Action</th>
+         </tr>
+         <tr>
+             <td>1</td>
+             <td>WO1802778</td>
+             <td>WO1802778</td>
+             <td>WO1802778</td>
+             <td>1,000</td>
+             <td>980</td>
+             <td>20</td>
+             <td>
+             <button type='button' class='btn btn-success btn-xs'><i class='fa ion-edit-o'></i> Detail</button>
+             <button type='button' class='btn btn-success btn-xs'><i class='fa fa-file-excel-o'></i> Excel</button>
+             <button type='button' class='btn btn-warning btn-xs'><i class='fa fa-file-pdf-o'></i> Short Report</button>
+             <button type='button' class='btn btn-info btn-xs'><i class='fa fa-file-pdf-o'></i> Full Report</button>
+             </td>
+         </tr>
+          *
+          */
+
+
+         $('#bootstrap-data-table').DataTable({
+             "lengthChange": false,
+             "ordering": false,
+             "info": false
+         });
+
+
+     });
+
+     function openDataDetails(mainDataId, codeNo, workStationNo) {
+         window.location = "V_ReportDetail_Driver?mainDataId=" + mainDataId + "&codeNo=" + codeNo + "&workStationNo=" + workStationNo;
+         /*
+         var url = "/DivisionPD2/getReportDataDetailFT8";
+         $.ajax({
+             data: { main_data_id: mainDataId},
+             type: "POST", url: url,
+             success: function (results) {
+                 //console.log(results);
+                 generateDataDetail(results.datas.mMainDataDetailFT8);
+                 //setControlList(results.datas);
+             },
+             complete: function (xhr, textStatus) {
+                 //console.log(xhr.status);
+                 if (xhr.status != "200") {
+                     alert("ระบบไม่สามารถงานได้ กรุณาติดต่อผู้ดูแลระบบ");
+                     return false;
+                 }
+
+             }
+         });
+         */
+     }
+
+
+
+</script>
+<div class="content mt-2">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Data Table</strong>
+                    </div>
+                    <div class="card-body">
+                        <!-- <div data-toggle="modal" data-keyboard="false" data-target="#largeModal" style="cursor:pointer"><button>XXXX</button></div>-->
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%;">#</th>
+                                    <th style="width:10%;">CODE No.</th>
+                                    <th style="width:15%;">WORK No.</th>
+                                    <th style="width:15%;">วันที่</th>
+                                    <th style="width:15%;">หลอดทั้งหมด</th>
+                                    <th style="width:10%;">หลอดดี</th>
+                                    <th style="width:10%;">หลอดเสีย</th>
+                                    <th style="width:20%;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_listData">
+                                <!--
+                                    <tr>
+                                        <td>1</td>
+                                        <td>WO1802778</td>
+                                        <td>WO1802778</td>
+                                        <td>WO1802778</td>
+                                        <td>1,000</td>
+                                        <td>980</td>
+                                        <td>20</td>
+                                        <td>
+                                            <button type="button" class="btn btn-success btn-xs"><i class="fa ion-edit-o"></i> Detail</button>
+                                            <button type="button" class="btn btn-success btn-xs"><i class="fa fa-file-excel-o"></i> Excel</button>
+                                            <button type="button" class="btn btn-warning btn-xs"><i class="fa fa-file-pdf-o"></i> Short Report</button>
+                                            <button type="button" class="btn btn-info btn-xs"><i class="fa fa-file-pdf-o"></i> Full Report</button>
+                                        </td>
+                                    </tr>
+                                -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- .animated -->
+
+
+</div>
+
+<!--########################################################################### MODAL DETAIL.-->
+
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="width:1200px;height:800px;margin: 5% -30% -50%;">
+            <div class="modal-header" style="text-align:center;">
+                CODE NO : 7600510 , WORK NO : WO1802996
+            </div>
+            <div class="modal-body">
+                <table id="data_table_details" class="table table-striped table-bordered" style="font-size:12px !important; ">
+                    <thead>
+                        <tr>
+                            <th style="width:5%;">#</th>
+                            <th style="width:10%;">LED No.</th>
+                            <th style="width:10%;">วันที่</th>
+                            <th style="width:10%;">ลำดับหลอด</th>
+                            <th style="width:30%;">ActionResult</th>
+                            <th style="width:10%;">W</th>
+                            <th style="width:10%;">V</th>
+                            <th style="width:10%;">PF</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_listDataDetail"></tbody>
+                </table>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
