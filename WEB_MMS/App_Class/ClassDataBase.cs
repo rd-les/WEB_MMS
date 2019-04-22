@@ -14,7 +14,8 @@ namespace Web_LED.App_Class{
         private SqlConnection conn; 
         //private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private SqlDataAdapter dataAdapter;
-        private string connectionString = "Server=192.168.18.100;Uid=sa;PASSWORD=LED123456!;database=LED;Max Pool Size=400;Connect Timeout=600;"; //FOR SERVER 
+        //private string connectionString = "Server=192.168.18.100;Uid=sa;PASSWORD=LED123456!;database=LED;Max Pool Size=400;Connect Timeout=600;"; //FOR SERVER 
+        private string connectionString = ConfigurationManager.ConnectionStrings["MmsConnectionString"].ToString();  //FOR SERVER 
         //private string connectionStringMMS = "Server=192.168.18.100;Uid=sa;PASSWORD=LED123456!;database=MMS;Max Pool Size=400;Connect Timeout=600;"; //FOR SERVER 
         public ClassDataBase() {
 
