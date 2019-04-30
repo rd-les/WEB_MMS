@@ -1,0 +1,586 @@
+﻿<script src="/Scripts/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+<script>
+
+    //######################################################    SET DATA CHART.
+    var barChartDatas = new Object();
+    var myBarChart = null;
+    var widgetChartAll = null;
+    var widgetChartOK = null;
+    var widgetChartNG = null;
+    var widgetChartWorkstation = null;
+
+    //######################################################    END SET DATA CHART.
+
+
+    var optionWidget = {
+        maintainAspectRatio: false,
+        legend: {
+            display: false
+        },
+        responsive: true,
+        tooltips: {
+            mode: 'index',
+            titleFontSize: 12,
+            titleFontColor: '#000',
+            bodyFontColor: '#000',
+            backgroundColor: '#fff',
+            titleFontFamily: 'Montserrat',
+            bodyFontFamily: 'Montserrat',
+            cornerRadius: 3,
+            intersect: false,
+        },
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    color: 'transparent',
+                    zeroLineColor: 'transparent'
+                },
+                ticks: {
+                    fontSize: 2,
+                    fontColor: 'transparent'
+                }
+            }],
+            yAxes: [{
+                display: false,
+                ticks: {
+                    display: false,
+                }
+            }]
+        },
+        title: {
+            display: false,
+        },
+        elements: {
+            line: {
+                tension: 0.00001,
+                borderWidth: 1
+            },
+            point: {
+                radius: 4,
+                hitRadius: 10,
+                hoverRadius: 4
+            }
+        }
+    };
+
+    function setSpanText(led_type_slot_name) {
+        $(".span_led_text").text(led_type_slot_name);
+
+    }
+
+    function getDataLedTypeCheckbox(led_type_slot_id) {
+
+        var url = "/DivisionPD3/getDataLedTypeCheckbox";
+        $.ajax({
+            data: { led_type_slot_id: led_type_slot_id },
+            type: "POST", url: url,
+
+            success: function (results) {
+                //console.log(results);
+                var count = 0;
+                $.each(results.datas, function (key, value) {
+                    if (count % 6 == 0) {
+                        $("#div_checkbox_led_type").append("<div class='clear:both;'></div>");
+                    }
+                    var str = "<div class='col-2'><label style='cursor:pointer;'>"
+                        + " <input type = 'checkbox'  name='chkGroups[]' id='chkGroup_" + value.code_no + "' class='switch-input'  value = " + value.led_type_slot_id + "  checked> <strong class='card-title'> " + value.code_no + "</strong></label >&nbsp;</div > ";
+                    $("#div_checkbox_led_type").append(str);
+                    count++;
+                });
+                //<input type="checkbox" class="switch-input" checked=""><strong class="card-title"> 5 watt</strong>
+            },
+            complete: function (xhr, textStatus) {
+                //console.log(xhr.status);
+                if (xhr.status != "200") {
+                    alert("ระบบไม่สามารถงานได้ กรุณาติดต่อผู้ดูแลระบบ");
+                    return false;
+                }
+            }
+        });
+    }
+
+    function searchDashboard(led_type_slot_id) {
+        //alert("searchDashboard =====> " + $("#txt_date_dashboard_start").val() + " - " + $("#txt_date_dashboard_end").val());
+
+        var url = "/DivisionPD3/getDashboardDataByCriteria";
+        var chkGroups = new Array();
+        $('input[name="chkGroups[]"]:checked').each(function () {
+            chkGroups.push(this.value);
+        });
+        //chkGroups: $('input[name="chkGroups[]"]:checked').serialize()
+        $.ajax({
+            data: { chkGroups, led_type_slot_id: "4", txt_date_dashboard_start: $("#txt_date_dashboard_start").val(), txt_date_dashboard_end: $("#txt_date_dashboard_end").val() },
+            //data: {  $("#form_input_data").serialize() },
+            type: "POST", url: url,
+            success: function (results) {
+                console.log(results);
+                barChartDatas = results.datas.barChart;
+                widgetData = results.datas.widget;
+                generateBarchart(barChartDatas);
+                getnerateWidget(widgetData, barChartDatas.labels);
+
+            },
+            complete: function (xhr, textStatus) {
+                //console.log(xhr.status);
+                if (xhr.status != "200") {
+                    alert("ระบบไม่สามารถงานได้ กรุณาติดต่อผู้ดูแลระบบ");
+                    return false;
+                }
+            }
+        });
+    }
+
+
+
+
+    function getDataDashboard(led_type_slot_id) {
+
+        var url = "/DivisionPD3/getDataDashboard";
+        $.ajax({
+            data: { led_type_slot_id: led_type_slot_id },
+            type: "POST", url: url,
+
+            success: function (results) {
+                console.log(results);
+                barChartDatas = results.datas.barChart;
+                widgetData = results.datas.widget;
+                generateBarchart(barChartDatas);
+                generateWidget(widgetData, barChartDatas.labels);
+
+                //console.log(barChartDatas);
+            },
+            complete: function (xhr, textStatus) {
+                //console.log(xhr.status);
+                if (xhr.status != "200") {
+                    alert("ระบบไม่สามารถงานได้ กรุณาติดต่อผู้ดูแลระบบ");
+                    return false;
+                }
+            }
+        });
+    }
+
+    function generateBarchart(barChartDatas) {
+        console.log(barChartDatas.datasets);
+
+        if (myBarChart != null) {
+            myBarChart.destroy();
+        }
+        var ctx = document.getElementById("barChart_detail");
+        //    ctx.height = 200;
+        myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: barChartDatas,
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+    }
+
+    function generateWidget(widgetData, labelsMonth) {
+
+
+        var ctx = document.getElementById("widgetChartAll");
+        ctx.height = 150;
+        if (widgetChartAll != null) { widgetChartAll.destroy(); }
+        if (widgetChartOK != null) { widgetChartOK.destroy(); }
+        if (widgetChartNG != null) { widgetChartNG.destroy(); }
+        if (widgetChartWorkstation != null) { widgetChartWorkstation.destroy(); }
+
+        widgetChartAll = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labelsMonth,
+                type: 'line',
+                datasets: [{
+                    data: widgetData.widgetAll,
+                    label: 'Dataset',
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgba(255,255,255,.55)',
+                },]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: {
+                    display: false
+                },
+                responsive: true,
+                tooltips: {
+                    mode: 'index',
+                    titleFontSize: 12,
+                    titleFontColor: '#000',
+                    bodyFontColor: '#000',
+                    backgroundColor: '#fff',
+                    titleFontFamily: 'Montserrat',
+                    bodyFontFamily: 'Montserrat',
+                    cornerRadius: 3,
+                    intersect: false,
+                },
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            color: 'transparent',
+                            zeroLineColor: 'transparent'
+                        },
+                        ticks: {
+                            fontSize: 2,
+                            fontColor: 'transparent'
+                        }
+                    }],
+                    yAxes: [{
+                        display: false,
+                        ticks: {
+                            display: false,
+                        }
+                    }]
+                },
+                title: {
+                    display: false,
+                },
+                elements: {
+                    line: {
+                        borderWidth: 1
+                    },
+                    point: {
+                        radius: 4,
+                        hitRadius: 10,
+                        hoverRadius: 4
+                    }
+                }
+            }
+        });
+
+
+        var ctx = document.getElementById("widgetChartOK");
+        ctx.height = 150;
+        widgetChartOK = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labelsMonth,
+                type: 'line',
+                datasets: [{
+                    data: widgetData.widgetOk,
+                    label: 'Dataset',
+                    backgroundColor: '#63c2de',
+                    borderColor: 'rgba(255,255,255,.55)',
+                },]
+            },
+            options: optionWidget
+        });
+
+        var ctx = document.getElementById("widgetChartNG");
+        ctx.height = 70;
+        widgetChartNG = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labelsMonth,
+                type: 'line',
+                datasets: [{
+                    data: widgetData.widgetNg,
+                    label: 'Dataset',
+                    backgroundColor: 'rgba(255,255,255,.2)',
+                    borderColor: 'rgba(255,255,255,.55)',
+                },]
+            },
+            options: optionWidget
+        });
+
+        var ctx = document.getElementById("widgetChartWorkstation");
+        ctx.height = 70;
+        widgetChartWorkstation = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labelsMonth,
+                datasets: [
+                    {
+                        label: "WORKSTATION",
+                        data: widgetData.widgetWorkstation,
+                        borderColor: "rgba(0, 123, 255, 0.9)",
+                        //borderWidth: "0",
+                        backgroundColor: "rgba(255,255,255,.3)"
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: true,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        display: false,
+                        categoryPercentage: 1,
+                        barPercentage: 0.5
+                    }],
+                    yAxes: [{
+                        display: false
+                    }]
+                }
+            }
+        });
+    }
+
+</script>
+
+<div class="col-lg-12">
+
+    <div class="card-header">
+
+        <div id="div_checkbox_led_type">&nbsp;</div>
+
+        <!-- <p>สร้าง Datepickerและปุ่มค้นหา-->
+        <div class="row clearfix" style="clear:both;">
+            <div class="col-sm-9">
+                <div class="form-group col-sm-4">
+                    <!--
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-calendar" id="div_data_dashboard_start" style="cursor:pointer;"></i></div>
+                        <input class="form-control" placeholder="01-01-2018" id="txt_date_dashboard_start">
+                    </div>
+                        -->
+                    <div class="input-group date form_date col-lg-12" data-date="" data-date-format="dd-mm-yyyy" data-link-field="txt_date_dashboard_start" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" size="16" type="text" value="01-01-2019" id="txt_date_dashboard_start_display">
+                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    </div>
+                    <input type="text" id="txt_date_dashboard_start" value="" realonly  /><br />
+
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <!--
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input class="form-control" placeholder="01-07-2018" id="txt_date_dashboard_end">
+                    </div>
+                    -->
+                    <div class="input-group date form_date col-lg-12" data-date="" data-date-format="dd-mm-yyyy" data-link-field="txt_date_dashboard_end" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" size="16" type="text" value="30-06-2019" id="txt_date_dashboard_end_display">
+                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    </div>
+                    <input type="text" id="txt_date_dashboard_end" value="" realonly  /><br />
+                </div>
+                <div class="form-group col-sm-2">
+                    <select name="selectLg" id="selectLg" class="form-control form-control">
+                        <option value="1">Quarter 1</option>
+                        <option value="2">Quarter 2</option>
+                        <option value="3">Quarter 3</option>
+                        <option value="4">Quarter 4</option>
+                    </select>
+
+                </div>
+                <div class="form-group col-sm-2">
+                    <select name="selectLg" id="selectLg" class="form-control form-control">
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <!-- 4-->
+                    </select>
+
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block" onclick="searchDashboard(); ">
+                    <i class="fa fa-search fa-lg"></i>&nbsp;
+                    <span id="payment-button-amount">SEARCH</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--  </p>จบชุด Datepickerและปุ่มค้นหา -->
+    <!--   </div>-->
+    <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-flat-color-1">
+            <div class="card-body pb-0">
+
+                <h4 class="mb-0">
+                    <span id="span_led_t8_total" class="count_all"></span> หลอด
+                    <!-- <span class="count" id="span_led_t8_total">0</span>-->
+                </h4>
+                <p class="text-light"><span id="span_led_total" class="span_led_text">&nbsp;</span> TOTAL</p>
+                <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                    <canvas id="widgetChartAll"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-flat-color-5">
+            <div class="card-body pb-0">
+
+                <h4 class="mb-0">
+                    <span id="span_led_t8_ok" class="count_all">0</span> หลอด
+                </h4>
+                <p class="text-light">หลอด <span id="span_led_ok" class="span_led_text">&nbsp;</span> OK </p>
+                <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                    <canvas id="widgetChartOK"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-flat-color-4">
+            <div class="card-body pb-0">
+
+                <h4 class="mb-0">
+                    <span id="span_led_t8_ng" class="count_all">0</span> หลอด
+                </h4>
+                <p class="text-light">หลอด <span id="span_led_ng" class="span_led_text">&nbsp;</span> NG</p>
+            </div>
+            <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                <canvas id="widgetChartNG"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-flat-color-3">
+            <div class="card-body pb-0">
+
+                <h4 class="mb-0">
+                    <span id="span_workstation_total" class="count_all">0</span> WorkStation
+                </h4>
+                <p class="text-light">TOTAL WORKSTAION <span id="span_led_workstation" class="span_led_text">&nbsp;</span></p>
+            </div>
+            <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                <canvas id="widgetChartWorkstation"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="mb-3">Bar Chart <span class="span_led_text">&nbsp;</span></h4>
+                        <canvas id="barChart_detail" style="width:100% !important;"></canvas>
+                    </div>
+                </div>
+            </div><!-- /# column -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="mb-3">TOTAL <span class="span_led_text">&nbsp;</span> NG (V , I , W , PF)</h4>
+                        <canvas id="viwpf-chart"></canvas>
+                    </div>
+                </div>
+            </div><!-- /# column -->
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
+<!-- </div>-->
+<script src="/Template/SufeeAdmin/js/lib/chart-js/Chart.bundle.js"></script>
+<!--<script src="/Template/SufeeAdmin/js/widgets.js"></script>
+<script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/plugins.js"></script>
+<script src="assets/js/main.js"></script>
+    -->
+
+<script>
+    $('.form_date').datetimepicker({
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+
+
+    (function ($) {
+
+        /*
+        console.log(barChartDatas);
+        //bar chart
+        var ctx = document.getElementById("barChart_E27");
+        //    ctx.height = 200;
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                datasets: [
+                    {
+                        label: "My First dataset",
+                        data: [65, 59, 80, 81, 56, 55, 40],
+                        borderColor: "rgba(0, 123, 255, 0.9)",
+                        borderWidth: "0",
+                        backgroundColor: "rgba(0, 123, 255, 0.5)"
+                    },
+                    {
+                        label: "My Second dataset",
+                        data: [28, 48, 40, 19, 86, 27, 90],
+                        borderColor: "rgba(0,0,0,0.09)",
+                        borderWidth: "0",
+                        backgroundColor: "rgba(0,0,0,0.07)"
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+        */
+        var ctx = document.getElementById("viwpf-chart");
+        ctx.height = 150;
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                datasets: [{
+                    data: [86, 114, 106, 106, 107, 111, 133],
+                    label: "V",
+                    borderColor: "#3e95cd",
+                    fill: false
+                }, {
+                    data: [100, 350, 411, 502, 635, 720, 457],
+                    label: "I",
+                    borderColor: "#8e5ea2",
+                    fill: false
+                }, {
+                    data: [168, 357, 178, 572, 203, 276, 408],
+                    label: "W",
+                    borderColor: "#3cba9f",
+                    fill: false
+                }, {
+                    data: [40, 20, 10, 16, 24, 38, 74],
+                    label: "PF",
+                    borderColor: "#e8c3b9",
+                    fill: false
+                }
+                ]
+            },
+            options: {
+                responsive: true,
+                hoverMode: 'index',
+                stacked: false
+            }
+        });
+
+    })(jQuery);
+
+
+
+
+</script>
+
+

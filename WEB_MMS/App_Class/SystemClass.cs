@@ -24,6 +24,7 @@ namespace Web_LED.App_Class {
 
 
 
+        
 
         public static Object returnResultJsonSuccess() {
             return new { result = MS_SUCCESS };
@@ -60,6 +61,49 @@ namespace Web_LED.App_Class {
         public static String getDateTimeNowForDB() {
             DateTime dateNow = DateTime.Now;
             return dateNow.ToString("yyyy-MM-dd HH:mm:ss" );
+        }
+
+
+        public static List<string> getLastMonths(string dateStart , string dateEnd) {
+
+
+            DateTime startDate = Convert.ToDateTime(dateStart);
+            DateTime startMonth = new DateTime(startDate.Year, startDate.Month, 1).AddMonths(0);
+            Debug.WriteLine(startMonth.Month);
+
+
+            DateTime lastDate = Convert.ToDateTime(dateEnd);
+            DateTime lastMonth = new DateTime(lastDate.Year, lastDate.Month, 1).AddMonths(0);
+            Debug.WriteLine(lastMonth.Month);
+
+            int monthsApart = 12 * (startDate.Year - lastDate.Year) + startDate.Month - lastDate.Month;
+            int monthRange = int.Parse( Math.Abs(monthsApart).ToString() ) + 1; 
+            Debug.WriteLine(monthRange);
+            //return Math.Abs(monthsApart);
+            List<string> returnMonths = new List<string>(Enumerable.Range(1, monthRange).Select(i => new DateTime(lastDate.Year, lastDate.Month, 1).AddMonths(i - monthRange)).Select(date => date.ToString("MMM-yyyy")));
+
+            return returnMonths; 
+        }
+
+        public static List<string> getBetweenMonths(string dateStart, string dateEnd) {
+
+
+            DateTime startDate = Convert.ToDateTime(dateStart);
+            DateTime startMonth = new DateTime(startDate.Year, startDate.Month, 1).AddMonths(0);
+            Debug.WriteLine(startMonth.Month);
+
+
+            DateTime lastDate = Convert.ToDateTime(dateEnd);
+            DateTime lastMonth = new DateTime(lastDate.Year, lastDate.Month, 1).AddMonths(0);
+            Debug.WriteLine(lastMonth.Month);
+
+            int monthsApart = 12 * (startDate.Year - lastDate.Year) + startDate.Month - lastDate.Month;
+            int monthRange = int.Parse(Math.Abs(monthsApart).ToString()) + 1;
+            Debug.WriteLine(monthRange);
+            //return Math.Abs(monthsApart);
+            List<string> returnMonths = new List<string>(Enumerable.Range(1, monthRange).Select(i => new DateTime(lastDate.Year, lastDate.Month, 1).AddMonths(i - monthRange)).Select(date => date.ToString("yyyy-MM")));
+
+            return returnMonths;
         }
 
         public static List<string> getLastMonths(int monthRange , string dateEnd) {
@@ -202,6 +246,10 @@ namespace Web_LED.App_Class {
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
+        public static int generateNumber(int min , int max) {
+            Random random = new Random();
+            return random.Next(min, max);
+        }
 
         //public static bool isInBetween(this int number, int lower, int upper, bool inclusive = false) {
         //    return inclusive ? lower <= number && number <= upper : lower < number && number < upper;

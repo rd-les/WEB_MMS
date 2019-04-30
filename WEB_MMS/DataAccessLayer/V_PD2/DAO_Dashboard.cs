@@ -54,7 +54,83 @@ namespace WEB_MMS.DataAccessLayer.V_PD2 {
             mDashboard.led_t8_ng = dataRowSumAll["COUNT_ALL_NG"].ToString();
             mDashboard.workstation_total = dataTable.Rows.Count.ToString();
 
-            mDashboard.barChart_labels_month = SystemClass.getLastMonths(6 , endDateCriteria);
+            //mDashboard.barChart_labels_month = SystemClass.getLastMonths(3 , endDateCriteria);
+            mDashboard.barChart_labels_month = SystemClass.getLastMonths(startDateCriteria , endDateCriteria); 
+            //##########################################################    GET MONTH OK/NG.
+            //List<string> dataMonths = SystemClass.getLastMonths(setLastMonth); // GET MONTH STRING.
+            List<string> dataMonths = SystemClass.getBetweenMonths(startDateCriteria, endDateCriteria); // GET MONTH STRING.
+            //List<string> dataNumberMonths = SystemClass.getLastMonths(setLastMonth); // GET MONTH NUMBER.
+            StringBuilder sqlAllOkNg = new StringBuilder();
+            StringBuilder sqlWidgetAll = new StringBuilder();
+            StringBuilder sqlLineChart = new StringBuilder();
+
+            int countMonth = 0;
+            foreach (string month in dataMonths) {
+
+                string[] splitYearMonth = month.Split('-');
+                int yearInt = int.Parse(splitYearMonth[0]);
+                int monthInt = int.Parse(splitYearMonth[1]);
+
+                string startSqlDate = month + "-01";
+                string endSqlDate = month + "-" + DateTime.DaysInMonth(yearInt, monthInt);
+
+                if (countMonth == 0 ) { //################################# FIND START DATE.
+                    startSqlDate = startDateCriteria; 
+                }
+                if (countMonth == (dataMonths.Count-1) ) {//################################# FIND END DATE.
+                    endSqlDate = endDateCriteria;
+                }
+                if (countMonth > 0) {
+                    sqlAllOkNg.Append(" UNION ALL ");
+                    sqlWidgetAll.Append(" UNION ALL ");
+                    sqlLineChart.Append(" UNION ALL ");
+                }
+                sqlAllOkNg.Append(this.getSqlCountOkNg(month, startSqlDate, endSqlDate));
+                sqlWidgetAll.Append(this.getSqlCountWidgetAll(month, startSqlDate, endSqlDate));
+                sqlLineChart.Append(this.getSqlLineChartCountFT8(month, startSqlDate, endSqlDate));
+
+                countMonth++;
+
+                Debug.WriteLine("----->" + startSqlDate + " - " + endSqlDate);
+            }
+
+            //List<string> returnMonths = new List<string>(Enumerable.Range(1, monthRange).Select(i => DateTime.Now.AddMonths(i - monthRange)).Select(date => date.ToString("yyyy-MM-dd")));
+            Debug.WriteLine(sqlAllOkNg.ToString());
+            DataTable dataTableAllOkNg = classDatabase.getDataTable(sqlAllOkNg.ToString());
+
+
+            mDashboard.barChart_datas_ok = new List<int>();
+            mDashboard.barChart_datas_ng = new List<int>();
+            foreach (DataRow dataRowAllOkNg in dataTableAllOkNg.Rows) {
+
+                int countAllOk = int.Parse(SystemClass.returnValueZero(dataRowAllOkNg["COUNT_ALL_OK"].ToString()));
+                int countAllNg = int.Parse(SystemClass.returnValueZero(dataRowAllOkNg["COUNT_ALL_NG"].ToString()));
+                mDashboard.barChart_datas_ok.Add(countAllOk);
+                mDashboard.barChart_datas_ng.Add(countAllNg);
+            }
+
+
+            //###############################################################################   WIDGET.
+            Debug.WriteLine(sqlWidgetAll.ToString());
+            DataTable dataTableWidgetAll = classDatabase.getDataTable(sqlWidgetAll.ToString());
+            mDashboard.widgetAllFT8 = new List<int>();
+            mDashboard.widgetOkFT8 = new List<int>();
+            mDashboard.widgetNgFT8 = new List<int>();
+            mDashboard.widgetWoFT8 = new List<int>();
+
+            foreach (DataRow dataRowWidgetAll in dataTableWidgetAll.Rows) {
+                int countAll = int.Parse(SystemClass.returnValueZero(dataRowWidgetAll["COUNT_ALL"].ToString()));
+                int countAllOk = int.Parse(SystemClass.returnValueZero(dataRowWidgetAll["COUNT_ALL_OK"].ToString()));
+                int countAllNg = int.Parse(SystemClass.returnValueZero(dataRowWidgetAll["COUNT_ALL_NG"].ToString()));
+                int countAllWo = int.Parse(SystemClass.returnValueZero(dataRowWidgetAll["COUNT_ALL_WO"].ToString()));
+
+                mDashboard.widgetAllFT8.Add(countAll);
+                mDashboard.widgetOkFT8.Add(countAllOk);
+                mDashboard.widgetNgFT8.Add(countAllNg);
+                mDashboard.widgetWoFT8.Add(countAllWo);
+            }
+
+
 
 
             return mDashboard;

@@ -32,7 +32,7 @@ namespace WEB_MMS.Controllers
                 string thisMonth = dateNow.Month.ToString("00");
                 string thisDay = dateNow.Day.ToString("00");
 
-                DateTime startMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-6); 
+                DateTime startMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-5); 
 
                 string startDateCurrent = startMonth.Year + "-" + startMonth.Month.ToString("00") + "-01 00:00:00";
                 string endDateCurrent = thisYear + "-" + thisMonth + "-" + thisDay + " 23:59:59";
@@ -42,7 +42,7 @@ namespace WEB_MMS.Controllers
                 ViewBag.paramDateEnd = thisDay+"-"+thisMonth+"-"+thisYear;
 
                 ViewBag.paramDateStartSearch = startMonth.Year + "-" + startMonth.Month + "-01" ;
-                ViewBag.paramDateEndSearch = thisYear+"-"+ "-" + thisMonth + "-" + thisDay;
+                ViewBag.paramDateEndSearch = thisYear+"-"+ thisMonth + "-" + thisDay;
 
             }
             else {

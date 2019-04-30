@@ -8,32 +8,179 @@
 <h2>V_Main DIVISION PD2</h2>
 
  Right Panel -->
+<script src="/Scripts/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
 
 <script>
 
     var jsonString = convertViewBagJsonData("@ViewBag.jsonData");
     var jsonData = eval('(' + jsonString + ')');
-    var widgetLedFT8Total = new Object();
-    var barChartT8 = new Object();
-    var widgetFT8 = new Object();
-    var lineChartFT8 = new Object();
+
+    //################################################# Generate Data.
+    var barChartDatas = new Object();
+    var myBarChart = null;
+
+    var widgetChartAll = null;
+    var widgetChartOK = null;
+    var widgetChartNG = null;
+    var widgetChartWorkstation = null;
+
+
+    var widgetOptions = {
+
+        maintainAspectRatio: false,
+        legend: {
+            display: false
+        },
+        responsive: true,
+        tooltips: {
+            mode: 'index',
+            titleFontSize: 12,
+            titleFontColor: '#000',
+            bodyFontColor: '#000',
+            backgroundColor: '#fff',
+            titleFontFamily: 'Montserrat',
+            bodyFontFamily: 'Montserrat',
+            cornerRadius: 3,
+            intersect: false,
+        },
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    color: 'transparent',
+                    zeroLineColor: 'transparent'
+                },
+                ticks: {
+                    fontSize: 2,
+                    fontColor: 'transparent'
+                }
+            }],
+            yAxes: [{
+                display: false,
+                ticks: {
+                    display: false,
+                }
+            }]
+        },
+        title: {
+            display: false,
+        },
+        elements: {
+            line: {
+                borderWidth: 1
+            },
+            point: {
+                radius: 5,
+                hitRadius: 20,
+                hoverRadius: 4
+            }
+        }
+    };
+
+    var widgetOptionsOkNg = {
+        maintainAspectRatio: false,
+        legend: {
+            display: false
+        },
+        responsive: true,
+        tooltips: {
+            mode: 'index',
+            titleFontSize: 12,
+            titleFontColor: '#000',
+            bodyFontColor: '#000',
+            backgroundColor: '#fff',
+            titleFontFamily: 'Montserrat',
+            bodyFontFamily: 'Montserrat',
+            cornerRadius: 3,
+            intersect: false,
+        },
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    color: 'transparent',
+                    zeroLineColor: 'transparent'
+                },
+                ticks: {
+                    fontSize: 2,
+                    fontColor: 'transparent'
+                }
+            }],
+            yAxes: [{
+                display: false,
+                ticks: {
+                    display: false,
+                }
+            }]
+        },
+        title: {
+            display: false,
+        },
+        elements: {
+            line: {
+                tension: 0.00001,
+                borderWidth: 1
+            },
+            point: {
+                radius: 4,
+                hitRadius: 10,
+                hoverRadius: 4
+            }
+        }
+    };
+
 
 
     jQuery(function () {
 
         //console.log(jsonData.Data);
         //loadDataList(jsonData.Data);
-        setDataDashboard(jsonData.Data);
+       // setDataDashboard(jsonData.Data);
+        $("#txt_date_dashboard_start_display").val("@ViewBag.paramDateStartSearch"); 
+        $("#txt_date_dashboard_end_display").val("@ViewBag.paramDateEndSearch"); 
+
+        $("#txt_date_dashboard_start").val("@ViewBag.paramDateStartSearch"); 
+        $("#txt_date_dashboard_end").val("@ViewBag.paramDateEndSearch"); 
+        
+        generateBarchart(jsonData.Data); 
+        generateWidget(jsonData.Data);
         countWidget();
-        createBarChart();
-        createWidget();
+        //createBarChart();
+        //createWidget();
         createLineChart();
+
+        $('.form_date').datetimepicker({
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+
+
     });
+
+    function countWidget() {
+
+        $('.count').each(function () {
+            $(this).prop('Counter', 0).animate({
+                Counter: $(this).text()
+            }, {
+                    duration: 3000,
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(Math.ceil(now));
+                    }
+                });
+        });
+
+    }
+
 
 
     function setDataDashboard(datas) {
-
+        //console.log(datas);
         $("#span_count_t8_total").text(datas.led_t8_total);
         $("#span_count_t8_ok").text(datas.led_t8_ok);
         $("#span_count_t8_ng").text(datas.led_t8_ng);
@@ -53,6 +200,192 @@
     }
 
 
+    function searchDashboard() {
+        //alert("searchDashboard =====> " + $("#txt_date_dashboard_start").val() + " - " + $("#txt_date_dashboard_end").val());
+
+        var url = "/DivisionPD2/getDashboardDataByCriteria";
+
+        //chkGroups: $('input[name="chkGroups[]"]:checked').serialize()
+        $.ajax({
+            data: { txt_date_dashboard_start: $("#txt_date_dashboard_start").val(), txt_date_dashboard_end: $("#txt_date_dashboard_end").val() },
+            //data: {  $("#form_input_data").serialize() },
+            type: "POST", url: url,
+            success: function (results) {
+                console.log(results);
+                generateBarchart(results);
+                generateWidget(results); 
+                countWidget();
+
+            },
+            complete: function (xhr, textStatus) {
+                //console.log(xhr.status);
+                if (xhr.status != "200") {
+                    alert("ระบบไม่สามารถงานได้ กรุณาติดต่อผู้ดูแลระบบ");
+                    return false;
+                }
+            }
+        });
+    }
+
+
+    function generateBarchart(barChartDatas) {
+        console.log(barChartDatas);
+
+        if (myBarChart != null) {
+            myBarChart.destroy();
+        }
+        var ctx = document.getElementById("barChart");
+        //    ctx.height = 200;
+        myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: barChartDatas.barChart_labels_month,
+                datasets: [
+                    {
+                        label: "OK",
+                        data: barChartDatas.barChart_datas_ok,
+                        borderColor: "rgba(6, 140,1, 0.5)",
+                        borderWidth: "0",
+                        backgroundColor: "rgba(6, 140,1, 0.5)"
+                    },
+                    {
+                        label: "NG",
+                        data: barChartDatas.barChart_datas_ng,
+                        borderColor: "rgba(255,0,0,0.09)",
+                        borderWidth: "0",
+                        backgroundColor: "rgba(255,0,0,0.07)"
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+    }
+
+
+
+    function generateWidget(widgetData) {
+
+        var ctx = document.getElementById("widgetChartAll");
+
+        ctx.height = 150;
+        if (widgetChartAll != null) { widgetChartAll.destroy(); }
+        if (widgetChartOK != null) { widgetChartOK.destroy(); }
+        if (widgetChartNG != null) { widgetChartNG.destroy(); }
+        if (widgetChartWorkstation != null) { widgetChartWorkstation.destroy(); }
+
+        $("#span_count_t8_total").text(widgetData.led_t8_total);
+        $("#span_count_t8_ok").text(widgetData.led_t8_ok);
+        $("#span_count_t8_ng").text(widgetData.led_t8_ng);
+        $("#span_count_workstation").text(widgetData.workstation_total);
+
+        widgetChartAll = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: widgetData.barChart_labels_month,
+                type: 'line',
+                datasets: [{
+                    data: widgetData.widgetAllFT8,
+                    label: 'Count',
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgba(255,255,255,.55)',
+                },]
+            },
+            options: widgetOptions
+        });
+
+
+        var ctx = document.getElementById("widgetChart_Led_FT8_OK");
+        ctx.height = 150;
+        widgetChartOK = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: widgetData.barChart_labels_month,
+                type: 'line',
+                datasets: [{
+                    data: widgetData.widgetOkFT8,
+                    label: 'Dataset',
+                    backgroundColor: '#63c2de',
+                    borderColor: 'rgba(255,255,255,.55)',
+                },]
+            },
+            options: widgetOptionsOkNg
+        });
+
+        var ctx = document.getElementById("widgetChart_Led_FT8_NG");
+        ctx.height = 150;
+        widgetChartNG = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: widgetData.barChart_labels_month,
+                type: 'line',
+                datasets: [{
+                    data: widgetData.widgetNgFT8,
+                    label: 'Dataset',
+                    backgroundColor: '#63c2de',
+                    borderColor: 'rgba(255,255,255,.55)',
+                },]
+            },
+            options: widgetOptionsOkNg
+        });
+
+
+        var ctx = document.getElementById("widgetChart_Led_FT8_WO");
+        ctx.height = 70;
+        widgetChartWorkstation = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: widgetData.barChart_labels_month,
+                datasets: [
+                    {
+                        label: "WORKSTATION",
+                        data: widgetData.widgetWoFT8,
+                        //rgba(18, 206, 78, 1)
+                        //borderColor: "rgba(0, 123, 255, 0.9)",
+                        borderColor: "rgba(18, 206, 78, 1)",
+                        //borderWidth: "0",
+                        //backgroundColor: "rgba(255,255,255,.3)"
+                        backgroundColor: "rgba(221, 249, 233, 0.84)"
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: true,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        display: false,
+                        categoryPercentage: 1,
+                        barPercentage: 0.3
+                    }],
+                    yAxes: [{
+                        display: false
+                    }]
+                }
+            }
+        });
+
+
+
+
+        
+
+
+    }
+
+
+
+
 
 
 </script>
@@ -63,17 +396,21 @@
         <div class="row clearfix">
             <div class="col-sm-9">
                 <div class="form-group col-sm-3">
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input class="form-control" placeholder="01-01-2018">
+                    <div class="input-group date form_date col-lg-12" data-date="" data-date-format="dd-mm-yyyy" data-link-field="txt_date_dashboard_start" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" placeholder="01-01-2019" id="txt_date_dashboard_start_display" value="01-01-2019">
+                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                     </div>
+                    <input type="text" id="txt_date_dashboard_start" value="2019-01-01" realonly /><br />
                 </div>
 
                 <div class="form-group col-sm-3">
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input class="form-control" placeholder="01-07-2018">
+                    <div class="input-group date form_date col-lg-12" data-date="" data-date-format="dd-mm-yyyy" data-link-field="txt_date_dashboard_end" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" placeholder="01-07-2019" id="txt_date_dashboard_end_display" value="01-07-2019">
+                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                     </div>
+                    <input type="text" id="txt_date_dashboard_end" value="2019-03-31" realonly  /><br />
                 </div>
                 <div class="form-group col-sm-3">
                     <select name="selectLg" id="selectLg" class="form-control form-control">
@@ -100,7 +437,7 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block" onclick="searchDashboard(); ">
                     <i class="fa fa-search fa-lg"></i>&nbsp;
                     <span id="payment-button-amount">SEARCH</span>
                     <span id="payment-button-sending" style="display:none;">Sending…</span>
@@ -120,7 +457,7 @@
                     </h4>
                     <p class="text-light">LED FT8 TOTAL</p>
                     <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                        <canvas id="widgetChart_Led_FT8_Total"></canvas>
+                        <canvas id="widgetChartAll"></canvas>
                     </div>
                 </div>
             </div>
@@ -229,284 +566,12 @@
 <script>
 
 
-    var widgetOptions = {
-
-        maintainAspectRatio: false,
-        legend: {
-            display: false
-        },
-        responsive: true,
-        tooltips: {
-            mode: 'index',
-            titleFontSize: 12,
-            titleFontColor: '#000',
-            bodyFontColor: '#000',
-            backgroundColor: '#fff',
-            titleFontFamily: 'Montserrat',
-            bodyFontFamily: 'Montserrat',
-            cornerRadius: 3,
-            intersect: false,
-        },
-        scales: {
-            xAxes: [{
-                gridLines: {
-                    color: 'transparent',
-                    zeroLineColor: 'transparent'
-                },
-                ticks: {
-                    fontSize: 2,
-                    fontColor: 'transparent'
-                }
-            }],
-            yAxes: [{
-                display: false,
-                ticks: {
-                    display: false,
-                }
-            }]
-        },
-        title: {
-            display: false,
-        },
-        elements: {
-            line: {
-                borderWidth: 1
-            },
-            point: {
-                radius: 5,
-                hitRadius: 20,
-                hoverRadius: 4
-            }
-        }
-    };
-    function countWidget() {
-
-
-        $('.count').each(function () {
-            $(this).prop('Counter', 0).animate({
-                Counter: $(this).text()
-            }, {
-                    duration: 3000,
-                    easing: 'swing',
-                    step: function (now) {
-                        $(this).text(Math.ceil(now));
-                    }
-                });
-        });
-
-    }
-
-
-    function createWidget() {
-
-        var ctx = document.getElementById("widgetChart_Led_FT8_Total");
-        ctx.height = 150;
-        ctx.textBaseline = 'Top';
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: barChartT8.barChart_labels_month,
-                type: 'line',
-                datasets: [{
-                    data: widgetFT8.widgetAllFT8,
-                    label: 'Count',
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgba(255,255,255,.55)',
-                },]
-            },
-            options: widgetOptions
-
-        });
-
-        /*
-         widgetFT8.widgetOkFT8 = datas.widgetOkFT8;
-         widgetFT8.widgetNgFT8 = datas.widgetNgFT8;
-         */
-
-        var ctx = document.getElementById("widgetChart_Led_FT8_OK");
-        ctx.height = 150;
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: barChartT8.barChart_labels_month,
-                type: 'line',
-                datasets: [{
-                    data: widgetFT8.widgetOkFT8,
-                    label: 'Dataset',
-                    backgroundColor: '#63c2de',
-                    borderColor: 'rgba(255,255,255,.55)',
-                },]
-            },
-            options: {
-
-                maintainAspectRatio: false,
-                legend: {
-                    display: false
-                },
-                responsive: true,
-                tooltips: {
-                    mode: 'index',
-                    titleFontSize: 12,
-                    titleFontColor: '#000',
-                    bodyFontColor: '#000',
-                    backgroundColor: '#fff',
-                    titleFontFamily: 'Montserrat',
-                    bodyFontFamily: 'Montserrat',
-                    cornerRadius: 3,
-                    intersect: false,
-                },
-                scales: {
-                    xAxes: [{
-                        gridLines: {
-                            color: 'transparent',
-                            zeroLineColor: 'transparent'
-                        },
-                        ticks: {
-                            fontSize: 2,
-                            fontColor: 'transparent'
-                        }
-                    }],
-                    yAxes: [{
-                        display: false,
-                        ticks: {
-                            display: false,
-                        }
-                    }]
-                },
-                title: {
-                    display: false,
-                },
-                elements: {
-                    line: {
-                        tension: 0.00001,
-                        borderWidth: 1
-                    },
-                    point: {
-                        radius: 4,
-                        hitRadius: 10,
-                        hoverRadius: 4
-                    }
-                }
-            }
-        });
-
-
-
-        //WidgetChart 3
-        var ctx = document.getElementById("widgetChart_Led_FT8_NG");
-        ctx.height = 70;
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: barChartT8.barChart_labels_month,
-                type: 'line',
-                datasets: [{
-                    data: widgetFT8.widgetNgFT8,
-                    label: 'Dataset',
-                    backgroundColor: 'rgba(255,255,255,.2)',
-                    borderColor: 'rgba(255,255,255,.55)',
-                },]
-            },
-            options: {
-
-                maintainAspectRatio: true,
-                legend: {
-                    display: false
-                },
-                responsive: true,
-                // tooltips: {
-                //     mode: 'index',
-                //     titleFontSize: 12,
-                //     titleFontColor: '#000',
-                //     bodyFontColor: '#000',
-                //     backgroundColor: '#fff',
-                //     titleFontFamily: 'Montserrat',
-                //     bodyFontFamily: 'Montserrat',
-                //     cornerRadius: 3,
-                //     intersect: false,
-                // },
-                scales: {
-                    xAxes: [{
-                        gridLines: {
-                            color: 'transparent',
-                            zeroLineColor: 'transparent'
-                        },
-                        ticks: {
-                            fontSize: 2,
-                            fontColor: 'transparent'
-                        }
-                    }],
-                    yAxes: [{
-                        display: false,
-                        ticks: {
-                            display: false,
-                        }
-                    }]
-                },
-                title: {
-                    display: false,
-                },
-                elements: {
-                    line: {
-                        borderWidth: 2
-                    },
-                    point: {
-                        radius: 0,
-                        hitRadius: 10,
-                        hoverRadius: 4
-                    }
-                }
-            }
-        });
-
-
-        var ctx = document.getElementById("widgetChart_Led_FT8_WO");
-        ctx.height = 70;
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: barChartT8.barChart_labels_month,
-                datasets: [
-                    {
-                        label: "WORKSTATION",
-                        data: widgetFT8.widgetWoFT8,
-                        //rgba(18, 206, 78, 1)
-                        //borderColor: "rgba(0, 123, 255, 0.9)",
-                        borderColor: "rgba(18, 206, 78, 1)",
-                        //borderWidth: "0",
-                        //backgroundColor: "rgba(255,255,255,.3)"
-                        backgroundColor: "rgba(221, 249, 233, 0.84)"
-                    }
-                ]
-            },
-            options: {
-                maintainAspectRatio: true,
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        display: false,
-                        categoryPercentage: 1,
-                        barPercentage: 0.3
-                    }],
-                    yAxes: [{
-                        display: false
-                    }]
-                }
-            }
-        });
-
-
-
-
-
-
-    }
+    
 
 
     function createLineChart() {
-       // console.log(lineChartFT8);
+        // console.log(lineChartFT8);
+        var lineChartFT8 = new Object(); 
         var ctx = document.getElementById("viwpf-chart");
         ctx.height = 150;
         var myChart = new Chart(ctx, {
@@ -555,46 +620,6 @@
     }
 
 
-    function createBarChart() {
-
-        //console.log(barChartT8.barChart_labels_month);
-        var ctx = document.getElementById("barChart");
-        ctx.height = 150;
-        //    ctx.height = 200;
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: barChartT8.barChart_labels_month,
-                datasets: [
-                    {
-                        label: "OK",
-                        data: barChartT8.barChart_datas_ok,
-                        borderColor: "rgba(6, 140,1, 0.5)",
-                        borderWidth: "0",
-                        backgroundColor: "rgba(6, 140,1, 0.5)"
-                    },
-                    {
-                        label: "NG",
-                        data: barChartT8.barChart_datas_ng,
-                        borderColor: "rgba(255,0,0,0.09)",
-                        borderWidth: "0",
-                        backgroundColor: "rgba(255,0,0,0.07)"
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-
-
-    }
 
 
 </script>

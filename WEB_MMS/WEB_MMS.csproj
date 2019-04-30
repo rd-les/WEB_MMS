@@ -206,6 +206,7 @@
     <Compile Include="DataAccessLayer\V_PD2\DAO_Dashboard.cs" />
     <Compile Include="DataAccessLayer\V_PD2\DAO_ReportAging.cs" />
     <Compile Include="DataAccessLayer\V_PD2\Dao_ReportFT8.cs" />
+    <Compile Include="DataAccessLayer\V_PD3\DAO_Dashboard.cs" />
     <Compile Include="DataAccessLayer\V_PD3\Dao_LedConfigs.cs" />
     <Compile Include="DataAccessLayer\V_PD3\Dao_LedSlotType.cs" />
     <Compile Include="DataAccessLayer\V_PD3\DAO_RunTime_Report.cs" />
@@ -223,6 +224,7 @@
     <Compile Include="Models\V_PD2\M_MainDataFT8.cs" />
     <Compile Include="Models\V_PD2\M_ReportFT8.cs" />
     <Compile Include="Models\V_PD3\M_ConfigType.cs" />
+    <Compile Include="Models\V_PD3\M_Dashboard.cs" />
     <Compile Include="Models\V_PD3\M_RunTime_Report.cs" />
     <Compile Include="Models\V_QW\M_MainDataDetailDriver.cs" />
     <Compile Include="Models\V_QW\M_MainDataDriver.cs" />
@@ -994,6 +996,8 @@
     <Content Include="Views\DivisionPD3\V_Report_PAR30.cshtml" />
     <Content Include="Views\DivisionPD3\V_Report_PAR38.cshtml" />
     <Content Include="Views\DivisionPD3\V_Report_Runtime_Main.cshtml" />
+    <Content Include="Views\DivisionPD3\V_Dashboard_Main.cshtml" />
+    <Content Include="Views\DivisionPD3\V_MR16.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
