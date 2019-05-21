@@ -35,13 +35,13 @@ namespace WEB_MMS.Models.V_PD3 {
         //######################################################### Barchart.
 
 
-        /*
+/*
     label: "My First dataset",
     data: [65, 59, 80, 81, 56, 55, 40],
     borderColor: "rgba(0, 123, 255, 0.9)",
     borderWidth: "0",
     backgroundColor: "rgba(0, 123, 255, 0.5)"
-    */
+*/
 
 
     }
