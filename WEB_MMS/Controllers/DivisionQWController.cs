@@ -24,7 +24,9 @@ namespace WEB_MMS.Controllers
             return View(); 
         }
 
-
+        public ActionResult V_StatShow() {
+            return View(); 
+        }
         public ActionResult V_ReportIQA() {
 
             Dao_ReportDriver daoReportDriver = new Dao_ReportDriver();

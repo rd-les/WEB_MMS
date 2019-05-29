@@ -14,7 +14,7 @@
     <link href="~/Template/SufeeAdmin/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Template/SufeeAdmin/scss/style.css" rel="stylesheet" />
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Template/SufeeAdmin/js/plugins.js"></script>
     <script src="~/Scripts/default.js"></script>
 
@@ -47,6 +47,13 @@
             top: 0px !important;
         }
     </style>
+
+    <script>
+        jQuery(function () {
+            //$(".dropdown-toggle").toggle("click");
+        });
+        
+    </script>
 
 </head>
 
@@ -86,10 +93,10 @@
                     </li>
 
                     <h3 class="menu-title">PRODUCTION HISTORY REPORT</h3><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children dropdown show">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color:greenyellow  !important;">PRODUCTION REPORT : IQA</a>
 
-                        <ul class="sub-menu children dropdown-menu">
+                        <ul class="sub-menu children dropdown-menu show">
                             <li>
                                 <a href="~/DivisionQW/V_ReportIQA" class="dropdown-toggle" style="color:greenyellow  !important;"> <i class="menu-icon fa fa-gear"></i>PRODUCTION RUN TIME</a>
                             </li>
@@ -105,7 +112,7 @@
                                 <a href="~/DivisionQW/V_ReportIQA" class="dropdown-toggle"> <i class="menu-icon fa fa-bolt"></i>ENERGY</a>
                             </li>
                             <li>
-                                <a href="~/DivisionQW/V_ReportIQA" class="dropdown-toggle"> <i class="menu-icon fa fa-area-chart"></i>STATISTICS PROCESS CONTROL</a>
+                                <a href="~/DivisionQW/V_StatShow" class="dropdown-toggle" style="color:greenyellow  !important;"> <i class="menu-icon fa fa-area-chart"></i>STATISTICS PROCESS CONTROL</a>
                             </li>
                             <li>
                                 <a href="~/DivisionQW/V_ReportIQA" class="dropdown-toggle"> <i class="menu-icon fa fa-bar-chart"></i>OEE</a>
@@ -113,10 +120,10 @@
                         </ul>
                     </li>
 
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children dropdown show">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PRODUCTION REPORT : QA</a>
 
-                        <ul class="sub-menu children dropdown-menu">                           
+                        <ul class="sub-menu children dropdown-menu show">                           
                             <li>
                                 <a href="~/DivisionQW/V_ReportQA" class="dropdown-toggle"> <i class="menu-icon fa fa-gear"></i>PRODUCTION RUN TIME</a>
                             </li>
@@ -132,7 +139,7 @@
                                 <a href="~/DivisionQW/V_ReportQA" class="dropdown-toggle"> <i class="menu-icon fa fa-bolt"></i>ENERGY</a>
                             </li>
                             <li>
-                                <a href="~/DivisionQW/V_ReportQA" class="dropdown-toggle"> <i class="menu-icon fa fa-area-chart"></i>STATISTICS PROCESS CONTROL</a>
+                                <a href="~/DivisionQW/V_StatShow" class="dropdown-toggle" style="color:greenyellow  !important;"> <i class="menu-icon fa fa-area-chart"></i>STATISTICS PROCESS CONTROL</a>
                             </li>
                             <li>
                                 <a href="~/DivisionQW/V_ReportQA" class="dropdown-toggle"> <i class="menu-icon fa fa-bar-chart"></i>OEE</a>

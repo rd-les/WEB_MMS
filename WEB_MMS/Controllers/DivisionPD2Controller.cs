@@ -19,15 +19,17 @@ namespace WEB_MMS.Controllers
             return View("V_Main");
         }
 
+        public ActionResult V_StatShow() {
+            return View(); 
+        }
         public ActionResult V_Main() {
             DAO_Dashboard daoDashboard = new DAO_Dashboard();
             DateTime dateNow = DateTime.Now;
 
             string paramDateStart = SystemClass.returnValue(Request["paramDateStart"]);
             string paramDataEnd = SystemClass.returnValue(Request["paramDataEnd"]);
-
-
-            if (paramDateStart.Equals("") || paramDataEnd.Equals("") ) {
+            
+           if (paramDateStart.Equals("") || paramDataEnd.Equals("") ) {
                 string thisYear = dateNow.Year.ToString();
                 string thisMonth = dateNow.Month.ToString("00");
                 string thisDay = dateNow.Day.ToString("00");
@@ -61,7 +63,14 @@ namespace WEB_MMS.Controllers
             string dateEnd = Request["txt_date_dashboard_end"];
             DAO_Dashboard daoDashboard = new DAO_Dashboard();
 
-            if (!dateStart.Equals("") && !dateEnd.Equals("")) {
+
+            string paramQuaeter = SystemClass.returnValue(Request["cmb_quaeter"]);
+
+
+            if (!paramQuaeter.Equals("0")) {
+                return Json(SystemClass.MS_FAILURE);
+            }
+            else if (!dateStart.Equals("") && !dateEnd.Equals("")) {
                 return Json(daoDashboard.searchDataDashboard(dateStart, dateEnd));
             }
             else {

@@ -8,7 +8,6 @@
 <h2>V_Main DIVISION PD2</h2>
 
  Right Panel -->
-<script src="/Scripts/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
 
 <script>
@@ -135,13 +134,13 @@
         //console.log(jsonData.Data);
         //loadDataList(jsonData.Data);
        // setDataDashboard(jsonData.Data);
-        $("#txt_date_dashboard_start_display").val("@ViewBag.paramDateStartSearch"); 
-        $("#txt_date_dashboard_end_display").val("@ViewBag.paramDateEndSearch"); 
+        $("#txt_date_dashboard_start_display").val("@ViewBag.paramDateStart");
+        $("#txt_date_dashboard_end_display").val("@ViewBag.paramDateEnd");
 
-        $("#txt_date_dashboard_start").val("@ViewBag.paramDateStartSearch"); 
-        $("#txt_date_dashboard_end").val("@ViewBag.paramDateEndSearch"); 
-        
-        generateBarchart(jsonData.Data); 
+        $("#txt_date_dashboard_start").val("@ViewBag.paramDateStartSearch");
+        $("#txt_date_dashboard_end").val("@ViewBag.paramDateEndSearch");
+
+        generateBarchart(jsonData.Data);
         generateWidget(jsonData.Data);
         countWidget();
         //createBarChart();
@@ -207,13 +206,13 @@
 
         //chkGroups: $('input[name="chkGroups[]"]:checked').serialize()
         $.ajax({
-            data: { txt_date_dashboard_start: $("#txt_date_dashboard_start").val(), txt_date_dashboard_end: $("#txt_date_dashboard_end").val() },
+            data: { txt_date_dashboard_start: $("#txt_date_dashboard_start").val(), txt_date_dashboard_end: $("#txt_date_dashboard_end").val(), cmb_quaeter: $("#cmb_quaeter").val() },
             //data: {  $("#form_input_data").serialize() },
             type: "POST", url: url,
             success: function (results) {
                 console.log(results);
                 generateBarchart(results);
-                generateWidget(results); 
+                generateWidget(results);
                 countWidget();
 
             },
@@ -378,7 +377,7 @@
 
 
 
-        
+
 
 
     }
@@ -390,7 +389,17 @@
 
 </script>
 
+<!--
+<link href="~/Scripts/plugins/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<script src="/Scripts/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+-->
+
+<link href="~/Scripts/plugins/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<script src="~/Scripts/plugins/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+
+
 <div class="col-sm-12">
+
 
     <div class="alert  alert-success alert-dismissible fade show" role="alert">
         <div class="row clearfix">
@@ -399,7 +408,6 @@
                     <div class="input-group date form_date col-lg-12" data-date="" data-date-format="dd-mm-yyyy" data-link-field="txt_date_dashboard_start" data-link-format="yyyy-mm-dd">
                         <input class="form-control" placeholder="01-01-2019" id="txt_date_dashboard_start_display" value="01-01-2019">
                         <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                     </div>
                     <input type="text" id="txt_date_dashboard_start" value="2019-01-01" realonly hidden /><br />
                 </div>
@@ -408,12 +416,11 @@
                     <div class="input-group date form_date col-lg-12" data-date="" data-date-format="dd-mm-yyyy" data-link-field="txt_date_dashboard_end" data-link-format="yyyy-mm-dd">
                         <input class="form-control" placeholder="01-07-2019" id="txt_date_dashboard_end_display" value="01-07-2019">
                         <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                     </div>
-                    <input type="text" id="txt_date_dashboard_end" value="2019-03-31" realonly hidden  /><br />
+                    <input type="text" id="txt_date_dashboard_end" value="2019-03-31" realonly hidden /><br />
                 </div>
                 <div class="form-group col-sm-3">
-                    <select name="selectLg" id="selectLg" class="form-control form-control">
+                    <select name="cmb_quaeter" id="cmb_quaeter" class="form-control form-control">
                         <!--
                             <option value="2021">Year 2021</option>
                             <option value="2020">Year 2020</option>
@@ -565,12 +572,12 @@
 <script>
 
 
-    
+
 
 
     function createLineChart() {
         // console.log(lineChartFT8);
-        var lineChartFT8 = new Object(); 
+        var lineChartFT8 = new Object();
         var ctx = document.getElementById("viwpf-chart");
         ctx.height = 150;
         var myChart = new Chart(ctx, {

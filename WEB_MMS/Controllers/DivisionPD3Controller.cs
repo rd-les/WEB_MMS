@@ -18,7 +18,9 @@ namespace WEB_MMS.Controllers {
             //return View();
         }
 
-
+        public ActionResult V_StatShow() {
+            return View(); 
+        }
 
         public JsonResult getSearchRunTimeReport(string pd3TypeSlotId, string[] chkGroups) {
 
